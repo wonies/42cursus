@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 21:03:22 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/03/15 21:09:40 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/03/16 12:16:00 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int	ft_lowhex(unsigned int hex)
 	int		hex_len;
 
 	str = ft_lowitoa(hex);
+	if (!str)
+		return (0);
 	hex_len = ft_strlen(str);
 	ft_str(str);
 	free(str);
@@ -87,6 +89,8 @@ int	ft_uphex(unsigned int hex)
 	int		hex_len;
 
 	str = ft_upitoa(hex);
+	if (!str)
+		return (0);
 	hex_len = ft_strlen(str);
 	ft_str(str);
 	free(str);
