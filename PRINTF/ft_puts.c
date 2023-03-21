@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 21:11:42 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/03/15 21:23:30 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/03/16 12:15:42 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	ft_putchar(char c)
 
 int	ft_putstr(char *str)
 {
-	int		i;
 	char	*nullcheck;
 
 	nullcheck = "(null)";
@@ -29,16 +28,13 @@ int	ft_putstr(char *str)
 		ft_str(nullcheck);
 		return (ft_strlen(nullcheck));
 	}
-	i = 0;
-	while (*(str + i) != '\0')
-	{
-		ft_putchar(*(str + i));
-		i++;
-	}
-	return (i);
+	ft_str(str);
+	return (ft_strlen(str));
 }
 
 void	ft_str(char *s)
 {
+	if (!s)
+		return ;
 	write(1, s, ft_strlen(s));
 }

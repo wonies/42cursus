@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:56:39 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/03/15 21:17:36 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/03/16 12:09:11 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ size_t	ft_putmemo(size_t mem)
 	int		point_len;
 
 	point = ft_memitoa(mem);
+	if (!point)
+		return (0);
 	point_len = ft_strlen(point);
 	ft_str(point);
 	free(point);

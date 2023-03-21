@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:56:02 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/03/15 20:56:22 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/03/16 12:04:57 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ int	ft_putdeci(int str)
 	int		deci_len;
 
 	deci = ft_itoa(str);
+	if (!deci)
+		return (0);
 	deci_len = ft_strlen(deci);
 	ft_str(deci);
 	free(deci);
@@ -99,6 +101,8 @@ int	ft_putunsigned(unsigned int ui)
 	int		unsign_len;
 
 	unsign = ft_unsignitoa(ui);
+	if (!unsign)
+		return (0);
 	unsign_len = ft_strlen(unsign);
 	ft_str(unsign);
 	free(unsign);
