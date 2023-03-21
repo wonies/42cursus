@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check.c                                            :+:      :+:    :+:   */
+/*   checks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:29:50 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/03/21 21:23:35 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/03/21 21:22:27 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_printfs.h"
 
 int	check(va_list ap, char c)
 {
@@ -30,5 +30,7 @@ int	check(va_list ap, char c)
 		return (ft_lowhex(va_arg(ap, unsigned int)));
 	else if (c == 'X')
 		return (ft_uphex(va_arg(ap, unsigned int)));
+	else
+		return (-1);
 	return (0);
 }
