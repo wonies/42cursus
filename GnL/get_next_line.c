@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 23:00:12 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/04/13 15:59:21 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/04/13 20:11:21 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*data_join(char **data, char *buf)
 	return (*data);
 }
 
-char	*devide_line(char **data, int idx, int flag)
+char	*devide_line(char **data, int idx)
 {
 	char	*line;
 	char	*data_new;
@@ -40,12 +40,15 @@ char	*devide_line(char **data, int idx, int flag)
 	{
 		data_new = ft_substr(*data, idx + 1, ft_strlen(*data));
 		if (!data_new)
-			flag = 1;
+		{
+			free(line);
+			free(*data);
+			*data = NULL;
+			return (NULL);
+		}
 	}
-	if (*data)
-		free(*data);
-	if (flag == 0)
-		*data = data_new;
+	free(*data);
+	*data = data_new;
 	return (line);
 }
 
@@ -55,7 +58,7 @@ char	*size_is_zero(char **data, int idx)
 
 	idx = ft_strchr(*data, '\n');
 	if (idx != -1)
-		return (devide_line(data, 0, 0));
+		return (devide_line(data, 0));
 	line = ft_substr(*data, 0, ft_strlen(*data));
 	if (!line)
 	{
@@ -88,33 +91,31 @@ char	*read_buf(int fd, char **data, char *buf, int size)
 		if (!*data)
 			return (NULL);
 		if (ft_strchr(*data, '\n') != -1)
-			return (devide_line(data, 0, 0));
+			return (devide_line(data, 0));
 	}
 	return (NULL);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*data = NULL;
+	static char	*data;
 	char		*buf;
 	char		*line;
-	int			size;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) == -1)
 	{
-		if (data)
-		{
-			free(data);
-			data = NULL;
-		}
+		free(data);
+		data = NULL;
 		return (NULL);
 	}
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
+	{
+		free(data);
+		data = NULL;
 		return (NULL);
-	size = 1;
-	line = read_buf(fd, &data, buf, size);
+	}
+	line = read_buf(fd, &data, buf, 1);
 	free(buf);
-	buf = NULL;
 	return (line);
 }
