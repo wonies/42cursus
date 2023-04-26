@@ -7,7 +7,6 @@
 # include <stdio.h>
 # include <unistd.h>
 
-
 typedef struct s_node	t_node;
 
 struct	s_node
@@ -16,7 +15,12 @@ struct	s_node
 	t_node	*next;
 };
 
-t_node	*create_node(int value);
+typedef struct s_info
+{
+	int		size;
+	int		chunk;
+} t_info;
+
 void	add_node(t_node **list, int value);
 void    sa(t_node *(a));
 void sb(t_node *b);
@@ -31,5 +35,8 @@ void    rrb(t_node **b);
 void    rrr(t_node **a, t_node **b);
 int print_error(int err);
 int	ft_lstsize(t_node *lst);
-void    create_rank(t_node **a);
+int    create_chunk(t_node **a, t_info *info);
+void    get_rank(t_node **a, t_info *info);
+
+
 #endif

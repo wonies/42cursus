@@ -1,6 +1,5 @@
 #include "push_swap.h"
 
-
 t_node  *create_node(int value)
 {
     t_node *new_node;
