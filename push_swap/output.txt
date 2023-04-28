@@ -1,4 +1,0 @@
-4&./a.out
-4&hello
-4&world
-4&input.txt

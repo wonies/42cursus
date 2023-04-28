@@ -12,6 +12,7 @@ typedef struct s_node	t_node;
 struct	s_node
 {
 	int		value;
+	int		order;
 	t_node	*next;
 };
 
@@ -37,6 +38,11 @@ int print_error(int err);
 int	ft_lstsize(t_node *lst);
 int    create_chunk(t_node **a, t_info *info);
 void    get_rank(t_node **a, t_info *info);
+void    get_order(t_node **a, t_info *info);
+t_node  *create_node(int value);
+void    push_start(t_node **a, t_info *info, int chunk, t_node **b);
+void    b_order(t_node **a, t_node **b, t_info *info);
+
 
 
 #endif
