@@ -53,17 +53,20 @@ void    push_start(t_node **a, t_info *info, int chunk, t_node **b)
     }
 }
 
-void    b_order(t_node **a, t_node **b, t_info *info)
+void    b_order(t_node **a, t_node **b, t_info info)
 {
     long long max;
     t_node  *temp;
     int count;
     int i;
     t_node  *tmp;
+    int cnt = 0;
+    int flag = 0;
 
     count = ft_lstsize(*b);
     while (count > 0)
     {
+        cnt = 0;
         max = -2147483649;
         temp = *b;
         while (temp)
@@ -75,15 +78,29 @@ void    b_order(t_node **a, t_node **b, t_info *info)
         tmp = *b;
         while (tmp)
         {
+            cnt++;
             if (tmp->value == max)
             {
-                pa(a, b);
+                //pa(a, b);
+                break ;
+            }
+            tmp = tmp->next;
+        }
+        printf("cnt : %d\n", cnt);
+        printf("count : %d\n", count);
+        // tmp = *b;
+        while (1)
+        {
+            if ((*b)->value == max)
+            {
+                pa(a,b);
                 count--;
                 break ;
             }
-            else
+            if (cnt < (info.size / 2))
                 rb(b);
-            tmp = tmp->next;
+            else
+                rrb(b);
         }
     }
 }

@@ -41,8 +41,8 @@ void    get_rank(t_node **a, t_info *info);
 void    get_order(t_node **a, t_info *info);
 t_node  *create_node(int value);
 void    push_start(t_node **a, t_info *info, int chunk, t_node **b);
-void    b_order(t_node **a, t_node **b, t_info *info);
-
-
+void    b_order(t_node **a, t_node **b, t_info info);
+long	ft_atoi(const char *str);
+int check_duplication(t_node *a);
 
 #endif
