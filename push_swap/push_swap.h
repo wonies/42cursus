@@ -44,5 +44,8 @@ void    push_start(t_node **a, t_info *info, int chunk, t_node **b);
 void    b_order(t_node **a, t_node **b, t_info info);
 long	ft_atoi(const char *str);
 int check_duplication(t_node *a);
+long long   b_max(t_node **b);
+int b_max_order(t_node **b, long long max);
+
 
 #endif

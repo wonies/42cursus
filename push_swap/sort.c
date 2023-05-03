@@ -55,40 +55,16 @@ void    push_start(t_node **a, t_info *info, int chunk, t_node **b)
 
 void    b_order(t_node **a, t_node **b, t_info info)
 {
-    long long max;
-    t_node  *temp;
-    int count;
-    int i;
-    t_node  *tmp;
-    int cnt = 0;
-    int flag = 0;
+    long long   max;
+    int         cnt;
+    int         count;
 
     count = ft_lstsize(*b);
     while (count > 0)
     {
-        cnt = 0;
-        max = -2147483649;
-        temp = *b;
-        while (temp)
-        {
-            if (max < temp->value)
-                max = temp->value;
-            temp = temp->next;
-        }
-        tmp = *b;
-        while (tmp)
-        {
-            cnt++;
-            if (tmp->value == max)
-            {
-                //pa(a, b);
-                break ;
-            }
-            tmp = tmp->next;
-        }
-        printf("cnt : %d\n", cnt);
-        printf("count : %d\n", count);
-        // tmp = *b;
+        max = b_max(b);
+        cnt = b_max_order(b, max);
+        // tmp = *b; -> 왜 이렇게 해서 if문에 넣으면 안될까?
         while (1)
         {
             if ((*b)->value == max)
