@@ -50,3 +50,24 @@ int	ft_strlen(char const *s)
 		i++;
 	return (i);
 }
+
+char	*ft_strdup(const char *s1)
+{
+	char	*temp;
+	char	*str;
+	int		len;
+
+	len = ft_strlen(s1);
+	str = malloc((len + 1) * sizeof(char));
+	temp = str;
+	if (!temp)
+		return (NULL);
+	while (*s1)
+	{
+		*temp = *s1;
+		temp++;
+		s1++;
+	}
+	*temp = '\0';
+	return (str);
+}

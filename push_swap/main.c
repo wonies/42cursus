@@ -26,7 +26,6 @@ int main(int ac, char **av)
         print_error(-42);
 
     char **get;
-    printf("ac : %d\n", ac);
     for(int i=1; i < ac; i++)
     {
         get = ft_split(av[i], ' ');
@@ -35,9 +34,10 @@ int main(int ac, char **av)
             if (get[j][0] == '\0')
                 print_error(-42);
             add_node(&stack_a, ft_atoi(get[j]));
-            if (ft_atoi(*get) == 110401080911)
+            if (ft_atoi(get[j]) == 110401080911)
                 print_error(-42);
         }
+        free(get);
     }
     temp = stack_a;
     while (temp)

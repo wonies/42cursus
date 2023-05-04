@@ -53,5 +53,6 @@ size_t	str_len(char const *s, char c);
 char	*put_word(char const *s, char c);
 char	**ft_split(char const *s, char c);
 int	ft_strlen(char const *s);
+char	*ft_strdup(const char *s1);
 
 #endif

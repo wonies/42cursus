@@ -71,6 +71,11 @@ char	**ft_split(char const *s, char c)
 	string = (char **)malloc(sizeof(char *) * (count_str(s, c) + 1));
 	if (!string)
 		return (0);
+	if (count_str(s, c) == 0)
+	{
+		string[0] = ft_strdup("");
+		return string;
+	}
 	while (*s)
 	{
 		while (*s && *s == c)
