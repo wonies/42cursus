@@ -20,11 +20,13 @@ int print_error(int err)
 
 int check_duplication(t_node *a)
 {
-    t_node *cur;
+    t_node  *cur;
+    t_node  *tmp;
+    
     cur = a;
     while (cur)
     {
-        t_node *tmp = cur->next;
+        tmp = cur->next;
         while (tmp)
         {
             if (cur->value == tmp->value)
@@ -33,5 +35,32 @@ int check_duplication(t_node *a)
         }
         cur = cur->next;
     }
+    return 0;
+}
+
+int check_sort(t_node *a)
+{
+    t_node  *tmp;
+    t_node  *rear;
+    int flag;
+    int compare;
+    int len;
+
+    flag = 0;
+    tmp = a;
+    len = ft_lstsize(a);
+    compare = a->value;
+    while (tmp->next)
+    {
+        rear = tmp->next;
+        if (compare < rear->value)
+        {
+            flag++;
+            compare = rear->value;
+        }
+        tmp = tmp->next;
+    }
+    if (flag == len - 1)
+        return -114;
     return 0;
 }

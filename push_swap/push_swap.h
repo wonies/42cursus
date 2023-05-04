@@ -46,6 +46,12 @@ long	ft_atoi(const char *str);
 int check_duplication(t_node *a);
 long long   b_max(t_node **b);
 int b_max_order(t_node **b, long long max);
-
+int check_sort(t_node *a);
+size_t	count_str(char const *s, char c);
+char	**ft_free_split(char **str, int order);
+size_t	str_len(char const *s, char c);
+char	*put_word(char const *s, char c);
+char	**ft_split(char const *s, char c);
+int	ft_strlen(char const *s);
 
 #endif
