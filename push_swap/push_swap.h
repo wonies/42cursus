@@ -23,9 +23,9 @@ typedef struct s_info
 } t_info;
 
 void	add_node(t_node **list, int value);
-void    sa(t_node *(a));
-void sb(t_node *b);
-void ss(t_node *a, t_node *b);
+void sa(t_node *a);
+void	sb(t_node *b);
+void 	ss(t_node *a, t_node *b);
 void    pa(t_node **a, t_node **b);
 void    pb(t_node **a, t_node **b);
 void    ra(t_node **head);
@@ -56,5 +56,9 @@ int	ft_strlen(char const *s);
 char	*ft_strdup(const char *s1);
 void	*ft_calloc(size_t count, size_t size);
 void	*ft_memset(void *b, int c, size_t len);
+void    three_algo(t_node **a);
+void count_each(t_node **a, t_info *info);
+t_node	*ft_lstlast(t_node *lst);
+
 
 #endif

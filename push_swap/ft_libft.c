@@ -51,3 +51,12 @@ void	*ft_memset(void *b, int c, size_t len)
 		*temp++ = (unsigned char)c;
 	return (b);
 }
+
+t_node	*ft_lstlast(t_node *lst)
+{
+	if (!lst)
+		return (0);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}

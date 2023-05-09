@@ -48,9 +48,10 @@ int main(int ac, char **av)
             exit(1);
         temp = temp->next;
     }
-
+    printf("start!\n");
     get_rank(&stack_a, &a_len);
     push_start(&stack_a,&a_len,15,&stack_b);
+    // three_algo(&stack_a);
     printf("B is ");
     print_list(stack_b);
     b_order(&stack_a, &stack_b, a_len);

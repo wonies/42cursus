@@ -16,6 +16,49 @@ int    create_chunk(t_node **a, t_info *info)
     return chunk;
 }
 
+
+void    three_algo(t_node **a)
+{
+    t_node *temp;
+    t_node *temp_next;
+    t_node *last;
+    
+    last = ft_lstlast(*a);
+    temp = *a;
+    printf("temp-order : %d\n", temp->order);
+    printf("temp-order2 : %d\n", temp->next->order);
+    temp_next = temp->next;
+    if (temp->order < temp_next->order && temp_next->order > last->order)
+    {
+        rra(a);
+        sa(a);
+    }
+    else if (temp->order > temp_next->order && temp->order < last->order)
+        sa(a);
+    else if (temp->order < temp_next->order && temp->order > last->order)
+        rra(a);
+    else if (temp->order > last->order && temp_next->order < last->order)
+        ra(a);
+    else if (temp->order > temp_next->order && temp_next->order > last->order)
+    {
+        sa(a);
+        rra(a);
+    }
+}
+
+
+void count_each(t_node **a, t_info *info)
+{
+    int size;
+    size = info->size;
+    printf("size : %d\n", size);
+    if(size <= 3)
+        three_algo(a);
+    // else if (size <= 5)
+    //     five_algo(a, b);
+}
+
+
 void    get_rank(t_node **a, t_info *info)
 {
     int rank;
@@ -24,10 +67,12 @@ void    get_rank(t_node **a, t_info *info)
 
     rank = 0;
     size = info->size;
+    printf("why?\n");
     chunk = create_chunk(a, info);
+    if (chunk == -1)
+        count_each(a, info);
     get_order(a, info);
-    printf("the size is what %d\n", info->size);
-    
+    printf("the size is what %d\n", info->size);   
 }
 
 void    push_start(t_node **a, t_info *info, int chunk, t_node **b)
