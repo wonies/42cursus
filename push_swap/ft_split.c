@@ -68,14 +68,11 @@ char	**ft_split(char const *s, char c)
 	size_t	index;
 
 	index = 0;
-	string = (char **)malloc(sizeof(char *) * (count_str(s, c) + 1));
+	string = (char **)ft_calloc(count_str(s, c) + 1, sizeof(char *));
 	if (!string)
 		return (0);
 	if (count_str(s, c) == 0)
-	{
 		string[0] = ft_strdup("");
-		return string;
-	}
 	while (*s)
 	{
 		while (*s && *s == c)
@@ -90,6 +87,5 @@ char	**ft_split(char const *s, char c)
 		while (*s && *s != c)
 			s++;
 	}
-	string[index] = 0;
 	return (string);
 }

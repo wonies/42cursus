@@ -1,4 +1,3 @@
-
 #include "push_swap.h"
 
 long	ft_atoi(const char *str)
@@ -32,3 +31,23 @@ long	ft_atoi(const char *str)
 	return (sign * res);
 }
 
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*temp;
+
+	temp = malloc(count * size);
+	if (!temp)
+		return (NULL);
+	ft_memset(temp, 0, count * size);
+	return (temp);
+}
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*temp;
+
+	temp = (unsigned char *)b;
+	while (len-- > 0)
+		*temp++ = (unsigned char)c;
+	return (b);
+}

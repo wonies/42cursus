@@ -54,5 +54,7 @@ char	*put_word(char const *s, char c);
 char	**ft_split(char const *s, char c);
 int	ft_strlen(char const *s);
 char	*ft_strdup(const char *s1);
+void	*ft_calloc(size_t count, size_t size);
+void	*ft_memset(void *b, int c, size_t len);
 
 #endif
