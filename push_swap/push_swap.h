@@ -37,11 +37,11 @@ void    rrr(t_node **a, t_node **b);
 int print_error(int err);
 int	ft_lstsize(t_node *lst);
 int    create_chunk(t_node **a, t_info *info);
-void    get_rank(t_node **a, t_info *info);
+void    get_rank(t_node **a, t_info *info, t_node **b);
 void    get_order(t_node **a, t_info *info);
 t_node  *create_node(int value);
 void    push_start(t_node **a, t_info *info, int chunk, t_node **b);
-void    b_order(t_node **a, t_node **b, t_info info);
+void    b_order(t_node **a, t_node **b, t_info *info);
 long	ft_atoi(const char *str);
 int check_duplication(t_node *a);
 long long   b_max(t_node **b);
@@ -57,8 +57,9 @@ char	*ft_strdup(const char *s1);
 void	*ft_calloc(size_t count, size_t size);
 void	*ft_memset(void *b, int c, size_t len);
 void    three_algo(t_node **a);
-void count_each(t_node **a, t_info *info);
+void 	count_each(t_node **a, t_info *info, t_node **b);
 t_node	*ft_lstlast(t_node *lst);
+void	ft_lstadd_back(t_node **lst, int value);
 
 
 #endif

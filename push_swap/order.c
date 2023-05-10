@@ -12,6 +12,7 @@ void sa(t_node *a)
         a->next->value = a->value;
         a->value = temp;
     }
+    write(1, "sa\n", 3);
 }
 
 void sb(t_node *b)
@@ -26,12 +27,14 @@ void sb(t_node *b)
         b->next->value = b->value;
         b->value = temp;
     }
+    write(1, "sb\n", 3);
 }
 
 void ss(t_node *a, t_node *b)
 {
     sa(a);
     sb(b);
+    write(1, "ss\n", 3);
 }
 
 void    pa(t_node **a, t_node **b)
@@ -44,6 +47,7 @@ void    pa(t_node **a, t_node **b)
     *b = (*b)->next;
     temp->next = *a;
     *a = temp;
+    write(1, "pa\n", 3);
 }
 
 void    pb(t_node **a, t_node **b)
@@ -56,6 +60,7 @@ void    pb(t_node **a, t_node **b)
     *a = (*a)->next;
     temp->next = *b;
     *b = temp;
+    write(1, "pb\n", 3);
 }
 
 void    ra(t_node **head)
@@ -69,6 +74,7 @@ void    ra(t_node **head)
     tail->next = *head;
     *head = (*head)->next;
     tail->next->next = NULL;
+    write(1, "ra\n", 3);
 }
 
 void    rb(t_node **head)
@@ -82,12 +88,14 @@ void    rb(t_node **head)
     tail->next = *head;
     *head = (*head)->next;
     tail->next->next = NULL;
+    write(1, "rb\n", 3);
 }
 
 void    rr(t_node **a, t_node **b)
 {
     ra(a);
     rb(b);
+    write(1, "rr\n", 3);
 }
 
 void    rra(t_node **a)
@@ -108,6 +116,7 @@ void    rra(t_node **a)
     head->next = *a;
     *a = head;
     // printf("a is ..%d\n", **a);
+    write(1, "rra\n", 4);
 }
 
 void    rrb(t_node **b)
@@ -128,10 +137,12 @@ void    rrb(t_node **b)
     head->next = *b;
     *b = head;
     // printf("a is ..%d\n", **b);
+    write(1, "rrb\n", 4);
 }
 
 void    rrr(t_node **a, t_node **b)
 {
     rra(a);
     rrb(b);
+    write(1, "rrr\n", 4);
 }

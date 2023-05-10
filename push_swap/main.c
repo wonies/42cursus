@@ -33,28 +33,32 @@ int main(int ac, char **av)
         {
             if (get[j][0] == '\0')
                 print_error(-42);
-            add_node(&stack_a, ft_atoi(get[j]));
+            ft_lstadd_back(&stack_a, ft_atoi(get[j]));
             if (ft_atoi(get[j]) == 110401080911)
                 print_error(-42);
         }
         free(get);
     }
-    temp = stack_a;
-    while (temp)
-    {
+    //temp = stack_a;
+    int a_size = ft_lstsize(stack_a);
+    // for (int i = 0; i < a_size ; i++)
+    // {
+    //     printf("%d\n", stack_a->value);
+    //     stack_a = stack_a->next;
+    // }
+    // while (temp)
+    // {
         if (check_duplication(stack_a) == -42)
             print_error(-42);
-        if (check_sort(stack_a) == -114)    
+        if (check_sort(stack_a) == 1)    
             exit(1);
-        temp = temp->next;
-    }
-    printf("start!\n");
-    get_rank(&stack_a, &a_len);
-    push_start(&stack_a,&a_len,15,&stack_b);
+        // temp = temp->next;
+    // }
+    get_rank(&stack_a, &a_len,  &stack_b);
+    //push_start(&stack_a,&a_len,15,&stack_b);
     // three_algo(&stack_a);
-    printf("B is ");
-    print_list(stack_b);
-    b_order(&stack_a, &stack_b, a_len);
+   // print_list(stack_b);
+    // b_order(&stack_a, &stack_b, a_len);
     print_list(stack_a);
 
     return (0);

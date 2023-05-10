@@ -12,21 +12,43 @@ t_node  *create_node(int value)
     return (new_node);
 }
 
-void    add_node(t_node **head, int value)
-{
-    t_node  *new_node;
 
-    new_node = create_node(value);
-    if (!new_node)
-        return ;
-    if (*head == NULL)
-        *head = new_node;
-    else
-    {
-        new_node->next = *head;
-        *head = new_node;
-    }
+void	ft_lstadd_back(t_node **lst, int value)
+{
+	t_node	*temp;
+	t_node *new;
+
+	new = create_node(value);
+	temp = *lst;
+	if (!lst || !new)
+		return ;
+	else if (!(*lst))
+		(*lst) = new;
+	else
+	{
+		while ((*lst)->next)
+			(*lst) = (*lst)->next;
+		(*lst)->next = new;
+		(*lst) = temp;
+	}
 }
+
+
+// void    add_node(t_node **head, int value)
+// {
+//     t_node  *new_node;
+
+//     new_node = create_node(value);
+//     if (!new_node)
+//         return ;
+//     if (*head == NULL)
+//         *head = new_node;
+//     else
+//     {
+//         new_node->next = *head;
+//         *head = new_node;
+//     }
+// }
 
 int	ft_lstsize(t_node *lst)
 {
