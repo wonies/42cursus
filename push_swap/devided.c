@@ -9,8 +9,8 @@ long long   b_max(t_node **b)
     temp = *b;
     while (temp)
     {
-        if (max < temp->value)
-            max = temp->value;
+        if (max < temp->order)
+            max = temp->order;
         temp = temp->next;
     }
     return (max);
@@ -26,7 +26,7 @@ int b_max_order(t_node **b, long long max)
     while (temp)
     {
         cnt++;
-        if (temp->value == max)
+        if (temp->order == max)
             break ;
         temp = temp->next;
     }

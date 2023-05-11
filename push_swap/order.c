@@ -3,14 +3,18 @@
 void sa(t_node *a)
 {
     int temp;
+    int temp_order;
     
     if (a == NULL || a->next == NULL)
         return ;
-    if (a->next != NULL && a->next->next != NULL)
+    if (a != NULL && a->next != NULL)
     {
         temp = a->next->value;
         a->next->value = a->value;
         a->value = temp;
+        temp_order = a->next->order;
+        a->next->order = a->order;
+        a->order = temp_order;
     }
     write(1, "sa\n", 3);
 }
@@ -18,14 +22,18 @@ void sa(t_node *a)
 void sb(t_node *b)
 {
     int temp;
+    int temp_order;
 
     if (b == NULL || b->next == NULL)
         return ;
-    if (b->next != NULL && b->next->next != NULL)
+    if (b!= NULL && b->next != NULL)
     {
         temp = b->next->value;
         b->next->value = b->value;
         b->value = temp;
+        temp_order = b->next->order;
+        b->next->order = b->order;
+        b->order = temp_order;
     }
     write(1, "sb\n", 3);
 }
@@ -62,6 +70,37 @@ void    pb(t_node **a, t_node **b)
     *b = temp;
     write(1, "pb\n", 3);
 }
+
+// void	ra(t_node **head)
+// {
+// 	t_node  *tmp;
+// 	int		size;
+
+// 	size = ft_lstsize(*head);
+// 	tmp = *head;
+// 	if (!tmp || size <= 1)
+// 		return ;
+// 	*head = (*head)->next;
+// 	tmp->next = NULL;
+// 	ft_lstadd_back(head, tmp);
+//     write(1, "ra\n", 3);
+// }
+
+
+// void    ra(t_node **head)
+// {
+//     t_node *temp;
+//     int size;
+
+//     size = ft_lstsize(*head);
+//     temp = *head;
+//     if (!temp || size <= 1)
+//         return ;
+//     *head = (*head)->next;
+//     temp->next = NULL;
+//     ft_lstadd_back(head, size);
+//     write(1, "ra\n", 3);
+// }
 
 void    ra(t_node **head)
 {

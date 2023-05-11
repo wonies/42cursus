@@ -59,7 +59,7 @@ int main(int ac, char **av)
     // three_algo(&stack_a);
    // print_list(stack_b);
     // b_order(&stack_a, &stack_b, a_len);
-    print_list(stack_a);
+    // print_list(stack_a);
 
     return (0);
 }

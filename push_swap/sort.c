@@ -18,55 +18,153 @@ int    create_chunk(t_node **a, t_info *info)
 
 void    three_algo(t_node **a)
 {
-    t_node *temp;
-    t_node *temp_next;
-    t_node *last;
+//     t_node *temp;
+//     t_node *temp_next;
+//     t_node *last;
     
-    last = ft_lstlast(*a);
-    temp = *a;
-    printf("temp order : %d\n", temp->order);
-    temp_next = temp->next;
-    printf("temp next_order : %d\n", temp_next->order);
-    printf("last order : %d\n", last->order);
+//     last = ft_lstlast(*a);
+//     temp = *a;
+//    // printf("temp order : %d\n", temp->order);
+//     temp_next = (*a)->next;
+//     // printf("temp next_order : %d\n", temp_next->order);
+//     // printf("last order : %d\n", last->order);
 
+//     /* 1 3 2*/
+//     if (temp->order < temp_next->order && temp_next->order > last->order && temp->order < last->order)
+//     {
+//         sa(*a);
+//         ra(a);
+//     }
+//     /*2 1 3*/
+//     else if (temp->order > temp_next->order && temp_next->order < last->order && temp->order < last->order)
+//         sa(*a);
+//     /* 2 3 1*/
+//     else if (temp->order < temp_next->order && temp_next->order > last->order && temp->order > last->order)
+//         rra(a);
+//     /* 3 1 2 */
+//     else if (temp->order > temp_next->order && temp_next->order < last->order && temp->order > last->order)
+//         ra(a);
+//     /* 3 2 1*/
+//     else if (temp->order > temp_next->order && temp_next->order > last->order && temp->order > last->order)
+//     {
+//         sa(*a);
+//         rra(a);
+//     }
+    t_node	*temp;
+	t_node	*last;
 
-    /* 1 3 2 */
-    
-    if (temp->order < temp_next->order && temp_next->order > last->order && temp->order < last->order)
-    {
-        sa(*a);
-        ra(a);
-    }
-    /* 2 1 3 */
-    else if (temp->order > temp_next->order && temp_next->order < last->order && temp->order < last->order)
-        sa(*a);
-    /* 2 3 1 */
-    else if (temp->order < temp_next->order && temp_next->order > last->order && temp->order > last->order)
-        rra(a);
-    /* 3 1 2 */
-    else if (temp->order > temp_next->order && temp_next->order < last->order && temp->order > last->order)
-        ra(a);
-    /* 3 2 1 */
-    else if (temp->order > temp_next->order && temp_next->order > last->order && temp->order > last->order)
-    {
-        sa(*a);
-        rra(a);
-    }
+	temp = (*a)->next;
+	last = ft_lstlast(*a);
+	if ((*a)->order < last->order && last->order < temp->order)
+	{
+		sa(*a);
+		ra(a);
+	}
+	else if (temp->order < (*a)->order && (*a)->order < last->order)
+		sa(*a);
+	else if ((*a)->order < temp->order && (*a)->order > last->order)
+		rra(a);
+	else if ((*a)->order > last->order && temp->order < last->order)
+		ra(a);
+	else if ((*a)->order > temp->order && temp->order > last->order)
+	{
+		sa(*a);
+		rra(a);
+	}
 }
 
 void    five_algo(t_node **a, t_node **b)
 {
+    t_node * temp;
+    // temp = *a;
+    // while (temp)
+    // {
+    //         printf(" a 의 vlaue 는??%d\n", temp->order);
+    //         temp = temp->next;
+    // }
+    int	cnt;
+
+	cnt = ft_lstsize(*a);
+    
     three_algo(a);
+    // temp = *a;
+    // while (temp)
+    // {
+    //         printf(" a 의 order 는??%d\n", temp->value);
+    //         temp = temp->next;
+    // }
     pb(a, b);
+    //  temp = *a;
+    // while (temp)
+    // {
+    //         printf(" a 2 의 order 는??%d\n", temp->value);
+    //         temp = temp->next;
+    // }
+    //   temp = *a;
+    // while (temp)
+    // {
+    //         printf(" a 의 vlaue 는??%d\n", temp->order);
+    //         temp = temp->next;
+    // }
+    // int cnt = ft_lstsize(*a);
     three_algo(a);
+    //  temp = *a;
+    // while (temp)
+    // {
+    //         printf(" a 3 의 order 는??%d\n", temp->value);
+    //         temp = temp->next;
+    // }
     pb(a, b);
+    // t_node *pbs;
+    // pbs = *b;
+    // while (pbs)
+    // {
+    //     printf("show me the B: %d\n", pbs->value);
+    //     pbs = pbs->next;
+    // }
     three_algo(a);
-    if ((*b)->value < (*b)->next->value)
+    // temp = *a;
+    // while (temp)
+    // {
+    //         printf(" a 4 의 order 는??%d\n", temp->value);
+    //         temp = temp->next;
+    // }
+    if ((*b)->order < (*b)->next->order)
         sb(*b);
+    //  pbs = *b;
+    // while (pbs)
+    // {
+    //     printf("show me the B: %d\n", pbs->value);
+    //     pbs = pbs->next;
+    // }
     pa(a, b);
+    // temp = *a;
+    // while (temp)
+    // {
+    //         printf(" a 3 의 order 는??%d\n", temp->value);
+    //         temp = temp->next;
+    // }
     three_algo(a);
     pa(a, b);
     three_algo(a);
+	// while (cnt-- > 0)
+	// {
+	// 	pa(a, b);
+	// 	three_algo(a);
+	// }
+    // while (cnt-- > 0)
+    // {
+    //     pa(a, b);
+    //     three_algo(a);
+    // }
+    // pa(a, b);
+    // temp  =*a;
+    //   while (temp)
+    // {
+    //         printf(" a 의 vlaue 는??%d\n", temp->order);
+    //         temp = temp->next;
+    // }
+    // three_algo(a);
 }
 
 
@@ -79,7 +177,6 @@ void count_each(t_node **a, t_info *info, t_node **b)
     else if (size <= 5)
        five_algo(a, b);
 } 
-
 
 void    get_rank(t_node **a, t_info *info, t_node **b)
 {
@@ -137,13 +234,13 @@ void    b_order(t_node **a, t_node **b, t_info *info)
         // tmp = *b; -> 왜 이렇게 해서 if문에 넣으면 안될까?
         while (1)
         {
-            if ((*b)->value == max)
+            if ((*b)->order == max)
             {
                 pa(a,b);
                 count--;
                 break ;
             }
-            if (cnt < (info->size / 2))
+            if (cnt < (info->size / 4))
                 rb(b);
             else
                 rrb(b);
