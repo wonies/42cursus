@@ -1,5 +1,32 @@
 #include "push_swap.h"
 
+
+int optimize(t_node **a, t_info *info)
+{
+    int     front;
+    int     center;
+    int     tri;
+    int     cnt;
+    t_node *temp;
+
+    front = 1;
+    center = info->size / 2;
+    tri = info->size / 3;
+    temp = *a;
+    cnt = 0;
+    while (temp)
+    {
+        if (center <= front && temp->order <= tri)
+            cnt++;
+        temp = temp->next;
+        front++;
+    }
+    if (cnt >= (tri / 4) * 3)
+        return 1;
+    else
+        return -1;
+}
+
 int    create_chunk(t_node **a, t_info *info)
 {
     int size = ft_lstsize(*a);
@@ -195,58 +222,213 @@ void    get_rank(t_node **a, t_info *info, t_node **b)
         return ;
     }
     push_start(a, info, chunk, b);
-    b_order(a, b, info);
+    sort_b(a, b, info);
 }
 
 void    push_start(t_node **a, t_info *info, int chunk, t_node **b)
 {
     int i = 0;
-    t_node *temp; 
-    while (1)
+    t_node *temp;
+    int size = info->size; 
+    int opti;
+
+    opti = optimize(a, info);
+    // printf("size : %d\n", size);
+    // while (i < size)
+	// {
+	// 	if ((*a)->order > chunk + i)
+	// 		ra(a);
+	// 	else
+	// 	{
+	// 		if ((*a)->order < i)
+	// 			pb(a, b);
+	// 		else
+	// 			rrb(b);
+    //         i++;
+	// 	}
+	// }
+    
+    while (i < size)
     {
-        temp = *a;
-        if ((*a) == NULL)
-            break ;
-        if (temp->order < chunk + i)
+        if ((*a)->order > chunk + i)
         {
-            pb(a, b);
-            if ((*b)->order < i)
-                rrb(b);
-            i++;
+            if (opti == 1)
+                rra(a);
+            else
+                ra(a);
         }
         else
-            ra(a);
-        temp = (temp)->next;
-    }
-}
-
-void    b_order(t_node **a, t_node **b, t_info *info)
-{
-    long long   max;
-    int         cnt;
-    int         count;
-
-    count = ft_lstsize(*b);
-    while (count > 0)
-    {
-        max = b_max(b);
-        cnt = b_max_order(b, max);
-        // tmp = *b; -> 왜 이렇게 해서 if문에 넣으면 안될까?
-        while (1)
         {
-            if ((*b)->order == max)
+            if ((*a)->order < i)
+                pb(a, b);
+            else 
             {
-                pa(a,b);
-                count--;
-                break ;
-            }
-            if (cnt < (info->size / 4))
+                pb(a, b);
                 rb(b);
-            else
-                rrb(b);
+            }
+            i++;
         }
     }
+
+    // while (i < size)
+    // {
+    //     temp = *a;
+    //     // if ((*a) == NULL)
+    //     //     break ;
+    //     if ((*a)->order < chunk + i)
+    //     {
+    //         // if ( i < chunk)
+    //             pb(a, b);
+    //         if ((*b)->order > i)
+    //             rrb(b);
+    //         // if ((*b)->order < i)
+    //             // rrb(b);
+    //         i++;
+    //     }
+    //     else
+    //         ra(a);
+    //     // temp = (temp)->next;
+    // }
+
+    //  while (1)
+    // {
+    //     temp = *a;
+    //     if ((*a) == NULL)
+    //         break ;
+    //     if (temp->order < chunk + i)
+    //     {
+    //         pb(a, b);
+    //         if ((*b)->order < i)
+    //             rrb(b);
+    //         i++;
+    //     }
+    //     else
+    //         ra(a);
+    //     temp = (temp)->next;
+    // }
+    // // while (1)
+    // {
+    //     temp = *a;
+    //     if (temp == NULL)
+    //         break ;
+    //     if (temp->order > chunk + i)
+    //         ra(a);
+    //     else
+    //     {
+    //         if ( (temp->order <  i))
+    //             pb(a, b);
+    //         else 
+    //             rrb(b);
+    //         i++;
+    //     }
+    //     temp = (temp)->next;
+    // }
 }
+
+int find_order(t_node **b, int size, int len)
+{
+    t_node *temp;
+    int high;
+
+    temp = *b;
+    high = 1;
+    while (temp->order != size)
+    {
+        high++;
+        temp = temp->next;
+    }
+    if (high <= len)
+        return 1;
+    return 2;
+}
+
+void    b_order(t_node **a, t_node **b, int size)
+{
+    int len;
+    int k;
+
+    len = size / 2;
+    if ((*b)->order == size)
+        return ;
+    k = find_order(b, size, len);
+    while (1)
+    {
+        if (k == 1)
+            rb(b);
+        else if (k == 2)
+            rrb(b);
+        if ((*b)->order == size)
+            break ;
+    }
+}
+
+void sort_b(t_node **a, t_node **b, t_info *info)
+{
+    int f_order;
+
+    f_order = info->size;
+    while (f_order != 0)
+    {
+        b_order(a, b, f_order);
+        pa(a, b);
+        f_order--;
+    }
+}
+
+// void    b_order(t_node **a, t_node **b, t_info *info)
+// {
+//     long long   max;
+//     int         cnt;
+//     int         count;
+
+//     int size = info->size;
+//     int len =  size / 2;
+//     int flag = 0;
+//     int  i= 0;
+//     int con = b_max_order(b, max);
+//     //count = ft_lstsize(*b);
+//     max = b_max(b);
+//     if ((*b)->order == con)
+//         return ;
+//     if (con <= len)
+//         flag = 1;
+//     else
+//         flag = 2;
+//     while (i < size)
+//     {
+//         while (1)
+//         {
+//             if ((*b)->order == con)
+//                 break ;
+//             if (flag == 1)
+//                 rb(b);
+//             else if (flag == 2)
+//                 rrb(b);
+//         }
+//         pa(a, b);
+//         i++;
+//     }
+
+//     // while (count > 0)
+//     // {
+//     //     max = b_max(b);
+//     //     cnt = b_max_order(b, max);
+//     //     // tmp = *b; -> 왜 이렇게 해서 if문에 넣으면 안될까?
+//     //     while (1)
+//     //     {
+//     //         if ((*b)->order == max)
+//     //         {
+//     //             pa(a,b);
+//     //             count--;
+//     //             break ;
+//     //         }
+//     //         if (cnt < (info->size / 2))
+//     //             rb(b);
+//     //         else
+//     //             rrb(b);
+//     //     }
+//     // }
+// }
 
 void    get_order(t_node **a, t_info *info)
 {
