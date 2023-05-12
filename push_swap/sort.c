@@ -34,7 +34,7 @@ int    create_chunk(t_node **a, t_info *info)
     info->size = size;
     if (size <= 5)
         return -1;
-    else if (size < 100)
+    else if (size <= 100)
         chunk = 15;
     else
         chunk= 30;
@@ -199,7 +199,9 @@ void count_each(t_node **a, t_info *info, t_node **b)
 {
     int size;
     size = info->size;
-    if(size <= 3)
+    if (size == 2)
+        sa(*a);
+    else if(size <= 3)
         three_algo(a);
     else if (size <= 5)
        five_algo(a, b);

@@ -20,23 +20,47 @@ int main(int ac, char **av)
 
     stack_a = NULL;
     stack_b = NULL;
-    t_node *temp;
-
+    // t_node *temp;
+    t_node *tmp;
     if (ac < 2)
         print_error(-42);
 
-    char **get;
+    char **get ;
+    get= NULL;
     for(int i=1; i < ac; i++)
     {
+        // printf("-\n");
         get = ft_split(av[i], ' ');
-        for (int j=0; get[j]; j++)
+        // int k = 0;
+        // while (get[k])
+        // {
+        //     printf("%s\n", get[k]);
+        //     k++;
+        // }
+        // t_node *temp = stack_a;
+        //     while (temp)
+        //     {
+        //         printf("value :: %d\n", temp->value);
+        //         temp = temp->next;
+        //     }
+        t_node *last;
+        for (int j=0; get[j] != NULL; j++)
         {
+            // if (get[j] == NULL)
+            //     break ;
             if (get[j][0] == '\0')
                 print_error(-42);
             ft_lstadd_back(&stack_a, ft_atoi(get[j]));
             if (ft_atoi(get[j]) == 110401080911)
                 print_error(-42);
+//            tmp = stack_a;
         }
+        
+            // while (tmp)
+            // {
+            //     printf("value :: %d\n", tmp->value);
+            //     tmp = tmp->next;
+            // }
         free(get);
     }
     //temp = stack_a;

@@ -19,7 +19,7 @@ long	ft_atoi(const char *str)
 	else if (str[i] == '+')
 		i++;
 	else if (!(str[i] == 32 || (str[i] >= 9 && str[i] <= 13) || str[i] == '-' || str[i] == '+' || (str[i] >= '0' \
-	&& str[i] <= '9') || str[i] == '\"'))
+	&& str[i] <= '9')))
 		return 110401080911;
 	while (str[i] && (str[i] >= '0' && str[i] <= '9'))
 	{
