@@ -6,13 +6,13 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:00:04 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/05/14 17:08:57 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/05/14 19:12:11 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ra(t_node **head)
+void	ra(t_node **head, int flag)
 {
 	t_node	*tail;
 
@@ -24,10 +24,11 @@ void	ra(t_node **head)
 	tail->next = *head;
 	*head = (*head)->next;
 	tail->next->next = NULL;
-	write(1, "ra\n", 3);
+    if (flag == 1)
+	    write(1, "ra\n", 3);
 }
 
-void	rb(t_node **head)
+void	rb(t_node **head, int flag)
 {
 	t_node	*tail;
 
@@ -39,17 +40,19 @@ void	rb(t_node **head)
 	tail->next = *head;
 	*head = (*head)->next;
 	tail->next->next = NULL;
-	write(1, "rb\n", 3);
+    if (flag == 1)
+	    write(1, "rb\n", 3);
 }
 
-void	rr(t_node **a, t_node **b)
+void	rr(t_node **a, t_node **b, int flag)
 {
-	ra(a);
-	rb(b);
-	write(1, "rr\n", 3);
+	ra(a, 0);
+	rb(b, 0);
+    if (flag == 1)
+	    write(1, "rr\n", 3);
 }
 
-void	rra(t_node **a)
+void	rra(t_node **a, int flag)
 {
 	t_node	*temp;
 	t_node	*head;
@@ -65,10 +68,11 @@ void	rra(t_node **a)
 	temp->next = NULL;
 	head->next = *a;
 	*a = head;
-	write(1, "rra\n", 4);
+    if (flag == 1)
+	    write(1, "rra\n", 4);
 }
 
-void	rrb(t_node **b)
+void	rrb(t_node **b, int flag)
 {
 	t_node	*temp;
 	t_node	*head;
@@ -84,5 +88,6 @@ void	rrb(t_node **b)
 	temp->next = NULL;
 	head->next = *b;
 	*b = head;
-	write(1, "rrb\n", 4);
+    if (flag == 1)
+	    write(1, "rrb\n", 4);
 }

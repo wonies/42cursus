@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   order3.c                                           :+:      :+:    :+:   */
+/*   bonus_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/14 16:53:47 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/05/14 18:56:50 by wonhshin         ###   ########.fr       */
+/*   Created: 2023/05/14 20:04:35 by wonhshin          #+#    #+#             */
+/*   Updated: 2023/05/14 21:38:20 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
-void	rrr(t_node **a, t_node **b)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	rra(a);
-	rrb(b);
-	write(1, "rrr\n", 4);
+	unsigned char	*s1_cpy;
+	unsigned char	*s2_cpy;
+
+	s1_cpy = (unsigned char *)s1;
+	s2_cpy = (unsigned char *)s2;
+	while ((*s1_cpy || *s2_cpy) && n > 0)
+	{
+		if (*s1_cpy != *s2_cpy || n == 0)
+			return (*s1_cpy - *s2_cpy);
+		s1_cpy++;
+		s2_cpy++;
+		n--;
+	}
+	return (0);
 }

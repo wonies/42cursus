@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   order3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/14 18:53:21 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/05/14 18:53:55 by wonhshin         ###   ########.fr       */
+/*   Created: 2023/05/14 16:53:47 by wonhshin          #+#    #+#             */
+/*   Updated: 2023/05/14 19:52:10 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int ac, char **av)
+void	rrr(t_node **a, t_node **b, int flag)
 {
-	t_node	*a;
-	t_node	*b;
-	t_info	info;
-	char	**get;
-
-	a = NULL;
-	b = NULL;
-	get = NULL;
-	if (ac < 2)
-		print_error(-42);
-	get = parsing(&a, ac, av);
-	if (!get)
-		return (0);
-	pushswap_start(a, b, &info);
+	rra(a, 0);
+	rrb(b, 0);
+    if (flag == 1)
+	    write(1, "rrr\n", 4);
 }

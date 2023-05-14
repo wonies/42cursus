@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:54:04 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/05/14 18:55:23 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/05/14 22:05:09 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,21 +63,21 @@ int		check_sort(t_node *a);
 void	pushswap_start(t_node *a, t_node *b, t_info *info);
 
 /* order1 */
-void	sa(t_node *a);
-void	sb(t_node *b);
-void	ss(t_node *a, t_node *b);
-void	pa(t_node **a, t_node **b);
-void	pb(t_node **a, t_node **b);
+void	sa(t_node *a, int flag);
+void	sb(t_node *b, int flag);
+void	ss(t_node *a, t_node *b, int flag);
+void	pa(t_node **a, t_node **b, int flag);
+void	pb(t_node **a, t_node **b, int flag);
 
 /* order2 */
-void	ra(t_node **head);
-void	rb(t_node **head);
-void	rr(t_node **a, t_node **b);
-void	rra(t_node **a);
-void	rrb(t_node **b);
+void	ra(t_node **head, int flag);
+void	rb(t_node **head, int flag);
+void	rr(t_node **a, t_node **b, int flag);
+void	rra(t_node **a, int flag);
+void	rrb(t_node **b, int flag);
 
 /* order3 */
-void	rrr(t_node **a, t_node **b);
+void	rrr(t_node **a, t_node **b, int flag);
 
 /* getting */
 int		create_chunk(t_node **a, t_info *info);
@@ -95,7 +95,7 @@ int		optimize(t_node **a, int size);
 
 /* sort_b */
 void	sort_b(t_node **a, t_node **b, int size);
-void	b_order(t_node **a, t_node **b, int size);
+void	b_order(t_node **b, int size);
 int		find_order(t_node **b, int size, int len);
 
 #endif

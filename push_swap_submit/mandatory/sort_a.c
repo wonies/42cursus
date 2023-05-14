@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 20:07:51 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/05/14 16:53:22 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/05/14 19:10:27 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,18 @@ void	put_sort(t_node **a, t_node **b, int size, int chunk)
 		if ((*a)->order > chunk + i)
 		{
 			if (opti == 114)
-				rra(a);
+				rra(a, 1);
 			else
-				ra(a);
+				ra(a, 1);
 		}
 		else
 		{
 			if ((*a)->order < i++)
-				pb(a, b);
+				pb(a, b, 1);
 			else
 			{
-				pb(a, b);
-				rb(b);
+				pb(a, b, 1);
+				rb(b, 1);
 			}
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 20:05:58 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/05/12 20:06:41 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/05/14 21:54:46 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	find_order(t_node **b, int size, int len)
 	return (1111);
 }
 
-void	b_order(t_node **a, t_node **b, int size)
+void	b_order(t_node **b, int size)
 {
 	int	len;
 	int	check;
@@ -41,9 +41,9 @@ void	b_order(t_node **a, t_node **b, int size)
 	while (1)
 	{
 		if (check == 1104)
-			rb(b);
+			rb(b, 1);
 		else if (check == 1111)
-			rrb(b);
+			rrb(b, 1);
 		if ((*b)->order == size)
 			break ;
 	}
@@ -56,8 +56,8 @@ void	sort_b(t_node **a, t_node **b, int size)
 	fforder = size;
 	while (fforder != 0)
 	{
-		b_order(a, b, fforder);
-		pa(a, b);
+		b_order(b, fforder);
+		pa(a, b, 1);
 		fforder--;
 	}
 }
