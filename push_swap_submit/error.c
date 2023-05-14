@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/14 16:59:02 by wonhshin          #+#    #+#             */
+/*   Updated: 2023/05/14 18:57:44 by wonhshin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int print_error(int err)
+int	print_error(int err)
 {
-    if (err == -42)
-        write(2, "Error\n", 6);
-    exit(1);
-    return (-1);
+	if (err == -42)
+		write(2, "Error\n", 6);
+	exit(1);
+	return (-1);
 }

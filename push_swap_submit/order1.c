@@ -6,16 +6,16 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 20:11:23 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/05/12 20:22:20 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/05/14 18:52:20 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void sa(t_node *a)
+void	sa(t_node *a)
 {
-	int temp;
-	int temp_order;
+	int	temp;
+	int	temp_order;
 
 	if (a == NULL || a->next == NULL)
 		return ;
@@ -31,10 +31,10 @@ void sa(t_node *a)
 	write(1, "sa\n", 3);
 }
 
-void sb(t_node *b)
+void	sb(t_node *b)
 {
-	int temp;
-	int temp_order;
+	int	temp;
+	int	temp_order;
 
 	if (b == NULL || b->next == NULL)
 		return ;
@@ -50,19 +50,19 @@ void sb(t_node *b)
 	write(1, "sb\n", 3);
 }
 
-void ss(t_node *a, t_node *b)
+void	ss(t_node *a, t_node *b)
 {
 	sa(a);
 	sb(b);
 	write(1, "ss\n", 3);
 }
 
-void pa(t_node **a, t_node **b)
+void	pa(t_node **a, t_node **b)
 {
-	t_node *temp;
+	t_node	*temp;
 
 	if (*b == NULL)
-		return;
+		return ;
 	temp = *b;
 	*b = (*b)->next;
 	temp->next = *a;
@@ -70,12 +70,12 @@ void pa(t_node **a, t_node **b)
 	write(1, "pa\n", 3);
 }
 
-void pb(t_node **a, t_node **b)
+void	pb(t_node **a, t_node **b)
 {
-	t_node *temp;
+	t_node	*temp;
 
 	if (*a == NULL)
-		return;
+		return ;
 	temp = *a;
 	*a = (*a)->next;
 	temp->next = *b;

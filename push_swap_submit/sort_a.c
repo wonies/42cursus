@@ -6,13 +6,13 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 20:07:51 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/05/12 20:11:15 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/05/14 16:53:22 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include  "push_swap.h"
 
-int optimize(t_node **a, int size)
+int	optimize(t_node **a, int size)
 {
 	int		front;
 	int		mid;

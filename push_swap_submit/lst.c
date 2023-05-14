@@ -1,22 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lst.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/14 17:09:18 by wonhshin          #+#    #+#             */
+/*   Updated: 2023/05/14 18:51:26 by wonhshin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-t_node  *create_node(int value)
+t_node	*create_node(int value)
 {
-    t_node  *new_node;
+	t_node	*new_node;
 
-    new_node = malloc(sizeof(t_node));
-    if (!new_node)
-        return (NULL);
-    new_node->value = value;
-    new_node->next = NULL;
-    return (new_node);
+	new_node = malloc(sizeof(t_node));
+	if (!new_node)
+		return (NULL);
+	new_node->value = value;
+	new_node->next = NULL;
+	return (new_node);
 }
 
-
-void    ft_lstadd_back(t_node **lst, int value)
+void	ft_lstadd_back(t_node **lst, int value)
 {
 	t_node	*temp;
-	t_node *new;
+	t_node	*new;
 
 	new = create_node(value);
 	temp = *lst;
@@ -54,4 +65,3 @@ t_node	*ft_lstlast(t_node *lst)
 		lst = lst->next;
 	return (lst);
 }
-
