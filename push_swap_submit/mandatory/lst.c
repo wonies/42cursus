@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 17:09:18 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/05/14 18:51:26 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/05/16 15:22:42 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,22 @@ t_node	*ft_lstlast(t_node *lst)
 	while (lst->next)
 		lst = lst->next;
 	return (lst);
+}
+
+
+void	ft_lstclear(t_node **lst)
+{
+	t_node	*curr;
+	t_node	*next;
+
+	if (!lst)
+		return ;
+	curr = *lst;
+	while (curr)
+	{
+		next = curr->next;
+		free(curr);
+		curr = next;
+	}
+	*lst = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 18:54:04 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/05/14 22:05:09 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/05/16 20:51:08 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_node	*create_node(int value);
 void	ft_lstadd_back(t_node **lst, int value);
 int		ft_lstsize(t_node *lst);
 t_node	*ft_lstlast(t_node *lst);
+void	ft_lstclear(t_node **lst);
 
 /* init */
 int		ft_strlen(char const *s);
@@ -63,9 +64,9 @@ int		check_sort(t_node *a);
 void	pushswap_start(t_node *a, t_node *b, t_info *info);
 
 /* order1 */
-void	sa(t_node *a, int flag);
-void	sb(t_node *b, int flag);
-void	ss(t_node *a, t_node *b, int flag);
+void	sa(t_node **a, int flag);
+void	sb(t_node **b, int flag);
+void	ss(t_node **a, t_node **b, int flag);
 void	pa(t_node **a, t_node **b, int flag);
 void	pb(t_node **a, t_node **b, int flag);
 
