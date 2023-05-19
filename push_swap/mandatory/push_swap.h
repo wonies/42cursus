@@ -6,17 +6,15 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/18 21:56:29 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/05/18 21:56:42 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/05/19 20:37:17 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <stdarg.h>
 # include <stddef.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include <unistd.h>
 
 typedef struct s_node	t_node;
