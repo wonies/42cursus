@@ -14,6 +14,7 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include "../mlx/mlx.h"
+# include "../gnl/get_next_line.h"
 
 typedef struct s_param
 {
@@ -32,7 +33,20 @@ typedef struct s_map
 {
     int height;
     int width;
+    char    **emptymap;
 
 } t_map;
+
+void    open_file(t_map *map, char **av);
+
+/* lst.c */
+void	ft_lstadd_back(t_list **lst, t_list *new);
+t_list	*ft_lstnew(void *content);
+int	ft_lstsize(t_list *lst);
+
+size_t	ft_strlen_long(const	char *str);
+
+
+
 
 #endif

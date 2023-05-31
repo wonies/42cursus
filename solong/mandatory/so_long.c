@@ -24,13 +24,78 @@ int key_press(int key, t_param *param)
     return 0;
 }
 
-int main(void)
-{
-    void    *mlx_ptr;
-    void    *win_ptr;
 
-    mlx_ptr = mlx_init();
-    win_ptr = mlx_new_window(mlx_ptr, 500, 500, "wonie");
-    mlx_loop(mlx_ptr);
+t_list  *read_map(int fd)
+{
+    t_list  *head;
+    t_list  *new;
+    char    *str;
+
+    head = NULL;
+    str = get_next_line(fd);
+    if (!str)
+    {
+        close(fd);
+    }
+    while (str)
+    {
+        printf("%s\n", str);
+        new = ft_lstnew(str);
+        ft_lstadd_back(&head, new);
+        str = get_next_line(fd);
+    }
+    close(fd);
+    return head;
 }
 
+void    map_init(t_map *map)
+{
+    
+}
+
+
+
+void    open_file(t_map *map, char **av)
+{
+    t_list  *head;
+    int     fd;
+    char    *filename;
+    int     len;
+    
+    head = NULL;
+   fd = open(av[1], O_RDONLY);
+   printf("fd : %d\n", fd);
+   if (fd < 0)
+        printf("1");
+    head = read_map(fd);
+    map->height = ft_lstsize(head);
+    map->width = ft_strlen(head->content) - 1;
+    map_init(map);
+}
+ 
+
+
+
+int main(int ac, char **av)
+{
+    // void    *mlx_ptr;
+    // void    *win_ptr;
+
+    // mlx_ptr = mlx_init();
+    // win_ptr = mlx_new_window(mlx_ptr, 500, 500, "wonie");
+    // mlx_loop(mlx_ptr);
+
+    // t_list *lst;
+    t_map map;
+    
+    map.height = 0 ;
+    map.width = 0;
+
+    open_file(&map, av);
+
+
+}
+
+
+
+//gcc -L ../mlx -lmlx -framework OpenGL -framework Appkit -lz so_long.c
