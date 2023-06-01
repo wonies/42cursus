@@ -31,9 +31,9 @@ typedef struct s_list
 
 typedef struct s_map
 {
-    int height;
-    int width;
-    char    **emptymap;
+    int     height;
+    int     width;
+    char    **empty;
 
 } t_map;
 
@@ -44,9 +44,14 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 t_list	*ft_lstnew(void *content);
 int	ft_lstsize(t_list *lst);
 
+
+/* init.c */
 size_t	ft_strlen_long(const	char *str);
+void	*ft_calloc(size_t count, size_t size);
+void	*ft_memset(void *b, int c, size_t len);
 
 
-
+/* initialize.c */
+void    initialize_structure(t_map *map);
 
 #endif
