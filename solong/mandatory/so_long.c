@@ -48,9 +48,20 @@ t_list  *read_map(int fd)
     return head;
 }
 
+
+void    map_setting(t_map *map)
+{
+    char    **
+}
+
+
+
 void    map_init(t_map *map)
 {
-        
+    char    **mapping;
+
+    mapping = map->mapping;
+    mapping = (char **)(ft_calloc(sizeof(map->height), 1));
 }
 
 void    open_file(t_map *map, char **av)
@@ -73,8 +84,6 @@ void    open_file(t_map *map, char **av)
    // map_init(map);
 }
 
-
-
 int main(int ac, char **av)
 {
     // void    *mlx_ptr;
@@ -88,11 +97,6 @@ int main(int ac, char **av)
     t_map map;
     
     initialize_structure(&map);
-
-
-    map.height = 0 ;
-    map.width = 0;
-
     open_file(&map, av);
 }
 

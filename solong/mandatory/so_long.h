@@ -33,7 +33,7 @@ typedef struct s_map
 {
     int     height;
     int     width;
-    char    **empty;
+    char    **mapping;
 
 } t_map;
 
