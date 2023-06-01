@@ -56,7 +56,7 @@ void    map_setting(t_map *map)
 
     mapp = mapp->mapping;
     i = 0;
-    while (idx < map->height)
+    while (i < map->height)
     {
         mapp[i] = ft_strdup(mapping[i]);
         i++;
