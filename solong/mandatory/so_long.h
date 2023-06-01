@@ -49,7 +49,7 @@ int	ft_lstsize(t_list *lst);
 size_t	ft_strlen_long(const	char *str);
 void	*ft_calloc(size_t count, size_t size);
 void	*ft_memset(void *b, int c, size_t len);
-
+char	*ft_strdup(const char *s1);
 
 /* initialize.c */
 void    initialize_structure(t_map *map);

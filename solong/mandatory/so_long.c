@@ -51,17 +51,26 @@ t_list  *read_map(int fd)
 
 void    map_setting(t_map *map)
 {
-    char    **
+    char    **mapp;
+    int     i;
+
+    mapp = mapp->mapping;
+    i = 0;
+    while (idx < map->height)
+    {
+        mapp[i] = ft_strdup(mapping[i]);
+        i++;
+    }
 }
 
 
 
 void    map_init(t_map *map)
 {
-    char    **mapping;
+    char    **mapp;
 
-    mapping = map->mapping;
-    mapping = (char **)(ft_calloc(sizeof(map->height), 1));
+    mapp = map->mapping;
+    mapp = (char **)(ft_calloc(sizeof(map->height), 1));
 }
 
 void    open_file(t_map *map, char **av)
