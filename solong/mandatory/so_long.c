@@ -48,29 +48,50 @@ t_list  *read_map(int fd)
     return head;
 }
 
-
-void    map_setting(t_map *map)
+void    find_character(t_map *map, t_list *head)
 {
-    char    **mapp;
-    int     i;
+    int i;
+    int j;
 
-    mapp = mapp->mapping;
     i = 0;
     while (i < map->height)
     {
-        mapp[i] = ft_strdup(mapping[i]);
+        j = 0;
+        while (j < map->width)
+        {
+            if (map->mapping[i][j] == 'P')
+            {
+                map->player[0] = i;
+                map->player[1] = j;
+                break ;
+            }
+            j++;
+        }
         i++;
     }
+    printf("%d\n", map->player[0]);
+    printf("%d\n", map->player[1]);
 }
 
 
+void    map_setting(t_map *map, t_list *head)
+{
+    int     i;
+
+    i = 0;
+    while (i < map->height)
+    {
+       map->mapping[i] = ft_strdup(head->content);
+       head = head->next;
+       printf("%s\n", map->mapping[i]);
+       i++;
+    }
+    find_character(map, head);
+}
 
 void    map_init(t_map *map)
 {
-    char    **mapp;
-
-    mapp = map->mapping;
-    mapp = (char **)(ft_calloc(sizeof(map->height), 1));
+    map->mapping = (char **)(ft_calloc(map->height, sizeof(char *)));
 }
 
 void    open_file(t_map *map, char **av)
@@ -90,6 +111,8 @@ void    open_file(t_map *map, char **av)
     map->width = ft_strlen(head->content) - 1;
     printf("map height : %d\n", map->height);
     printf("map width : %d\n", map->width);
+    map_init(map);
+    map_setting(map, head);
    // map_init(map);
 }
 
