@@ -1,29 +1,113 @@
 #include "so_long.h"
 
-void    param_init(t_param *param)
+// void    player_init(t_map *map)
+// {
+//     map->player[0] ;
+// }
+
+void    key_up(t_map *map)
 {
-    param->x = 3;
-    param->y = 4;
+    int i;
+    int j;
+    
+    i = map->player[0];
+    j = map->player[1];
+    if (map->mapping[i-1][j] != '1' && map->mapping[i-1][j] != 'E')
+    {
+        if (map->mapping[i-1][j] == 'C')
+            map->collect--;
+        map->player[0] = i-1;
+        map->mapping[i-1][j] = 'P';
+        map->mapping[i][j] = '0';
+        // map->player[1] = i-1;
+    }
+    if (map->mapping[i-1][j] == 'E' && map->collect == 0)
+        exit(0);
+    show_map(map);
 }
 
-int key_press(int key, t_param *param)
+void    key_down(t_map *map)
+{
+    int i;
+    int j;
+    
+    i = map->player[0];
+    j = map->player[1];
+    if (map->mapping[i+1][j] != '1' && map->mapping[i+1][j] != 'E')
+    {
+        if (map->mapping[i+1][j] == 'C')
+            map->collect--;
+        map->player[0] = i+1;
+        map->mapping[i+1][j] = 'P';
+        map->mapping[i][j] = '0';
+        // map->player[1] = j-1;
+    }
+    if (map->mapping[i+1][j] == 'E' && map->collect == 0)
+        exit(0);
+    show_map(map);
+}
+
+void    key_left(t_map *map)
+{
+    int i;
+    int j;
+    
+    i = map->player[0];
+    j = map->player[1];
+    if (map->mapping[i][j-1] != '1' && map->mapping[i][j-1] != 'E')
+    {
+        if (map->mapping[i][j-1] == 'C')
+            map->collect--;
+        map->mapping[i][j-1] = 'P';
+        map->mapping[i][j] = '0';
+        map->player[1] = j-1;
+        // map->player[1] = j;
+    }
+    if (map->collect == 0)
+        printf("all : %d\n", map->collect);
+
+    if (map->mapping[i][j-1] == 'E' && map->collect == 0)
+        exit(0);
+    show_map(map);
+}
+
+void    key_right(t_map *map)
+{
+    int i;
+    int j;
+    
+    i = map->player[0];
+    j = map->player[1];
+    if (map->mapping[i][j+1] != '1' && map->mapping[i][j+1] != 'E')
+    {
+        if (map->mapping[i][j+1] == 'C')
+            map->collect--;
+        map->mapping[i][j+1] = 'P';
+        map->mapping[i][j] = '0';
+        map->player[1] = j+1;
+        //map->player[1] = j;
+    }
+    if (map->mapping[i][j+1] == 'E' && map->collect == 0)
+        exit(0);
+    show_map(map);
+}
+
+int key_press(int key, t_map *map)
 {
     static int a = 0;
 
     if (key == KEY_W)
-        param->y++;
+        key_up(map);
     else if (key == KEY_S)
-        param->y--;
+        key_down(map);
     else if (key == KEY_A)
-        param->x--;
+        key_left(map);
     else if (key == KEY_D)
-        param->x++;
+        key_right(map);
     else if (key == KEY_ESC)
         exit(0);
-    printf("x : %d, y: %d\n", param->x, param->y);
     return 0;
 }
-
 
 t_list  *read_map(int fd)
 {
@@ -48,12 +132,66 @@ t_list  *read_map(int fd)
     return head;
 }
 
-void    find_character(t_map *map, t_list *head)
+int    find_exit(t_map *map)
 {
     int i;
     int j;
+    int exit_flag;
 
     i = 0;
+    exit_flag = 0;
+    while (i < map->height)
+    {
+        j = 0;
+        while (j < map->width)
+        {
+            if (map->mapping[i][j] == 'E')
+            {
+                map->gameover[0] = i;
+                map->gameover[1] = j;
+                exit_flag++;
+            }
+            j++;
+        }
+        i++;
+    }
+    return (exit_flag);
+}
+
+
+
+int   find_collect(t_map *map)
+{
+    int i;
+    int j;
+    int collect;
+
+    i = 0;
+    collect = 0;
+    while (i < map->height)
+    {
+        j = 0;
+        while (j < map->width)
+        {
+            if (map->mapping[i][j] == 'C')
+                map->collect++;
+            j++;
+        }
+        i++;
+    }
+    collect = map->collect;
+    return (collect);
+}
+
+
+int    find_character(t_map *map)
+{
+    int i;
+    int j;
+    int character_flag;
+
+    i = 0;
+    character_flag = 0;
     while (i < map->height)
     {
         j = 0;
@@ -63,14 +201,14 @@ void    find_character(t_map *map, t_list *head)
             {
                 map->player[0] = i;
                 map->player[1] = j;
-                break ;
+                character_flag++;
+                printf("char : %d\n", character_flag);
             }
             j++;
         }
         i++;
     }
-    printf("%d\n", map->player[0]);
-    printf("%d\n", map->player[1]);
+    return (character_flag);
 }
 
 
@@ -86,7 +224,13 @@ void    map_setting(t_map *map, t_list *head)
        printf("%s\n", map->mapping[i]);
        i++;
     }
-    find_character(map, head);
+    if (find_character(map) > 1 || find_character(map) == 0)
+        error_msg(-1);
+    if (find_exit(map) > 1 || find_exit(map) == 0)
+        error_msg(-2);
+    if (find_collect(map) == 0)
+        error_msg(-3);
+    printf("map collect : %d\n", map->collect);
 }
 
 void    map_init(t_map *map)
@@ -120,9 +264,6 @@ int main(int ac, char **av)
 {
     // void    *mlx_ptr;
     // void    *win_ptr;
-
-    // mlx_ptr = mlx_init();
-    // win_ptr = mlx_new_window(mlx_ptr, 500, 500, "wonie");
     // mlx_loop(mlx_ptr);
 
     // t_list *lst;
@@ -130,6 +271,14 @@ int main(int ac, char **av)
     
     initialize_structure(&map);
     open_file(&map, av);
+    map.mlx = mlx_init();
+    map.win = mlx_new_window(map.mlx, map.width * 50, map.height * 50, "wonie");
+   
+    show_map(&map);
+    mlx_hook(map.win, X_EVENT_KEY_PRESS, 0, &key_press, &map);
+    //mlx_key_hook(map.win, &key_press, &map);
+    mlx_loop(map.mlx);
 }
 
+//mlx_hook -> key press & key release 차이 설정가능
 //gcc -L ../mlx -lmlx -framework OpenGL -framework Appkit -lz so_long.c

@@ -33,9 +33,12 @@ typedef struct s_map
 {
     int     height;
     int     width;
-    int     player[2];
     char    **mapping;
-
+    void    *mlx; // mlx라는 걸 쓰는데, 이 함수의 반환형이 보이드형 포인트임
+    void    *win;
+    int     player[2];
+    int     gameover[2];
+    int     collect;
 } t_map;
 
 void    open_file(t_map *map, char **av);
@@ -54,5 +57,14 @@ char	*ft_strdup(const char *s1);
 
 /* initialize.c */
 void    initialize_structure(t_map *map);
+
+/* put_img*/
+void    put_img(t_map *map, int x, int y, char *file);
+void    base_map(t_map *map);
+void    place_image(t_map *map);
+int     show_map(t_map *map);
+
+/* error.c */
+void    error_msg(int flag);
 
 #endif
