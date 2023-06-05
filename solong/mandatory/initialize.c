@@ -12,7 +12,6 @@ void    dfs_init(t_map *map)
     map->check_y[3] = 1;
 }
 
-
 void    initialize_structure(t_map *map)
 {
     map->height = 0;

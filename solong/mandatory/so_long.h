@@ -48,12 +48,11 @@ typedef struct s_map
 
 } t_map;
 
-void    open_file(t_map *map, char **av);
 
 /* lst.c */
 void	ft_lstadd_back(t_list **lst, t_list *new);
 t_list	*ft_lstnew(void *content);
-int	ft_lstsize(t_list *lst);
+int     ft_lstsize(t_list *lst);
 
 
 /* init.c */
@@ -79,7 +78,29 @@ void    error_msg(int flag);
 void    square_check(t_map *map);
 void    check_write_validate(t_map *map);
 void    check_square_obstacle(t_map *map);
-void    mapcheck_through_bfs(t_map *map);
+void    mapcheck_validate(t_map *map);
+
+/* check_bfs */
+void    onecase_dfs(int x, int y, t_map *map);
+void    twocase_dfs(int x, int y, t_map *map);
+
+
+/* open_file.c */
+void    open_file(t_map *map, char **av);
+
+/* setting.c */
+void    map_setting(t_map *map, t_list *head);
+void    map_init(t_map *map);
+t_list  *read_map(int fd);
+
+/* key_check.c */
+int     key_press(int key, t_map *map);
+
+/* find_x.c */
+int     find_exit(t_map *map);
+int     find_collect(t_map *map);
+int     find_character(t_map *map);
+
 
 
 #endif
