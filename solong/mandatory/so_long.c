@@ -252,7 +252,11 @@ void    open_file(t_map *map, char **av)
     fd = open(av[1], O_RDONLY);
     printf("fd : %d\n", fd);
     if (fd < 0)
-        printf("1");
+        error_msg(-4);
+    filename = av[1];
+    len = ft_strlen_long(filename);
+    if (len < 4 || ft_strncmp(&filename[len - 4], ".ber", 4))
+        error_msg(-4);
     head = read_map(fd);
     map->height = ft_lstsize(head);
     map->width = ft_strlen(head->content) - 1;
