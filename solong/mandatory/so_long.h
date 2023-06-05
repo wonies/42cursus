@@ -45,6 +45,7 @@ typedef struct s_map
     char    **mapping_cpy2;
     int     cpy;
     int     cpy2;
+    int     step_cnt;
 
 } t_map;
 
@@ -95,6 +96,9 @@ t_list  *read_map(int fd);
 
 /* key_check.c */
 int     key_press(int key, t_map *map);
+
+/* key_hook.c */
+void    key_hook(t_map *map);
 
 /* find_x.c */
 int     find_exit(t_map *map);

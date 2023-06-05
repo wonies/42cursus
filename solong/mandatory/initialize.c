@@ -22,5 +22,6 @@ void    initialize_structure(t_map *map)
     map->mapping_cpy2 = NULL;
     map->cpy = 1;
     map->cpy2 = 0;
+    map->step_cnt = 0;
     dfs_init(map);
 }

@@ -14,6 +14,7 @@ void    key_up(t_map *map)
         map->player[0] = i-1;
         map->mapping[i-1][j] = 'P';
         map->mapping[i][j] = '0';
+        map->step_cnt++;
     }
     if (map->mapping[i-1][j] == 'E' && map->collect == 0)
         exit(0);
@@ -34,6 +35,7 @@ void    key_down(t_map *map)
         map->player[0] = i+1;
         map->mapping[i+1][j] = 'P';
         map->mapping[i][j] = '0';
+        map->step_cnt++;
     }
     if (map->mapping[i+1][j] == 'E' && map->collect == 0)
         exit(0);
@@ -54,6 +56,7 @@ void    key_left(t_map *map)
         map->mapping[i][j-1] = 'P';
         map->mapping[i][j] = '0';
         map->player[1] = j-1;
+        map->step_cnt++;
     }
     if (map->mapping[i][j-1] == 'E' && map->collect == 0)
         exit(0);
@@ -74,6 +77,7 @@ void    key_right(t_map *map)
         map->mapping[i][j+1] = 'P';
         map->mapping[i][j] = '0';
         map->player[1] = j+1;
+        map->step_cnt++;
     }
     if (map->mapping[i][j+1] == 'E' && map->collect == 0)
         exit(0);
@@ -82,6 +86,9 @@ void    key_right(t_map *map)
 
 int key_press(int key, t_map *map)
 {
+    int cnt;
+    
+    cnt = map->step_cnt;
     if (key == KEY_W)
         key_up(map);
     else if (key == KEY_S)
@@ -92,5 +99,7 @@ int key_press(int key, t_map *map)
         key_right(map);
     else if (key == KEY_ESC)
         exit(0);
-    return 0;
+    if (cnt != map->step_cnt)
+        key_hook(map);
+    return (0);
 }
