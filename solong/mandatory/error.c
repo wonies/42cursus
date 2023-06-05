@@ -17,5 +17,10 @@ void    error_msg(int flag)
         write(2, "Error\n", 6);
         write(2, "Feed is NOT EXIST!!\n", 20);
     }
+    else if (flag == -4)
+    {
+        write(2, "Error\n", 6);
+        write(2, "NOT VALIDATE!!!\n", 16);
+    }
     exit(1);
 }

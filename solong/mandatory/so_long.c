@@ -158,8 +158,6 @@ int    find_exit(t_map *map)
     return (exit_flag);
 }
 
-
-
 int   find_collect(t_map *map)
 {
     int i;
@@ -174,7 +172,10 @@ int   find_collect(t_map *map)
         while (j < map->width)
         {
             if (map->mapping[i][j] == 'C')
+            {
                 map->collect++;
+                map->cpy2++;
+            }
             j++;
         }
         i++;
@@ -182,7 +183,6 @@ int   find_collect(t_map *map)
     collect = map->collect;
     return (collect);
 }
-
 
 int    find_character(t_map *map)
 {
@@ -211,7 +211,6 @@ int    find_character(t_map *map)
     return (character_flag);
 }
 
-
 void    map_setting(t_map *map, t_list *head)
 {
     int     i;
@@ -220,6 +219,8 @@ void    map_setting(t_map *map, t_list *head)
     while (i < map->height)
     {
        map->mapping[i] = ft_strdup(head->content);
+       map->mapping_cpy[i] = ft_strdup(head->content);
+       map->mapping_cpy2[i] = ft_strdup(head->content);
        head = head->next;
        printf("%s\n", map->mapping[i]);
        i++;
@@ -236,6 +237,8 @@ void    map_setting(t_map *map, t_list *head)
 void    map_init(t_map *map)
 {
     map->mapping = (char **)(ft_calloc(map->height, sizeof(char *)));
+    map->mapping_cpy = (char **)(ft_calloc(map->height, sizeof(char *)));
+    map->mapping_cpy2 = (char **)(ft_calloc(map->height, sizeof(char *)));
 }
 
 void    open_file(t_map *map, char **av)
@@ -273,7 +276,10 @@ int main(int ac, char **av)
     open_file(&map, av);
     map.mlx = mlx_init();
     map.win = mlx_new_window(map.mlx, map.width * 50, map.height * 50, "wonie");
-   
+    square_check(&map);
+    check_write_validate(&map);
+    check_square_obstacle(&map);
+    mapcheck_through_bfs(&map);
     show_map(&map);
     mlx_hook(map.win, X_EVENT_KEY_PRESS, 0, &key_press, &map);
     //mlx_key_hook(map.win, &key_press, &map);
@@ -282,3 +288,13 @@ int main(int ac, char **av)
 
 //mlx_hook -> key press & key release 차이 설정가능
 //gcc -L ../mlx -lmlx -framework OpenGL -framework Appkit -lz so_long.c
+
+
+
+
+//1. 사각형인지 확인 
+//2. 10CPE 다른 문자시 에러처리
+//3. 장애물 1인지
+//4. 맵유효성검사
+//5. .ber파일로 무조건들어오기!! 
+

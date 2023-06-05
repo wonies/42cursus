@@ -39,6 +39,13 @@ typedef struct s_map
     int     player[2];
     int     gameover[2];
     int     collect;
+    int     check_x[4];
+    int     check_y[4];
+    char    **mapping_cpy;
+    char    **mapping_cpy2;
+    int     cpy;
+    int     cpy2;
+
 } t_map;
 
 void    open_file(t_map *map, char **av);
@@ -66,5 +73,12 @@ int     show_map(t_map *map);
 
 /* error.c */
 void    error_msg(int flag);
+
+/* check_validate */
+void    square_check(t_map *map);
+void    check_write_validate(t_map *map);
+void    check_square_obstacle(t_map *map);
+void    mapcheck_through_bfs(t_map *map);
+
 
 #endif
