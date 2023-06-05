@@ -79,7 +79,7 @@ void    onecase_dfs(int x, int y, t_map *map)
     {
         nx = x + map->check_x[i];
         ny = y + map->check_y[i];
-        if (nx < 0 || nx >= map->height - 1 || ny < 0 || ny >= map->width - 1)
+        if (nx < 0 || nx > map->height || ny < 0 || ny > map->width)
             continue ;
         if (map->mapping_cpy[nx][ny] == 'E' || map->mapping_cpy[nx][ny] == '0' || \
         map->mapping_cpy[nx][ny] == 'C' || map->mapping_cpy[nx][ny] == 'P')
@@ -104,18 +104,17 @@ void    twocase_dfs(int x, int y, t_map *map)
     {
         nx = x + map->check_x[i];
         ny = y + map->check_y[i];
-        if (nx < 0 || nx >= map->height - 1 || ny < 0 || ny >= map->width - 1)
+        if (nx < 0 || nx > map->height || ny < 0 || ny > map->width - 1)
             continue ;
-        if (map->mapping_cpy[nx][ny] == 'P' || map->mapping_cpy[nx][ny] == '0' || \
-        map->mapping_cpy[nx][ny] == 'C')
+        if (map->mapping_cpy2[nx][ny] == '0' || map->mapping_cpy2[nx][ny] == 'P' || \
+        map->mapping_cpy2[nx][ny] == 'C')
         {
-            if (map->mapping_cpy[nx][ny] == 'C')
+            if (map->mapping_cpy2[nx][ny] == 'C')
                 map->cpy2--;
             twocase_dfs(nx, ny, map);
         }
         i++;
     }
-
 }
 
 void    mapcheck_through_bfs(t_map *map)
