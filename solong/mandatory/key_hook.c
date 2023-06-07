@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key_hook.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/07 16:36:44 by wonhshin          #+#    #+#             */
+/*   Updated: 2023/06/07 16:37:28 by wonhshin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	ft_len(long n)
@@ -37,12 +49,12 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
-void    key_hook(t_map *map)
+void	key_hook(t_map *map)
 {
-    char    *str;
+	char	*str;
 
-    str = ft_itoa(map->step_cnt);
-    write(1, "kerbi's moving: \n", 17);
-    write(1, str, ft_strlen_long(str));
-    write(1, "\n", 1);
+	str = ft_itoa(map->step_cnt);
+	write(1, "kerbi's moving: \n", 17);
+	write(1, str, ft_strlen_long(str));
+	write(1, "\n", 1);
 }

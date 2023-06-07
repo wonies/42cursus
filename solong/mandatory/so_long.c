@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   so_long.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/07 16:51:18 by wonhshin          #+#    #+#             */
+/*   Updated: 2023/06/07 18:13:05 by wonhshin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void leaks()
@@ -20,6 +32,7 @@ int main(int ac, char **av)
     mapcheck_validate(&map);
     show_map(&map);
     mlx_hook(map.win, X_EVENT_KEY_PRESS, 0, &key_press, &map);
+    mlx_hook(map.win, X_EVENT_KEY_EXIT, 0, &exit_e, &map);
     //mlx_key_hook(map.win, &key_press, &map);
     mlx_loop(map.mlx);
 }
