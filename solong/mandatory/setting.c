@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:44:02 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/08 01:45:16 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/08 01:46:04 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,14 @@ t_list	*read_map(int fd)
 	str = get_next_line(fd);
 	if (!str)
 	{
+		error_msg(-4);
 		close(fd);
 	}
 	while (str)
 	{
 		new = ft_lstnew(str);
+		if (!new)
+			error_msg(-4);
 		ft_lstadd_back(&head, new);
 		str = get_next_line(fd);
 	}
