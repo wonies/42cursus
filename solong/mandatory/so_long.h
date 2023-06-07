@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:51:31 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/07 18:12:41 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/08 01:38:05 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE	3
+# define X_EVENT_KEY_EXIT		17
 # define KEY_ESC				53
 # define KEY_W					13
 # define KEY_A					0

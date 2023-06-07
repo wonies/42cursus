@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:44:02 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/07 17:16:09 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/08 01:45:16 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	map_setting(t_map *map, t_list *head)
 		map->mapping[i] = ft_strdup(head->content);
 		map->map_cpy[i] = ft_strdup(head->content);
 		map->map_cpy2[i] = ft_strdup(head->content);
+		if (!(map->mapping[i]) || !(map->map_cpy[i]) || !(map->map_cpy2[i]))
+			error_msg(-4);
 		head = head->next;
 		i++;
 	}
@@ -38,6 +40,8 @@ void	map_init(t_map *map)
 	map->mapping = (char **)(ft_calloc(map->height, sizeof(char *)));
 	map->map_cpy = (char **)(ft_calloc(map->height, sizeof(char *)));
 	map->map_cpy2 = (char **)(ft_calloc(map->height, sizeof(char *)));
+	if (!(map->mapping) || !(map->map_cpy) || !(map->map_cpy2))
+			error_msg(-4);
 }
 
 t_list	*read_map(int fd)
