@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:44:02 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/08 21:02:53 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/08 23:55:20 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	map_setting(t_map *map, t_list *head)
 		if (!(map->mapping[i]) || !(map->map_cpy[i]) || !(map->map_cpy2[i]))
 			error_msg(-4);
 		head = head->next;
+		
 		i++;
 	}
 	if (find_character(map) > 1 || find_character(map) == 0)
@@ -50,7 +51,7 @@ t_list	*read_map(int fd)
 	t_list	*head;
 	t_list	*new;
 	char	*str;
-
+	
 	head = NULL;
 	str = get_next_line(fd);
 	if (!str)
@@ -58,6 +59,7 @@ t_list	*read_map(int fd)
 		error_msg(-4);
 		close(fd);
 	}
+	
 	while (str)
 	{
 		new = ft_lstnew(str);
@@ -65,6 +67,7 @@ t_list	*read_map(int fd)
 			error_msg(-4);
 		ft_lstadd_back(&head, new);
 		str = get_next_line(fd);
+	
 	}
 	close(fd);
 	return (head);
