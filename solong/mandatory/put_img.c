@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:38:18 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/07 16:43:57 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:02:23 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,10 @@ void	place_images(t_map *map)
 				put_img(map, y, x, "../pic/toma.xpm");
 			else if (map->mapping[y][x] == '1')
 				put_img(map, y, x, "../pic/obstacle.xpm");
-			else if (map->mapping[y][x] == 'E')
+			else if (map->mapping[y][x] == 'E' && map->collect != 0)
 				put_img(map, y, x, "../pic/exit.xpm");
+			else if (map->mapping[y][x] == 'E' && map->collect == 0)
+				put_img(map, y, x, "../pic/exitt.xpm");
 			x++;
 		}
 		y++;
