@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:37:47 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/09 01:11:13 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:23:24 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ void	open_file(t_map *map, char **av)
 	char	*filename;
 	int		len;
 
-
 	head = NULL;
 	fd = open(av[1], O_RDONLY);
-
 	if (fd < 0)
 		error_msg(-4);
 	filename = av[1];

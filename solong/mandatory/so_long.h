@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:51:31 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/08 01:49:21 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:42:55 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,6 @@
 # include <stdio.h>
 # include "../mlx/mlx.h"
 # include "../gnl/get_next_line.h"
-
-typedef struct	s_param
-{
-	int		x;
-	int		y;
-}				t_param;
 
 typedef struct	s_list
 {
@@ -92,9 +86,10 @@ void			twocase_dfs(int x, int y, t_map *map);
 /* open_file.c */
 void			open_file(t_map *map, char **av);
 /* setting.c */
-void			map_setting(t_map *map, t_list *head);
+void			map_setting(t_map *map, t_list **head);
 void			map_init(t_map *map);
 t_list			*read_map(int fd);
+void			find_err(t_map *map);
 /* key_check.c */
 int				key_press(int key, t_map *map);
 void			key_hook(t_map *map);

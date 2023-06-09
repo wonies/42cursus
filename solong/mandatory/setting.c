@@ -6,35 +6,44 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:44:02 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/08 23:55:20 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:23:47 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	map_setting(t_map *map, t_list *head)
+void	find_err(t_map *map)
 {
-	int	i;
-
-	i = 0;
-	while (i < map->height)
-	{
-		map->mapping[i] = ft_strdup(head->content);
-		map->map_cpy[i] = ft_strdup(head->content);
-		map->map_cpy2[i] = ft_strdup(head->content);
-		if (!(map->mapping[i]) || !(map->map_cpy[i]) || !(map->map_cpy2[i]))
-			error_msg(-4);
-		head = head->next;
-		
-		i++;
-	}
 	if (find_character(map) > 1 || find_character(map) == 0)
 		error_msg(-1);
 	if (find_exit(map) > 1 || find_exit(map) == 0)
 		error_msg(-2);
 	if (find_collect(map) == 0)
 		error_msg(-3);
-	ft_lstclear(&head);
+}
+
+void	map_setting(t_map *map, t_list **head)
+{
+	int		i;
+	char	*freezing;
+	t_list	*temp;
+
+	i = 0;
+	temp = *head;
+	while (i < map->height)
+	{
+		freezing = temp->content;
+		map->mapping[i] = ft_strdup(temp->content);
+		map->map_cpy[i] = ft_strdup(temp->content);
+		map->map_cpy2[i] = ft_strdup(temp->content);
+		free(freezing);
+		if (!(map->mapping[i]) || !(map->map_cpy[i]) || !(map->map_cpy2[i]))
+			error_msg(-4);
+		temp = temp->next;
+		i++;
+	}
+	find_err(map);
+	ft_lstclear(head);
 }
 
 void	map_init(t_map *map)
@@ -51,7 +60,7 @@ t_list	*read_map(int fd)
 	t_list	*head;
 	t_list	*new;
 	char	*str;
-	
+
 	head = NULL;
 	str = get_next_line(fd);
 	if (!str)
@@ -59,7 +68,6 @@ t_list	*read_map(int fd)
 		error_msg(-4);
 		close(fd);
 	}
-	
 	while (str)
 	{
 		new = ft_lstnew(str);
@@ -67,7 +75,6 @@ t_list	*read_map(int fd)
 			error_msg(-4);
 		ft_lstadd_back(&head, new);
 		str = get_next_line(fd);
-	
 	}
 	close(fd);
 	return (head);

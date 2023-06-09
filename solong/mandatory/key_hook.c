@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:36:44 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/07 16:37:28 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/09 16:22:02 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,5 @@ void	key_hook(t_map *map)
 	write(1, "kerbi's moving: \n", 17);
 	write(1, str, ft_strlen_long(str));
 	write(1, "\n", 1);
+	free(str);
 }
