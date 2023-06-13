@@ -6,11 +6,11 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 15:16:40 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/13 16:47:05 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:36:33 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "so_long.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

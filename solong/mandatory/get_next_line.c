@@ -6,11 +6,11 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 23:00:12 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/04/13 20:52:17 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:36:28 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "so_long.h"
 
 char	*data_join(char **data, char *buf)
 {

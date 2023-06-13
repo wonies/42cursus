@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:51:31 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/13 16:52:38 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/13 17:23:11 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@
 # define KEY_S					1
 # define KEY_D					2
 # include "../mlx/mlx.h"
-# include "../gnl/get_next_line.h"
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
 
-# define BUFFER_SIZE 42
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 typedef struct s_list
 {
@@ -95,4 +96,15 @@ void			key_hook(t_map *map);
 int				find_exit(t_map *map);
 int				find_collect(t_map *map);
 int				find_character(t_map *map);
+/* gnl */
+char	*ft_strjoin(char const *s1, char const *s2);
+int		ft_strchr(char *str, int c);
+char	*ft_substr(char const *s, int start, int len);
+int		ft_strlen(const char *str);
+char	*data_join(char **data, char *buf);
+char	*setting_data(char *str);
+char	*devide_line(char **data, int idx);
+char	*size_is_zero(char **data, int idx);
+char	*read_buf(int fd, char **data, char *buf, int size);
+char	*get_next_line(int fd);
 #endif
