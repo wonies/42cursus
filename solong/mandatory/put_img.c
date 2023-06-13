@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:38:18 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/08 21:02:23 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/13 18:46:22 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,8 @@ void	place_images(t_map *map)
 	}
 }
 
-int	show_map(t_map *map)
+void	show_map(t_map *map)
 {
 	base_map(map);
 	place_images(map);
-	return (0);
 }

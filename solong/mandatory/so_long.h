@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:51:31 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/13 17:23:11 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/13 18:46:35 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void			initialize_structure(t_map *map);
 void			put_img(t_map *map, int x, int y, char *file);
 void			base_map(t_map *map);
 void			place_image(t_map *map);
-int				show_map(t_map *map);
+void				show_map(t_map *map);
 /* error.c */
 void			error_msg(int flag);
 int				exit_e(void);
@@ -97,14 +97,14 @@ int				find_exit(t_map *map);
 int				find_collect(t_map *map);
 int				find_character(t_map *map);
 /* gnl */
-char	*ft_strjoin(char const *s1, char const *s2);
-int		ft_strchr(char *str, int c);
-char	*ft_substr(char const *s, int start, int len);
-int		ft_strlen(const char *str);
-char	*data_join(char **data, char *buf);
-char	*setting_data(char *str);
-char	*devide_line(char **data, int idx);
-char	*size_is_zero(char **data, int idx);
-char	*read_buf(int fd, char **data, char *buf, int size);
-char	*get_next_line(int fd);
+char			*ft_strjoin(char const *s1, char const *s2);
+int				ft_strchr(char *str, int c);
+char			*ft_substr(char const *s, int start, int len);
+int				ft_strlen(const char *str);
+char			*data_join(char **data, char *buf);
+char			*setting_data(char *str);
+char			*devide_line(char **data, int idx);
+char			*size_is_zero(char **data, int idx);
+char			*read_buf(int fd, char **data, char *buf, int size);
+char			*get_next_line(int fd);
 #endif
