@@ -6,13 +6,12 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:51:31 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/09 16:42:55 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/13 16:52:38 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-
 # define X_EVENT_KEY_PRESS		2
 # define X_EVENT_KEY_RELEASE	3
 # define X_EVENT_KEY_EXIT		17
@@ -21,21 +20,21 @@
 # define KEY_A					0
 # define KEY_S					1
 # define KEY_D					2
-
+# include "../mlx/mlx.h"
+# include "../gnl/get_next_line.h"
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include "../mlx/mlx.h"
-# include "../gnl/get_next_line.h"
 
-typedef struct	s_list
+# define BUFFER_SIZE 42
+
+typedef struct s_list
 {
 	char			*content;
 	struct s_list	*next;
 }				t_list;
-
-typedef struct	s_map
+typedef struct s_map
 {
 	int		height;
 	int		width;
@@ -53,14 +52,13 @@ typedef struct	s_map
 	int		cpy2;
 	int		step_cnt;
 }				t_map;
-
 /* lst. c*/
 void			ft_lstadd_back(t_list **lst, t_list *new);
 t_list			*ft_lstnew(void *content);
 int				ft_lstsize(t_list *lst);
 void			ft_lstclear(t_list **lst);
 /* init.c */
-size_t			ft_strlen_long(const char *str);
+int				ft_strlen_long(const char *str);
 void			*ft_calloc(size_t count, size_t size);
 void			*ft_memset(void *b, int c, size_t len);
 char			*ft_strdup(const char *s1);
@@ -97,5 +95,4 @@ void			key_hook(t_map *map);
 int				find_exit(t_map *map);
 int				find_collect(t_map *map);
 int				find_character(t_map *map);
-
 #endif
