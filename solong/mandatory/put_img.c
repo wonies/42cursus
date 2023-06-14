@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:38:18 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/13 23:23:25 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:50:27 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	base_map(t_map *map)
 		x = 0;
 		while (x < map->width)
 		{
-			put_img(map, y, x, "../pic/base.xpm");
+			put_img(map, y, x, "./pic/base.xpm");
 			x++;
 		}
 		y++;
@@ -54,15 +54,15 @@ void	place_images(t_map *map)
 		while (x < map->width)
 		{
 			if (map->mapping[y][x] == 'P')
-				put_img(map, y, x, "../pic/kerbi.xpm");
+				put_img(map, y, x, "./pic/kerbi.xpm");
 			else if (map->mapping[y][x] == 'C')
-				put_img(map, y, x, "../pic/toma.xpm");
+				put_img(map, y, x, "./pic/toma.xpm");
 			else if (map->mapping[y][x] == '1')
-				put_img(map, y, x, "../pic/obstacle.xpm");
+				put_img(map, y, x, "./pic/obstacle.xpm");
 			else if (map->mapping[y][x] == 'E' && map->collect != 0)
-				put_img(map, y, x, "../pic/exit.xpm");
+				put_img(map, y, x, "./pic/exit.xpm");
 			else if (map->mapping[y][x] == 'E' && map->collect == 0)
-				put_img(map, y, x, "../pic/exitt.xpm");
+				put_img(map, y, x, "./pic/exitt.xpm");
 			x++;
 		}
 		y++;

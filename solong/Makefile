@@ -1,10 +1,20 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/06/14 15:52:13 by wonhshin          #+#    #+#              #
+#    Updated: 2023/06/14 15:57:29 by wonhshin         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = so_long
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
-SRC = ./mandatory
-SRC_G = ./gnl
 HEADER	=	mandatory/so_long.h
 
 MLX = -L./mlx -lmlx -framework OpenGL -framework Appkit

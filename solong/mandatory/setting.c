@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:44:02 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/13 18:33:07 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/14 15:47:50 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ void	map_setting(t_map *map, t_list **head)
 	}
 	find_err(map);
 	ft_lstclear(head);
+	map->mapping[i] = NULL;
+	map->map_cpy[i] = NULL;
+	map->map_cpy2[i] = NULL;
 }
 
 void	map_init(t_map *map)
