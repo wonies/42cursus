@@ -1,0 +1,10 @@
+a.out
+exec.c
+exec.h
+experiment.c
+file1
+file2
+fork.c
+forknexec.c
+process.c
+tr
