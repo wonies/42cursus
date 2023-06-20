@@ -9,7 +9,8 @@ void    execute(t_pipe *pp)
         exit(1);
     while (i < pp->child)
     {
-        if (pp->com[i])
+        if (pp->com[i] = fork() < 0)
+            exit(1);
     }
 }
 
