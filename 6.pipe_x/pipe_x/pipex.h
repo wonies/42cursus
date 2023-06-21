@@ -12,26 +12,37 @@
 # include<sys/wait.h>
 
 
+typedef struct s_pid
+{
+    pid_t   pid;
+    int     fd[2];
+}				t_pid;
+
 typedef struct s_pipe
 {
 	char    *path;
     char    **str;
     char    **cmd;
+    char    *fd_path;
     //child process
+    pid_t   pid;
     pid_t   *com;
     //fork
-    int     pipe_a[2];
-    int     pipe_b[2];
-    //child
     int     child;
+    int     pipe_fd[2];
+    //child
+    //file
+    int     infile;
+    int     outfile;
 }				t_pipe;
 
 /* path.c */
 char    *find_path(char **envp);
 // char    **make_slash(char **split);
 // int isok_access(char **split, char *ord);
-void isok_access(char **split, char *ord);
+void    isok_access(t_pipe *pp);
 void    make_slash(char **split);
+void    function_path(int ac, char **av, char **env, t_pipe *pp);
 /* ft_split.c */
 char	**ft_split(char const *s, char c);
 
