@@ -11,11 +11,14 @@
 # include <string.h>
 # include<sys/wait.h>
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 typedef struct s_pid
 {
     pid_t   pid;
-    int     fd[2];
+    int     pipe_fd[2];
 }				t_pid;
 
 typedef struct s_pipe
@@ -26,14 +29,16 @@ typedef struct s_pipe
     char    *fd_path;
     //child process
     pid_t   pid;
-    pid_t   *com;
+    t_pid   *com;
     //fork
     int     child;
-    int     pipe_fd[2];
+    char    *limiter;
+    int     limiter_len;
     //child
     //file
     int     infile;
     int     outfile;
+    
 }				t_pipe;
 
 /* path.c */
@@ -54,5 +59,21 @@ char	*ft_strdup(const char *s1);
 int	    ft_strncmp(const char *s1, const char *s2, size_t n);
 /* init2.c */
 char	*ft_strjoin(char const *s1, char const *s2);
+void    file_init(int ac, char **av, t_pipe *pp);
 
+/* bonus */
+/* gnl */
+char			*ft_strjoin(char const *s1, char const *s2);
+int				ft_strchr(char *str, int c);
+char			*ft_substr(char const *s, int start, int len);
+int				ft_strlen(const char *str);
+char			*data_join(char **data, char *buf);
+char			*setting_data(char *str);
+char			*devide_line(char **data, int idx);
+char			*size_is_zero(char **data, int idx);
+char			*read_buf(int fd, char **data, char *buf, int size);
+char			*get_next_line(int fd);
+/* pipe_gnl */
+void    read_gnl(t_pipe *pp);
+void    fileinit_bonus(int ac, char **av, t_pipe *pp);
 #endif

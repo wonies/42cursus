@@ -6,15 +6,15 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:31:09 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/13 15:41:45 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/07 16:31:58 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	ft_strlen_long(const char *str)
+size_t	ft_strlen_long(const char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (*str)

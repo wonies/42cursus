@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:51:31 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/14 15:52:02 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/11 19:44:29 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,11 @@
 # define KEY_S					1
 # define KEY_D					2
 # include "../mlx/mlx.h"
+# include "../gnl/get_next_line.h"
 # include <fcntl.h>
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
 
 typedef struct s_list
 {
@@ -59,7 +56,7 @@ t_list			*ft_lstnew(void *content);
 int				ft_lstsize(t_list *lst);
 void			ft_lstclear(t_list **lst);
 /* init.c */
-int				ft_strlen_long(const char *str);
+size_t			ft_strlen_long(const char *str);
 void			*ft_calloc(size_t count, size_t size);
 void			*ft_memset(void *b, int c, size_t len);
 char			*ft_strdup(const char *s1);
@@ -70,7 +67,7 @@ void			initialize_structure(t_map *map);
 void			put_img(t_map *map, int x, int y, char *file);
 void			base_map(t_map *map);
 void			place_image(t_map *map);
-void			show_map(t_map *map);
+int				show_map(t_map *map);
 /* error.c */
 void			error_msg(int flag);
 int				exit_e(void);
@@ -96,15 +93,4 @@ void			key_hook(t_map *map);
 int				find_exit(t_map *map);
 int				find_collect(t_map *map);
 int				find_character(t_map *map);
-/* gnl */
-char			*ft_strjoin(char const *s1, char const *s2);
-int				ft_strchr(char *str, int c);
-char			*ft_substr(char const *s, int start, int len);
-int				ft_strlen(const char *str);
-char			*data_join(char **data, char *buf);
-char			*setting_data(char *str);
-char			*devide_line(char **data, int idx);
-char			*size_is_zero(char **data, int idx);
-char			*read_buf(int fd, char **data, char *buf, int size);
-char			*get_next_line(int fd);
 #endif

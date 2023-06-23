@@ -6,7 +6,7 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:32:08 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/13 23:26:32 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/07 17:06:17 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,5 @@ void	initialize_structure(t_map *map)
 	map->cpy = 1;
 	map->cpy2 = 0;
 	map->step_cnt = 0;
-	map->player[0] = 0;
-	map->player[1] = 0;
-	map->gameover[0] = 0;
-	map->gameover[1] = 0;
 	dfs_init(map);
 }

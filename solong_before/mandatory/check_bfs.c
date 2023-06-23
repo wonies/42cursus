@@ -6,9 +6,11 @@
 /*   By: wonhshin <wonhshin@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:02:50 by wonhshin          #+#    #+#             */
-/*   Updated: 2023/06/13 18:21:21 by wonhshin         ###   ########.fr       */
+/*   Updated: 2023/06/07 16:12:57 by wonhshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "so_long.h"
 
 #include "so_long.h"
 

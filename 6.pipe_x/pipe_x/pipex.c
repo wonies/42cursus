@@ -1,34 +1,21 @@
 #include "pipex.h"
 
 
-void    file_init(int ac, char **av, t_pipe *pp)
-{
-    pp->infile = open(av[1], O_RDONLY);
-    if (pp->infile < 0) 
-    {
-        perror("Failed to open input file\n");
-        exit(1);
-    }
-    pp->outfile = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
-    if (pp->outfile < 0)
-    {
-        perror("Failed to open out file\n");
-        exit(1);
-    }
-    pp->child = ac - 3;
-    pp->com = (t_pipe *)ft_calloc(pp->child, sizeof(t_pipe));
-}
 
 
-int main(int ac, char **av, char **envp)
+int main(int ac, char **av, char **env)
 {
     t_pipe  pp;
 
     // pp.child = ac - 3;
     // printf("pp.child : %d\n", pp.child);
+    if (ac != 5)
+    {
+        perror("not valid!\n");
+        exit(1);
+    }
     file_init(ac, av, &pp);
-    function_path(ac, av, envp, &pp);
-    printf("2 pp.child : %d\n", pp.child);
+    function_path(ac, av, env, &pp);
     
     // if (pipe(pp.pipe_a) < 0)
     //     exit(1);
