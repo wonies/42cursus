@@ -1,0 +1,14 @@
+total 160
+drwxr-xr-x  13 wonhshin  2022_seoul    442 Jun 23 18:33 .
+drwxr-xr-x  16 wonhshin  2022_seoul    544 Jun 23 18:31 ..
+-r--r-x---   1 wonhshin  2022_seoul      4 Jun 23 17:45 HEREDOC
+-rwxr-xr-x   1 wonhshin  2022_seoul  51400 Jun 23 18:32 a.out
+-rw-r--r--   1 wonhshin  2022_seoul   1764 Jun 23 18:16 get_next_line.c
+-rw-r--r--   1 wonhshin  2022_seoul    811 Jun 23 17:43 get_next_line_utils.c
+-rw-r--r--   1 wonhshin  2022_seoul      0 Jun 23 18:33 infile
+-rw-r--r--   1 wonhshin  2022_seoul    593 Jun 23 18:05 init_bonus.c
+-rw-r--r--   1 wonhshin  2022_seoul      0 Jun 23 18:18 outfil
+-rw-r--r--   1 wonhshin  2022_seoul      0 Jun 23 18:34 outfile
+-rw-r--r--   1 wonhshin  2022_seoul    122 Jun 23 18:33 outfile1
+-rw-r--r--   1 wonhshin  2022_seoul    396 Jun 23 18:32 pipex_bonus.c
+-rw-r--r--   1 wonhshin  2022_seoul    352 Jun 23 18:17 pipex_gnl.c

@@ -1,19 +1,17 @@
 #include "pipex.h"
 
 
-
-
 int main(int ac, char **av, char **env)
 {
     t_pipe  pp;
 
     // pp.child = ac - 3;
     // printf("pp.child : %d\n", pp.child);
-    if (ac != 5)
-    {
-        perror("not valid!\n");
-        exit(1);
-    }
+    // if (ac != 5)
+    // {
+    //     perror("not valid!\n");
+    //     exit(1);
+    // }
     file_init(ac, av, &pp);
     function_path(ac, av, env, &pp);
     
