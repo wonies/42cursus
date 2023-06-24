@@ -1,0 +1,10 @@
+total 160
+drwxr-xr-x@ 20 wonie  staff    640 Jun 24 01:32 .
+drwxr-xr-x@ 16 wonie  staff    512 Jun 23 20:20 ..
+-rw-r--r--@  1 wonie  staff     25 Jun 23 20:23 HEREDOC
+-rwxr-xr-x@  1 wonie  staff  34944 Jun 23 20:21 a.out
+-rw-r--r--@  1 wonie  staff      0 Jun 23 20:28 cat
+-rw-r--r--@  1 wonie  staff   1764 Jun 23 20:20 get_next_line.c
+-rw-r--r--@  1 wonie  staff    811 Jun 23 20:20 get_next_line_utils.c
+-rw-r--r--@  1 wonie  staff      0 Jun 23 20:38 head
+-rw-r--r--@  1 wonie  staff      0 Jun 24 01:34 head -3

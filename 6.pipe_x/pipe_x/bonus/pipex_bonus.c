@@ -13,6 +13,6 @@ int main(int ac, char **av, char **env)
     }
     else
         file_init(ac, av, &pp);
-    printf("%d\n", pp.child);
     function_path(ac, av, env, &pp);
+    return 0;
 }

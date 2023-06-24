@@ -45,7 +45,7 @@ typedef struct s_pipe
 char    *find_path(char **envp);
 void    function_path(int ac, char **av, char **env, t_pipe *pp);
 void    make_slash(char **str);
-void    execute(t_pipe *pp, char **av, t_pid *ppid);
+void    execute(t_pipe *pp, char **av);
 // char    **make_slash(char **split);
 // int isok_access(char **split, char *ord);
 void    isok_access(t_pipe *pp);
@@ -82,4 +82,7 @@ char			*get_next_line(int fd);
 /* pipe_gnl */
 void    read_gnl(t_pipe *pp);
 void    fileinit_bonus(int ac, char **av, t_pipe *pp);
+
+/* error*/
+void    error_msg(int flag);
 #endif

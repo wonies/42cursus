@@ -127,3 +127,70 @@
 //     //     printf("after slash : %s\n", pp->str[i++]);
 //     execute(pp, av);
 // }
+
+#include "pipex.h"
+
+
+void    close_fd(int i, t_pipe *pp)
+{
+     if (i == 0)
+        close(pp->com[i].pipe_fd[1]);
+    else if (i == pp->child -1)
+        close(pp->com[i - 1].pipe_fd[0]);
+    else
+    {
+        close(pp->com[i - 1].pipe_fd[0]);
+        close(pp->com[i].pipe_fd[1]);
+    } 
+}
+
+
+void    process_transp(int i, t_pipe *pp, char **av)
+{
+    if (i == 0)
+    {
+        close(pp->com[i].pipe_fd[0]);
+        dup2(pp->com[i].pipe_fd[1],STDOUT_FILENO);
+        dup2(pp->infile, STDIN_FILENO);
+    }
+    else if (i == pp->child - 1)
+    {
+        dup2(pp->com[i - 1].pipe_fd[0],STDIN_FILENO);
+        dup2(pp->outfile, STDOUT_FILENO);
+    }
+    else
+    {
+        close(pp->com[i].pipe_fd[0]);
+        dup2(pp->com[i - 1].pipe_fd[0],STDIN_FILENO);
+        dup2(pp->com[i].pipe_fd[1], STDOUT_FILENO);
+    }
+    pp->cmd = ft_split(av[i + 2], ' ');
+}
+
+
+void    execute(t_pipe *pp, char **av)
+{
+    int i;
+
+    i = 0;
+    while (i < pp->child)
+    {
+        if (i < pp->child - 1)
+        {
+            if (pipe(pp->com[i].pipe_fd) < 0)
+                error_msg(1);
+        }
+        if ((pp->com[i].pid = fork()) < 0)
+            error_msg(1);
+        if (pp->com[i].pid == 0)
+        {
+            process_transp(i, pp, av);
+            isok_access(pp);
+            if (execve(pp->fd_path, pp->cmd, NULL) < 0)
+                error_msg(1);
+        }
+        close_fd(i, pp);
+        waitpid(pp->com[i].pid, 0, 0);
+        i++;
+    }
+}

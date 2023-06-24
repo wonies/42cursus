@@ -8,7 +8,7 @@ void    read_gnl(t_pipe *pp)
     while (str)
     {
         write(pp->infile, str, ft_strlen(str));
-        write(pp->infile, "\n", 1);
+        // write(pp->infile, "\n", 1);
         if (strncmp(str, pp->limiter, pp->limiter_len) == 0)
             return ;
         str = get_next_line(0);
