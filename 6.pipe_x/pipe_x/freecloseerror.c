@@ -1,11 +1,17 @@
 #include "pipex.h"
 
+void    error_msg(char *msg)
+{
+    perror(msg);
+    exit(1);
+}
+
 void    close_all(t_pipe *pp)
 {
     close(pp->infile);
     close(pp->outfile);
     if (pp->infile < 0)
-        error_msg("CAN NOT OPEN INFILE!!\n");
+        exit(1);
 }
 
 void free_all(t_pipe *pp)

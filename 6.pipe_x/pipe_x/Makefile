@@ -8,36 +8,31 @@ HEADER	=	pipex.h
 BONUS_HEADER = pipex.h
 
 SRCS = pipex.c \
-	path.c \
-	path2.c \
-	error.c \
+	path_parsing.c \
+	path_process.c \
+	freecloseerror.c \
 	init.c \
 	init2.c \
-	split.c \
-	free_all.c
+	split.c 
 	
 BONUS_SRCS = 	bonus/pipex_bonus.c \
 	bonus/init_bonus.c \
-	bonus/pipex_gnl.c \
 	bonus/get_next_line.c \
 	bonus/get_next_line_utils.c \
-	path.c \
-	path2.c \
-	error.c \
+	path_parsing.c \
+	path_process.c \
+	freecloseerror.c \
 	init.c \
 	init2.c \
-	split.c \
-	free_all.c
+	split.c 
 
 M_OBJS = $(SRCS:%.c=%.o)
 B_OBJS = $(BONUS_SRCS:%.c=%.o)
 
 ifdef WITH_BONUS
 	OBJS = $(B_OBJS)
-	HEADER = pipex.h
 else
 	OBJS = $(M_OBJS)
-	HEADER = pipex.h
 endif
 
 all : $(NAME)
@@ -48,8 +43,12 @@ all : $(NAME)
 $(NAME):	$(OBJS) $(HEADER)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
-bonus:
-	@$(RM) ./*.o	
+backup:
+	@$(RM) ./pipex_backup
+	@if [ -e "./pipex" ]; then cp ./pipex ./pipex_backup; fi
+
+bonus: backup
+	@$(RM) ./*.o
 	@make WITH_BONUS=1 $(NAME)
 
 clean:
