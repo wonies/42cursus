@@ -1,5 +1,5 @@
-#ifndef PIPE_X_H
-# define PIPE_X_H
+#ifndef PIPEX_H
+# define PIPEX_H
 
 # include <fcntl.h>
 # include <unistd.h>
@@ -15,6 +15,8 @@
 #  define BUFFER_SIZE 42
 # endif
 
+#define HEREDOC "6C413A8D-AA00-4130-B8FA-83E7376ECFD4"
+
 typedef struct s_pid
 {
     pid_t   pid;
@@ -27,25 +29,24 @@ typedef struct s_pipe
     char    **str;
     char    **cmd;
     char    *fd_path;
-    //child process
-    pid_t   pid;
     t_pid   *com;
-    //fork
     int     child;
     char    *limiter;
     int     limiter_len;
-    //child
-    //file
     int     infile;
     int     outfile;
+    char    **env;
+    int     check;
     
 }				t_pipe;
 
 /* path.c */
+void    process_transp(int i, t_pipe *pp);
 char    *find_path(char **envp);
-void    function_path(int ac, char **av, char **env, t_pipe *pp);
-void    make_slash(char **str);
+void    function_path(char **av, char **env, t_pipe *pp);
+void    make_slash(t_pipe *pp);
 void    execute(t_pipe *pp, char **av);
+void    wait_child(t_pipe *pp);
 // char    **make_slash(char **split);
 // int isok_access(char **split, char *ord);
 void    isok_access(t_pipe *pp);
@@ -84,5 +85,8 @@ void    read_gnl(t_pipe *pp);
 void    fileinit_bonus(int ac, char **av, t_pipe *pp);
 
 /* error*/
-void    error_msg(int flag);
+void    error_msg(char  *msg);
+/* free */
+void    free_all(t_pipe *pp);
+void    close_all(t_pipe *pp);
 #endif

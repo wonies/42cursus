@@ -26,17 +26,16 @@ char	*ft_strjoin(char const *s1, char const *s2)
 void    file_init(int ac, char **av, t_pipe *pp)
 {
     pp->infile = open(av[1], O_RDONLY);
-    if (pp->infile < 0) 
-    {
-        perror("Failed to open input file\n");
-        exit(1);
-    }
+    // if (pp->infile < 0) 
+    // {
+    //     perror("Failed to open input file\n");
+    //     exit(1);
+    // }
     pp->outfile = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
     if (pp->outfile < 0)
-    {
-        perror("Failed to open out file\n");
-        exit(1);
-    }
+        error_msg("Failed to open out file\n");
     pp->child = ac - 3;
     pp->com = (t_pid *)ft_calloc(pp->child, sizeof(t_pid));
+	pp->fd_path = NULL;
+	pp->str = NULL;
 }

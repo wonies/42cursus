@@ -66,20 +66,25 @@ void isok_access(t_pipe *pp)
         if (access(temp, X_OK) == 0)
         {
             pp->fd_path = temp;
+            free(temp);
             break ;
         }
+        free(temp);
         i++;
     }
 }
 
-void    make_slash(char **str)
+void    make_slash(t_pipe *pp)
 {
     int     i;
+    char    *temp;
 
     i = 0;
-    while (str[i])
+    while (pp->str[i])
     {
-        str[i] = ft_strjoin(str[i], "/");
+        temp = ft_strjoin(pp->str[i], "/");
+        free(pp->str[i]);
+        pp->str[i] = temp;
         i++;
     }
 }
@@ -88,6 +93,7 @@ char   *find_path(char **env)
 {
     char    *path;
 
+    path = NULL;
     while (*env)
     {
         if (ft_strncmp(*env, "PATH=", 5)==0)
@@ -100,10 +106,15 @@ char   *find_path(char **env)
     return path;
 }
 
-void    function_path(int ac, char **av, char **env, t_pipe *pp)
+void    function_path(char **av, char **env, t_pipe *pp)
 {
+    pp->env = env;
     pp->path = find_path(env);
     pp->str = ft_split(pp->path, ':');
-    make_slash(pp->str);
+    if (!pp->str)
+        error_msg("not allcoated SPLIT!\n");
+    make_slash(pp);
+    if (!pp->str)
+        error_msg("not allcoated JOIN!\n");
     execute(pp, av);
 }
