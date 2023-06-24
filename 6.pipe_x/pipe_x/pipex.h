@@ -77,16 +77,16 @@ void    close_all(t_pipe *pp);
 
 /* bonus */
 /* gnl */
-int				ft_strchr(char *str, int c);
-char			*ft_substr(char const *s, int start, int len);
-char			*data_join(char **data, char *buf);
-char			*setting_data(char *str);
-char			*devide_line(char **data, int idx);
-char			*size_is_zero(char **data, int idx);
-char			*read_buf(int fd, char **data, char *buf, int size);
-char			*get_next_line(int fd);
+int     ft_strchr(char *str, int c);
+char	*ft_substr(char const *s, int start, int len);
+char	*data_join(char **data, char *buf);
+char	*setting_data(char *str);
+char	*devide_line(char **data, int idx);
+char	*size_is_zero(char **data, int idx);
+char	*read_buf(int fd, char **data, char *buf, int size);
+char	*get_next_line(int fd);
 /* pipe_gnl */
-void        read_gnl(t_pipe *pp);
-void        fileinit_bonus(int ac, char **av, t_pipe *pp);
+void    read_gnl(t_pipe *pp);
+void    fileinit_bonus(int ac, char **av, t_pipe *pp);
 
 #endif

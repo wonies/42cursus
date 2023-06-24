@@ -43,19 +43,15 @@ all : $(NAME)
 $(NAME):	$(OBJS) $(HEADER)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
-backup:
-	@$(RM) ./pipex_backup
-	@if [ -e "./pipex" ]; then cp ./pipex ./pipex_backup; fi
-
-bonus: backup
-	@$(RM) ./*.o
+bonus: 
+	@$(RM) pipex.o
 	@make WITH_BONUS=1 $(NAME)
 
 clean:
 	$(RM) $(OBJS)
 	$(RM) $(M_OBJS)
 	$(RM) $(B_OBJS)
-
+	
 fclean: 
 	make clean
 	$(RM) $(NAME)
