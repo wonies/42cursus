@@ -23,21 +23,29 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (res);
 }
 
+void    pp_setting(int ac, t_pipe *pp)
+{
+    if (pp->check == 114)
+		pp->child = ac - 4;
+	else
+	{
+		pp->child = ac - 3;
+		pp->check = 0;
+	}
+    pp->com = (t_pid *)ft_calloc(pp->child, sizeof(t_pid));
+    if (!pp->com)
+        error_msg("CANT READ LIMITER\n");
+	pp->cmd = NULL;
+    pp->fd_path = NULL;
+    pp->str = NULL;
+}
+
 void    file_init(int ac, char **av, t_pipe *pp)
 {
 	pp->infile = open(av[1], O_RDONLY);
-	if (pp->infile < 0)
-	{
-		write(1, av[1], ft_strlen(av[1]));
-		write(1, " : No such file or directory\n", 29);
-	}
+	infile_errmsg(pp, av);
     pp->outfile = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
     if (pp->outfile < 0)
         error_msg("Failed to open out file\n");
-    pp->child = ac - 3;
-    pp->com = (t_pid *)ft_calloc(pp->child, sizeof(t_pid));
-	pp->cmd = NULL;
-	pp->fd_path = NULL;
-	pp->str = NULL;
-	pp->check = 0;
+    pp_setting(ac, pp);
 }

@@ -48,11 +48,16 @@ void    isok_access(t_pipe *pp);
 /* path_process.c */
 void    execute(t_pipe *pp, char **av);
 void    cmd_split(int i, t_pipe *pp, char **av);
-void    process_transp(int i, t_pipe *pp);
 void    wait_child(t_pipe *pp);
+void    child_exe(int i, t_pipe *pp, char **av);
 void    close_fd(int i, t_pipe *pp);
 
-/* ft_split.c */
+/* path_process_transp */
+void    process_transp(int i, t_pipe *pp);
+void    process_transp_the_one(int zero, t_pipe *pp);
+void    process_check_zero(int i, t_pipe *pp);
+
+/* split.c */
 size_t	count_str(char const *s, char c);
 char	**ft_free_split(char **str, int order);
 size_t	str_len(char const *s, char c);
@@ -66,13 +71,16 @@ void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s1);
 int	    ft_strncmp(const char *s1, const char *s2, size_t n);
 
-/* init2.c */
+/* init_file.c */
+char	*ft_strjoin(char const *s1, char const *s2s);
 void    file_init(int ac, char **av, t_pipe *pp);
-char	*ft_strjoin(char const *s1, char const *s2);
+void    pp_setting(int ac, t_pipe *pp);
+
 /* freecloseerror*/
 void    error_msg(char  *msg);
 void    free_all(t_pipe *pp);
 void    close_all(t_pipe *pp);
+void    infile_errmsg(t_pipe *pp, char **av);
 
 /* bonus */
 /* gnl */
@@ -84,7 +92,7 @@ char	*devide_line(char **data, int idx);
 char	*size_is_zero(char **data, int idx);
 char	*read_buf(int fd, char **data, char *buf, int size);
 char	*get_next_line(int fd);
-/* pipe_gnl */
+/* pipe_bonus */
 void    read_gnl(t_pipe *pp);
 void    fileinit_bonus(int ac, char **av, t_pipe *pp);
 

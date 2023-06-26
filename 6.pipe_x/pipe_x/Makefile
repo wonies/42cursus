@@ -10,9 +10,10 @@ BONUS_HEADER = pipex.h
 SRCS = pipex.c \
 	path_parsing.c \
 	path_process.c \
+	path_process_transp.c \
 	freecloseerror.c \
 	init.c \
-	init2.c \
+	init_file.c \
 	split.c 
 	
 BONUS_SRCS = 	bonus/pipex_bonus.c \
@@ -21,9 +22,10 @@ BONUS_SRCS = 	bonus/pipex_bonus.c \
 	bonus/get_next_line_utils.c \
 	path_parsing.c \
 	path_process.c \
+	path_process_transp.c \
 	freecloseerror.c \
 	init.c \
-	init2.c \
+	init_file.c \
 	split.c 
 
 M_OBJS = $(SRCS:%.c=%.o)

@@ -6,8 +6,12 @@ int main(int ac, char **av, char **env)
 
     if (strncmp(av[1], "here_doc", 9) == 0)
     {
-        pp.check = 114;
         fileinit_bonus(ac, av, &pp);
+        if (ac == 3 || ac == 4)
+        {
+            unlink(HEREDOC);
+            return 0;
+        }
         read_gnl(&pp);
     }
     else

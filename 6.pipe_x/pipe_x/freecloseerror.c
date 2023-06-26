@@ -1,5 +1,14 @@
 #include "pipex.h"
 
+void    infile_errmsg(t_pipe *pp, char **av)
+{
+    if (pp->infile < 0)
+	{
+		write(1, av[1], ft_strlen(av[1]));
+		write(1, ": No such file or directory\n", 28);
+	}
+}
+
 void    error_msg(char *msg)
 {
     perror(msg);

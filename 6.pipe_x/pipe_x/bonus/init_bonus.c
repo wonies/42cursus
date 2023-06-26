@@ -30,17 +30,22 @@ void    read_gnl(t_pipe *pp)
 void    fileinit_bonus(int ac, char **av, t_pipe *pp)
 {
     pp->infile = open(HEREDOC, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    pp->outfile = open(av[ac - 1], O_RDWR | O_CREAT | O_APPEND, 0644);
-    if (pp->outfile < 0)
-        error_msg("CANT OPEN OUTFILE\n");
-    pp->child = ac - 4;
+    infile_errmsg(pp, av);
     pp->limiter = av[2];
     if (!pp->limiter)
-        error_msg("NO LIMITER\n");
+        error_msg("syntax error near unexpected token `newline'\n");
     pp->limiter_len = ft_strlen(pp->limiter);
-    pp->com = (t_pid *)ft_calloc(pp->child, sizeof(t_pid));
-    if (!pp->com)
-        error_msg("CANT READ LIMITER\n");
-    pp->fd_path = NULL;
-    pp->str = NULL;
+    pp->check = 114;
+    if (ac > 3)
+    {
+        pp->outfile = open(av[ac - 1], O_RDWR | O_CREAT | O_APPEND, 0644);
+        if (pp->outfile < 0)
+            error_msg("CANT OPEN OUTFILE\n");
+    }
+    if (ac == 3 || ac == 4)
+    {
+        read_gnl(pp);
+        return ;
+    }
+    pp_setting(ac, pp);
 }
