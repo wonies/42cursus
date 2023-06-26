@@ -13,7 +13,8 @@ void isok_access(t_pipe *pp)
         if (access(temp, X_OK) == 0)
         {
             pp->fd_path = temp;
-            free(temp);
+            printf("fd path : %s\n",pp->fd_path);
+            // free(temp);
             break ;
         }
         free(temp);

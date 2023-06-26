@@ -43,12 +43,8 @@ all : $(NAME)
 $(NAME):	$(OBJS) $(HEADER)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
-ifeq ($(wildcard pipex_bonus.o),)
-	@$(RM) pipex_bonus.o
-endif
-
-bonus: 
-	@$(RM) pipex.o
+bonus:
+	@$(RM) ./pipex.o
 	@make WITH_BONUS=1 $(NAME)
 
 # clean:

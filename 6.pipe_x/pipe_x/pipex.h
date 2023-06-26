@@ -37,7 +37,6 @@ typedef struct s_pipe
     int     outfile;
     char    **env;
     int     check;
-    
 }				t_pipe;
 
 /* path_parsing.c */
