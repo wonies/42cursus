@@ -35,7 +35,9 @@ else
 	OBJS = $(M_OBJS)
 endif
 
-all : $(NAME)
+all :
+	$(RM) ./bonus/*.o
+	$(MAKE) $(NAME)
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -47,11 +49,8 @@ bonus:
 	@$(RM) ./pipex.o
 	@make WITH_BONUS=1 $(NAME)
 
-# clean:
-#     $(RM) $(OBJS)
-#     $(RM) $(B_OBJS)
 clean:
-	$(RM) $(OBJS)
+	# $(RM) $(OBJS)
 	$(RM) $(M_OBJS)
 	$(RM) $(B_OBJS)
 	

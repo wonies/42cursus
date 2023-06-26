@@ -14,6 +14,5 @@ int main(int ac, char **av, char **env)
         file_init(ac, av, &pp);
     function_path(av, env, &pp);
     free_all(&pp);
-    unlink(HEREDOC);
     return 0;
 }

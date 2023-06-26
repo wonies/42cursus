@@ -13,13 +13,13 @@ void isok_access(t_pipe *pp)
         if (access(temp, X_OK) == 0)
         {
             pp->fd_path = temp;
-            printf("fd path : %s\n",pp->fd_path);
-            // free(temp);
             break ;
         }
         free(temp);
         i++;
     }
+    if (!pp->fd_path)
+        error_msg("command not found\n");
 }
 
 void    make_slash(t_pipe *pp)
