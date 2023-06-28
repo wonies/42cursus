@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_file.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: wonhshin <wonhshin@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/28 15:13:22 by wonhshin          #+#    #+#             */
+/*   Updated: 2023/06/28 16:36:51 by wonhshin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -23,29 +35,29 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (res);
 }
 
-void    pp_setting(int ac, t_pipe *pp)
+void	pp_setting(int ac, t_pipe *pp)
 {
-    if (pp->check == 114)
+	if (pp->check == 114)
 		pp->child = ac - 4;
 	else
 	{
 		pp->child = ac - 3;
 		pp->check = 0;
 	}
-    pp->com = (t_pid *)ft_calloc(pp->child, sizeof(t_pid));
-    if (!pp->com)
-        error_msg("CANT READ LIMITER\n");
+	pp->com = (t_pid *)ft_calloc(pp->child, sizeof(t_pid));
+	if (!pp->com)
+		error_msg("CANT READ LIMITER\n");
 	pp->cmd = NULL;
-    pp->fd_path = NULL;
-    pp->str = NULL;
+	pp->fd_path = NULL;
+	pp->str = NULL;
 }
 
-void    file_init(int ac, char **av, t_pipe *pp)
+void	file_init(int ac, char **av, t_pipe *pp)
 {
 	pp->infile = open(av[1], O_RDONLY);
 	infile_errmsg(pp, av);
-    pp->outfile = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
-    if (pp->outfile < 0)
-        error_msg("Failed to open out file\n");
-    pp_setting(ac, pp);
+	pp->outfile = open(av[ac - 1], O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (pp->outfile < 0)
+		error_msg("Failed to open out file\n");
+	pp_setting(ac, pp);
 }
