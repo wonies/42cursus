@@ -15,33 +15,36 @@
 #include <termios.h>
 #include <string.h>
 
+#define BUFFER_SIZE 1024
 #define DELIMS " \t\r\n"
 #define READ 0
 #define WRITE 1
-#define T_NULL 0
-#define T_WORD 1
-#define T_PIPE 2
-#define T_READIRECT 3
-#define T_DOUBLE_QUOTES 4
-#define T_SINGLE_QUOTES 5
+#define ERROR -1
+
+typedef enum    e_type
+{
+    T_WORD,
+    T_PIPE,
+    T_REDIRECT,
+    T_HEREDOC, 
+    T_DOUBLE_Q,
+    T_SINGLE_Q,
+    T_SPACE
+};
 
 typedef struct  s_token
 {
     int     type;
     char    *str;
-}   t_token;
-
-typedef struct s_pid
-{
-	pid_t	pid;
-	int		pipe_fd[2];
-}				t_pid;
+    int     double_flag;
+    int     single_flag;
+}   t_token; 
 
 
 typedef struct s_list
 {
 	struct  s_list *next;
-    char    *string;
+    char    *content;
 }				t_list;
 
 
@@ -54,10 +57,19 @@ typedef struct s_mini
 }				t_mini;
 
 
+/*ft.c*/
+
+void	*ft_calloc(size_t count, size_t size);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strdup(const char *s1);
+
+
+
+
 /* bonus */
 /* gnl */
 int		ft_strchr(char *str, int c);
-char	*ft_substr(char const *s, int start, int len);
+// char	*ft_substr(char const *s, int start, int len);
 char	*data_join(char **data, char *buf);
 char	*setting_data(char *str);
 char	*devide_line(char **data, int idx);
