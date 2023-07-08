@@ -6,14 +6,14 @@ int main(int ac, char **av, char **env)
     (void)av;
 
     char *str;
-    t_list *list;
-
+    t_list *list = NULL;
+    
     str = ft_strdup("ls -al < a | grep  """);
-    list = lexer(str);
+    list = lexer(list, str);
     t_list *cur = list;
     while (cur)
     {
-        printf("%s\n", cur->content);
+        printf("cur : %d, %s\n", cur->token->type, cur->token->str);
         cur = cur->next;
     }    
 }

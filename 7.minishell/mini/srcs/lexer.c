@@ -15,15 +15,14 @@ void    addttlist(t_list **head, t_token *token)
     t_list  *new;
 
     new = ft_lstnew(token);
-    if (!new)
-        return 0;
     ft_lstadd_back(head, new);
+    //return 0 시키기 위해서 int형으로 바꿔줘야할듯
 }
 
 
 void    tokenization(char *str, int *idx, t_list **head, t_token **token)
 {
-
+    //    *token = new_token();
     if (str[*idx] == '|')
     {
         (*token)->type = T_PIPE;
@@ -47,20 +46,22 @@ void    tokenization(char *str, int *idx, t_list **head, t_token **token)
         if (str[*idx + 1] == str[*idx])
         {
             (*token)->str = ft_strncat((*token)->str, &str[*idx], 2);
-            *idx++;
+            (*idx)++;
         }
         else
         {
             if (str[*idx] == '<')
-                (*token)->str = ft_strdup('<');
+                (*token)->str = ft_strdup("<");
             else
-                (*token)->str = ft_strdup('>');
+                (*token)->str = ft_strdup(">");
         }
     }
     else if (str[*idx] == ' ')
-        *idx++;
+    {
+        // (*idx)++;
+        return ;
+    }
     addttlist(head, *token);
-    *token = new_token();
 
 }
 
@@ -72,16 +73,31 @@ t_list *lexer(t_list *list, char *str)
     t_token *token;
     t_list *head;
 
-    token = new_token();
-    if (!token)
-        return (NULL);
+    head = 0;
+
+    // if (!token)
+    //     return (NULL);
     while (str[idx])
     {
+        printf("end : %s\n", ft_substr(str, i, idx));
         if (str[idx] == '\"' || str[idx] == '\'' || str[idx] == '|' || str[idx] == '<' || str[idx] == '>' || str[idx] == ' ')
         {
-            tokenization(str, &idx, &head, &token);
+            addttlist(&head, token);
+            token = new_token();
+            if (str[idx] != ' ')
+                tokenization(str, &idx, &head, &token); 
+            printf("ex | token_str : %s\n", (*token).str);
+            printf("ex | token_type : %d\n", (*token).type);
+            printf("ex | idx : {{%d}}\n", idx);
             if (i != idx)
-                addttlist(&head, ft_substr(str, i, idx));
+            {
+                token = new_token();
+                (*token).str = ft_substr(str, i, idx);
+                printf("token_str : [%s]\n", (*token).str);
+                printf("token_type : %d\n", (*token).type);
+                printf("in | idx : {{%d}}\n", idx);
+                addttlist(&head, token);
+            }
             i = idx + 1;
         }
         idx++;

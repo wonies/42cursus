@@ -21,7 +21,7 @@
 #define WRITE 1
 #define ERROR -1
 
-typedef enum    e_type
+enum    e_type
 {
     T_WORD,
     T_PIPE,
@@ -44,7 +44,8 @@ typedef struct  s_token
 typedef struct s_list
 {
 	struct  s_list *next;
-    char    *content;
+    t_token *token;
+    void    *content;
 }				t_list;
 
 
@@ -58,10 +59,20 @@ typedef struct s_mini
 
 
 /*ft.c*/
-
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s1);
+t_list	*ft_lstnew(void *content);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+size_t	ft_strlen(const	char *str);
+void	*ft_memset(void *b, int c, size_t len);
+char *ft_strncat(char *d, const char *s, size_t sz);
+
+/* minishell.c*/
+t_token     *new_token();
+void    addttlist(t_list **head, t_token *token);
+void    tokenization(char *str, int *idx, t_list **head, t_token **token);
+t_list *lexer(t_list *list, char *str);
 
 
 

@@ -84,3 +84,35 @@ t_list	*ft_lstnew(void *content)
 	new->next = NULL;
 	return (new);
 }
+
+size_t	ft_strlen(const	char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (*str)
+	{
+		str++;
+		i++;
+	}
+	return (i);
+}
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*temp;
+
+	temp = (unsigned char *)b;
+	while (len-- > 0)
+		*temp++ = (unsigned char)c;
+	return (b);
+}
+
+char *ft_strncat(char *d, const char *s, size_t sz)
+{
+    char *p = d;
+    while(*d) d++;
+    while(*s && sz-- > 0) *d++ = *s++;
+    *d = '\0';
+    return p;
+}
