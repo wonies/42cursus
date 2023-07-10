@@ -66,6 +66,7 @@ void tokenization(char *str, int *idx, t_list **head, t_token **token)
         if (str[*idx + 1] == str[*idx])
         {
             (*token)->str = ft_strncat((*token)->str, &str[*idx], 2);
+            (*idx)++;
         }
         else
         {
@@ -77,7 +78,7 @@ void tokenization(char *str, int *idx, t_list **head, t_token **token)
     }
     else if (str[*idx] == ' ' || str[*idx] == '\t')
     {
-        return ;
+        (*token)->type = T_SPACE;
     }
     addttlist(head, *token);
 }
@@ -93,21 +94,23 @@ t_list *lexer(t_list *list, char *str)
 	token = new_token();
 	while (str[i])
 	{
-        if (str[i] == ' ' || str[i] == '\t' || str[i] == '<' || str[i] == '>' || str[i] == '|' || str[i] == '\"' || str[i] == '\'')
+        if (str[i] == ' ' || str[i] == '\t'|| str[i] == '<' || str[i] == '>' || str[i] == '|' || str[i] == '\"' || str[i] == '\'')
         {
-            if (token->str[0] != '\0')
+            if (token->str)
             {
                 printf("token : %s\n", token->str);
                 addttlist(&head, token);
-                token = new_token();
+                // token = new_token();
             }
-		    tokenization(str, &i, &head, &token);
+        // if (str[i] != ' ' && str[i] == '\t')
+            tokenization(str, &i, &head, &token);
+            token = new_token();
 		}
 		else
 			token->str = ft_strncat(token->str, &str[i], 1);
-        if (token->str[0] != '\0')
-            addttlist(&head, token);
 		i++;
 	}
+    if (token->str)
+        addttlist(&head, token);
 	return head;
 }
