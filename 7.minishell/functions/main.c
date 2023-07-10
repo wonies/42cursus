@@ -47,7 +47,7 @@ int main(int ac, char **av, char **env)
     int idx = 0;
     int i = 0;
     char *str;
-    str = "ls -al < a | grep "" ";
+    str = "ls -al < a | grep ""  'a";
     while(str[idx])
     {
         if (str[idx] == ' ' || str[idx] == '\"' ||  str[idx] == '\'' || str[idx] == '|' || str[idx] == '<' || str[idx] == '>' )
