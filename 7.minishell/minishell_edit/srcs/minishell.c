@@ -8,7 +8,7 @@ int main(int ac, char **av, char **env)
     char *str;
     t_list *list = NULL;
     
-    str = ft_strdup("ls -al < a | grep  """);
+    str = ft_strdup("ls -al < a | grep  "" | cat -e | head -3 >> outfile");
     list = lexer(list, str);
     t_list *cur = list;
     while (cur)

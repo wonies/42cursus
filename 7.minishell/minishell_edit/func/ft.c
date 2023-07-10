@@ -108,11 +108,20 @@ void	*ft_memset(void *b, int c, size_t len)
 	return (b);
 }
 
-char *ft_strncat(char *d, const char *s, size_t sz)
+char	*ft_strncat(char *dest, char *src, int n)
 {
-    char *p = d;
-    while(*d) d++;
-    while(*s && sz-- > 0) *d++ = *s++;
-    *d = '\0';
-    return p;
+	int		size;
+	char	*res;
+	int		i;
+
+	size = ft_strlen(dest) + n;
+	res = (char *)ft_calloc(size + 1, sizeof(char));
+	i = 0;
+	if (dest)
+		while (*dest)
+			res[i++] = *dest++;
+	if (src)
+		while (n--)
+			res[i++] = *src++;
+	return (res);
 }

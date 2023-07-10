@@ -62,11 +62,11 @@ typedef struct s_mini
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s1);
+char	*ft_strncat(char *dest, char *src, int n);
 // t_list	*ft_lstnew(void *content);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 size_t	ft_strlen(const	char *str);
 void	*ft_memset(void *b, int c, size_t len);
-char *ft_strncat(char *d, const char *s, size_t sz);
 
 /* minishell.c*/
 // t_token     *new_token();

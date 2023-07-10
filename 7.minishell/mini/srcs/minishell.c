@@ -7,6 +7,7 @@ int main(int ac, char **av, char **env)
 
     char *str;
     t_list *list = NULL;
+    t_token *token;
     
     str = ft_strdup("ls -al < a | grep  """);
     list = lexer(list, str);
