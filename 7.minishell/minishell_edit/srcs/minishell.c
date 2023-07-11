@@ -8,7 +8,13 @@ int main(int ac, char **av, char **env)
     char *str;
     t_list *list = NULL;
     
-    str = ft_strdup("ls -al < a | grep  "" | cat -e | head -3 >> outfile");
+    // str = ft_strdup("ls -al < a | grep  "" | cat -e | head -3 >> outfile");
+    // str = ft_strdup("< infile ls | cat > outfile");
+    
+    str = readline("prompt : ");
+    if (str)
+        printf("%s\n", str);
+    add_history(str);
     list = lexer(list, str);
     t_list *cur = list;
     while (cur)

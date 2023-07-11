@@ -26,10 +26,9 @@ enum    e_type
     T_WORD,
     T_PIPE,
     T_REDIRECT,
-    T_HEREDOC, 
     T_DOUBLE_Q,
     T_SINGLE_Q,
-    T_SPACE
+    T_SPACE // 추후에 고려해보기
 };
 
 typedef struct  s_token
@@ -74,7 +73,9 @@ void    addttlist(t_list **head, t_token *token);
 void    tokenization(char *str, int *idx, t_list **head, t_token **token);
 t_list *lexer(t_list *list, char *str);
 
-
+/* quote.c */
+void    double_quotes(t_list **list, t_token **token, char *str, int *idx);
+void    single_quotes(t_list **list, t_token **token, char *str, int *idx);
 
 
 /* bonus */
