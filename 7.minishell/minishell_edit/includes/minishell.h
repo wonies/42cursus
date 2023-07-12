@@ -42,9 +42,11 @@ typedef struct  s_token
 
 typedef struct s_list
 {
-	struct  s_list *next;
+    struct  s_list *next;
+	struct  s_list *pre;
     t_token *token;
-    void    *content;
+    // void    *content;
+    char    *env;
 }				t_list;
 
 
@@ -56,17 +58,36 @@ typedef struct s_mini
     
 }				t_mini;
 
+typedef struct s_data
+{
+	char		*input;
+	t_list		*tokens;
+	t_list		*envs;
+    // struct  s_data *next;
+}	t_data;
+
 
 /*ft.c*/
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s1);
 char	*ft_strncat(char *dest, char *src, int n);
+t_list	*ft_lst_new(void *content);
 // t_list	*ft_lstnew(void *content);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 size_t	ft_strlen(const	char *str);
 void	*ft_memset(void *b, int c, size_t len);
+int	    ft_lstsize(t_list *lst);
+t_list	*ft_lstnews();
+t_data *new_data();
+void    get_envp(t_data *data);
+void	env_init(t_data *data, char **env);
+void del_envp(t_data *data, char *key);
+t_list    *find_envp(t_data *data, char *key);
 
+
+
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 /* minishell.c*/
 // t_token     *new_token();
 void    addttlist(t_list **head, t_token *token);
@@ -76,8 +97,8 @@ t_list *lexer(t_list *list, char *str);
 /* quote.c */
 void    double_quotes(t_list **list, t_token **token, char *str, int *idx);
 void    single_quotes(t_list **list, t_token **token, char *str, int *idx);
-
-
+bool    find_quote(int i, char *str, char quote);
+void	env_init(t_data *data, char **env);
 /* bonus */
 /* gnl */
 int		ft_strchr(char *str, int c);

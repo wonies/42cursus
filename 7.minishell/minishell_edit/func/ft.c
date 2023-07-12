@@ -21,6 +21,25 @@ char	*ft_strdup(const char *s1)
 	return (str);
 }
 
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned char	*s1_cpy;
+	unsigned char	*s2_cpy;
+
+	s1_cpy = (unsigned char *)s1;
+	s2_cpy = (unsigned char *)s2;
+	while ((*s1_cpy || *s2_cpy) && n > 0)
+	{
+		if (*s1_cpy != *s2_cpy || n == 0)
+			return (*s1_cpy - *s2_cpy);
+		s1_cpy++;
+		s2_cpy++;
+		n--;
+	}
+	return (0);
+}
+
+
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*string;
@@ -59,31 +78,37 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*temp;
 
-	temp = *lst;
+	temp = *lst; // lst가 null일 때 이 처리를 먼저 해주면 쓰레기값이 들어가기 때문에 if문 먼저 처리해줘야함!
 	if (!lst || !new)
 		return ;
-	else if (!(*lst))
+	if (!temp)
+	{
+		printf("---check\n");
 		(*lst) = new;
+	}
 	else
 	{
-		while ((*lst)->next)
-			(*lst) = (*lst)->next;
-		(*lst)->next = new;
-		(*lst) = temp;
+		printf("---checking\n");
+		while (temp->next)
+			temp = temp->next;
+		temp->next = new;
 	}
+	printf("----\n");
 }
 
-// t_list	*ft_lstnew(void *content)
-// {
-// 	t_list	*new;
 
-// 	new = (t_list *)malloc(sizeof(t_list));
-// 	if (new == NULL)
-// 		return (NULL);
-// 	new->content = content;
-// 	new->next = NULL;
-// 	return (new);
-// }
+int	ft_lstsize(t_list *lst)
+{
+	int	cnt;
+
+	cnt = 0;
+	while (lst)
+	{
+		cnt++;
+		lst = lst->next;
+	}
+	return (cnt);
+}
 
 size_t	ft_strlen(const	char *str)
 {

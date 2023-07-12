@@ -16,10 +16,19 @@ t_token *new_token()
 	t_token *token;
 
 	token = (t_token *)ft_calloc(1, sizeof(t_token));
-	token->str = NULL;
+	token->str = ft_strdup("");
 	token->type = T_WORD;
 	
 	return token;
+}
+
+
+t_data *new_data()
+{
+    t_data *data;
+
+    data = (t_data *)ft_calloc(1, sizeof(t_data));
+    return data;
 }
 
 void	addttlist(t_list **head, t_token *token)
@@ -54,8 +63,10 @@ void tokenization(char *str, int *idx, t_list **head, t_token **token)
             (*token)->type = T_DOUBLE_Q;
           //  (*token)->double_flag++;
             (*token)->str = "\"";
+            addttlist(head, *token);
             *token = new_token();
             double_quotes(head, token, str, idx);
+            return ;
         }
     }
     else if (str[*idx] == '\'')
@@ -71,8 +82,10 @@ void tokenization(char *str, int *idx, t_list **head, t_token **token)
         {
             (*token)->type = T_SINGLE_Q;
             (*token)->str = "\'";
+            addttlist(head, *token);
             *token = new_token();
             single_quotes(head, token, str, idx);
+            return ;
         }
     }
     else if (str[*idx] == '>' || str[*idx] == '<')
