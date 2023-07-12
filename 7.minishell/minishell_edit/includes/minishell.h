@@ -35,8 +35,6 @@ typedef struct  s_token
 {
     int     type;
     char    *str;
-    int     double_flag;
-    int     single_flag;
 }   t_token; 
 
 

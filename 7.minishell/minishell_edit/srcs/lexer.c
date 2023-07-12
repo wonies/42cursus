@@ -54,7 +54,6 @@ void tokenization(char *str, int *idx, t_list **head, t_token **token)
         if (str[*idx + 1] == str[*idx])
         {
             (*token)->type = T_DOUBLE_Q;
-            (*token)->double_flag += 2;
             (*token)->str = "\"\"";
             (*idx)++;
         }
@@ -75,7 +74,6 @@ void tokenization(char *str, int *idx, t_list **head, t_token **token)
         {
             (*token)->type = T_SINGLE_Q;
             (*token)->str = "\'\'";
-            (*token)->single_flag++;
             (*idx)++;
         }
         else

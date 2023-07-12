@@ -55,3 +55,11 @@ int main(int ac, char **av, char **env)
     // // }
 
 }
+
+
+// t_list  *lexer(t_data *data)
+// {
+//     int i;
+
+//     i = -1;
+// }
