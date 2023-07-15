@@ -14,7 +14,7 @@ int main(int ac, char **av, char **env)
     if (data->input)
         printf("%s\n",data->input);
     add_history(data->input);
-    list = lexer(data);
+    // list = lexer(data);
     // env_init(data, env);
     // get_envp(data);
     // t_list *cur = list;
@@ -22,7 +22,7 @@ int main(int ac, char **av, char **env)
     // {
     //     // printf("env : %s\n", cur->env);
     //     printf("cur : %d, %s\n", cur->token->type, cur->token->str);
-    //     cur = cur->next;
+    //     cur = cur->next;s
     // }
     // list = NULL;
     // data = new_data();

@@ -1,50 +1,31 @@
 #include "../includes/minishell.h"
 
-void    double_quotes(t_list **list, t_token **token, char *str, int *idx)
+void    double_quotes(t_data *data, t_token **token, int *i)
 {
-    if (find_quote(*idx, str, '\"') == 0)
+    if (find_quote(*i, data->input, '\"') == 1)
     {    
-        if (!(*token)->str)
-                (*token)->str = ft_strdup("");
         (*token)->str = ft_strncat((*token)->str, "\"", 1);
-        (*idx)++;
+        (*i)++;
         return ;
     }
-    while (str[++(*idx)])
+    while (data->input[++(*i)])
     {
-        // *token = new_token();
-        if (!(*token)->str)
-                (*token)->str = ft_strdup("");
-        (*token)->str = ft_strncat((*token)->str, &str[*idx], 1); 
-        if (str[(*idx)] == '"')
-        {
-            addttlist(list, *token);
-            break ;
-        }
+        (*token)->str = ft_strncat((*token)->str, &data->input[*i], 1); 
     }
 }
 
-void    single_quotes(t_list **list, t_token **token, char *str, int *idx)
+void    single_quotes(t_data *data, t_token **token, int *i)
 {
 
-     if (find_quote(*idx, str, '\'') == 0)
+    if (find_quote(*i, data->input, '\'') == 1)
     {    
-        if (!(*token)->str)
-                (*token)->str = ft_strdup("");
         (*token)->str = ft_strncat((*token)->str, "\'", 1);
-        (*idx)++;
+        (*i)++;
         return ;
     }
-    while (str[++(*idx)])
+    while (data->input[++(*i)])
     {
-        if (!(*token)->str)
-                (*token)->str = ft_strdup("");
-        (*token)->str = ft_strncat((*token)->str, &str[*idx], 1); 
-        if (str[(*idx)] == '\'')
-        {
-            addttlist(list, *token);
-            break ;
-        }
+        (*token)->str = ft_strncat((*token)->str, &data->input[*i], 1);
     }
 }
 

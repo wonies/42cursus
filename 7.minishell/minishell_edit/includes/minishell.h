@@ -26,6 +26,10 @@ enum    e_type
     T_WORD,
     T_PIPE,
     T_REDIRECT,
+    T_INPUT,
+	T_OUTPUT,
+	T_HEREDOC,
+	T_APPEND,
     T_DOUBLE_Q,
     T_SINGLE_Q,
     T_SPACE // 추후에 고려해보기
@@ -34,6 +38,7 @@ enum    e_type
 typedef struct  s_token
 {
     int     type;
+    int     re_type;
     char    *str;
 }   t_token; 
 
@@ -84,17 +89,26 @@ void del_envp(t_data *data, char *key);
 t_list    *find_envp(t_data *data, char *key);
 
 
-
+t_token *new_token();
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 /* minishell.c*/
 // t_token     *new_token();
 void    addttlist(t_list **head, t_token *token);
-void    tokenization(char *str, int *idx, t_list **head, t_token **token);
-t_list *lexer(t_list *list, char *str);
+
+/* lexer.c */
+
+void    *lexer(t_data *data);
+void    input_token(t_data *data, t_token **token, int *i);
+void    token_to_list(t_list **head, t_token **token, int check);
+void    redirect_check(t_data *data, t_token *token, int *i);
+void    tokenization(t_data *data, t_token **token, int *i);
+
+
+
 
 /* quote.c */
-void    double_quotes(t_list **list, t_token **token, char *str, int *idx);
-void    single_quotes(t_list **list, t_token **token, char *str, int *idx);
+void    double_quotes(t_data *data, t_token **token, int *i);
+void    single_quotes(t_data *data, t_token **token, int *i);
 bool    find_quote(int i, char *str, char quote);
 void	env_init(t_data *data, char **env);
 /* bonus */

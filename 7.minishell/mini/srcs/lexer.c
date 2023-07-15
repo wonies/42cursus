@@ -195,59 +195,6 @@ void tokenization(char *str, int *idx, t_list **head, t_token **token)
     addttlist(head, *token);
 }
 
-// void tokenization(char *str, int *idx, t_list **head, t_token **token)
-// {
-//     *token = new_token();
-//     if (str[*idx] == '|')
-//     {
-//         (*token)->type = T_PIPE;
-//         (*token)->str = ft_strdup("|");
-//     }
-//     else if (str[*idx] == '\"')
-//     {
-//         if (str[*idx + 1] == str[*idx])
-//         {
-//             (*token)->type = T_DOUBLE_Q;
-//             (*token)->str = ft_strdup("\"\"");
-//             (*token)->double_flag += 2;
-//         }
-//         else
-//         {
-//             (*token)->type = T_DOUBLE_Q;
-//             (*token)->str = ft_strdup("\"");
-//             (*token)->double_flag++;
-//         }
-//         (*idx)++;
-//     }
-//     else if (str[*idx] == '\'')
-//     {
-//         (*token)->type = T_SINGLE_Q;
-//         (*token)->str = ft_strdup("'");
-//         (*token)->single_flag++;
-//     }
-//     else if (str[*idx] == '>' || str[*idx] == '<')
-//     {
-//         (*token)->type = T_REDIRECT;
-//         if (str[*idx + 1] == str[*idx])
-//         {
-//             (*token)->str = ft_strncat((*token)->str, &str[*idx], 2);
-//             (*idx)++;
-//         }
-//         else
-//         {
-//             if (str[*idx] == '<')
-//                 (*token)->str = ft_strdup("<");
-//             else
-//                 (*token)->str = ft_strdup(">");
-//         }
-//     }
-//     else if (str[*idx] == ' ' || str[*idx] == '\t')
-//     {
-//         return;
-//     }
-//     addttlist(head, *token);
-// }
-
 t_list *lexer(t_list *list, char *str)
 {
     int i = 0;
