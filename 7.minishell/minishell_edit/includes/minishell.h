@@ -78,6 +78,7 @@ char	*ft_strncat(char *dest, char *src, int n);
 t_list	*ft_lst_new(void *content);
 // t_list	*ft_lstnew(void *content);
 void	ft_lstadd_back(t_list **lst, t_list *new);
+t_list	*ft_lstlast(t_list *lst);
 size_t	ft_strlen(const	char *str);
 void	*ft_memset(void *b, int c, size_t len);
 int	    ft_lstsize(t_list *lst);
@@ -97,7 +98,7 @@ void    addttlist(t_list **head, t_token *token);
 
 /* lexer.c */
 
-void    *lexer(t_data *data);
+void    lexer(t_data *data);
 void    input_token(t_data *data, t_token **token, int *i);
 void    token_to_list(t_list **head, t_token **token, int check);
 void    redirect_check(t_data *data, t_token *token, int *i);

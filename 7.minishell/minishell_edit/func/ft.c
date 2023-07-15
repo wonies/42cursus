@@ -76,24 +76,27 @@ void	*ft_calloc(size_t count, size_t size)
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*temp;
+	t_list	*last;
 
-	temp = *lst; // lst가 null일 때 이 처리를 먼저 해주면 쓰레기값이 들어가기 때문에 if문 먼저 처리해줘야함!
 	if (!lst || !new)
 		return ;
-	if (!temp)
+	if (!*lst)
 	{
-		printf("---check\n");
-		(*lst) = new;
+		*lst = new;
+		return ;
 	}
-	else
-	{
-		printf("---checking\n");
-		while (temp->next)
-			temp = temp->next;
-		temp->next = new;
-	}
-	printf("----\n");
+	last = ft_lstlast(*lst);
+	last->next = new;
+	new->pre = last;
+}
+
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (!lst)
+		return (NULL);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
 }
 
 
