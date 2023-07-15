@@ -89,7 +89,7 @@ void	env_init(t_data *data, char **env);
 void del_envp(t_data *data, char *key);
 t_list    *find_envp(t_data *data, char *key);
 
-
+t_list *ft_lstnew(t_token *token);
 t_token *new_token();
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 /* minishell.c*/
@@ -104,13 +104,14 @@ void    token_to_list(t_list **head, t_token **token, int check);
 void    redirect_check(t_data *data, t_token *token, int *i);
 void    tokenization(t_data *data, t_token **token, int *i);
 
-
-
-
+int find_closing_quote(int i, char *str, char quote);
+char *extract_quoted_string(char *str, int start, int end);
+void remove_escape_characters(char *str);
+int is_quote_character(char c);
 /* quote.c */
 void    double_quotes(t_data *data, t_token **token, int *i);
 void    single_quotes(t_data *data, t_token **token, int *i);
-bool    find_quote(int i, char *str, char quote);
+int     find_quote(int i, char *str, char quote);
 void	env_init(t_data *data, char **env);
 /* bonus */
 /* gnl */

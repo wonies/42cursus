@@ -31,8 +31,8 @@ void	input_token(t_data *data, t_token **token, int *i)
 	}
 	else if (data->input[*i] == '\'' || data->input[*i] == '\"')
 		tokenization(data, token, i);
-	// else if	(data->input[*i] == '$')
-	// 	env_dollor(data, token, i);
+	else if	(data->input[*i] == '$')
+		env_dollor(data, token, i);
 	else
 	{
 		(*token)->str = ft_strncat((*token)->str, &data->input[*i], 1);
