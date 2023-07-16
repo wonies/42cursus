@@ -153,3 +153,28 @@ char	*ft_strncat(char *dest, char *src, int n)
 			res[i++] = *src++;
 	return (res);
 }
+
+char *ft_strtok(char *str, const char *delim)
+{
+    static char *buffer = NULL;
+    if (str != NULL)
+        buffer = str;
+
+    if (buffer == NULL || *buffer == '\0')
+        return NULL;
+
+    char *token_start = buffer;
+    char *token_end = strpbrk(buffer, delim);
+
+    if (token_end != NULL)
+    {
+        *token_end = '\0';
+        buffer = token_end + 1;
+    }
+    else
+    {
+        buffer += strlen(buffer);
+    }
+
+    return token_start;
+}

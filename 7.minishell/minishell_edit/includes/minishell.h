@@ -76,6 +76,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *s1);
 char	*ft_strncat(char *dest, char *src, int n);
 t_list	*ft_lst_new(void *content);
+char    *ft_strtok(char *str, const char *delim);
 // t_list	*ft_lstnew(void *content);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 t_list	*ft_lstlast(t_list *lst);
@@ -87,7 +88,7 @@ t_data *new_data();
 void    get_envp(t_data *data);
 void	env_init(t_data *data, char **env);
 void del_envp(t_data *data, char *key);
-t_list    *find_envp(t_data *data, char *key);
+char    *find_envp(t_data *data, char *key);
 
 t_list *ft_lstnew(t_token *token);
 t_token *new_token();
@@ -103,6 +104,7 @@ void    input_token(t_data *data, t_token **token, int *i);
 void    token_to_list(t_list **head, t_token **token, int check);
 void    redirect_check(t_data *data, t_token *token, int *i);
 void    tokenization(t_data *data, t_token **token, int *i);
+bool    possible_env(t_data *data, t_token *token, int *i, char *var);
 
 int find_closing_quote(int i, char *str, char quote);
 char *extract_quoted_string(char *str, int start, int end);

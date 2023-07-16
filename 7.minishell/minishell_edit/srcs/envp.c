@@ -39,7 +39,6 @@ void    get_envp(t_data *data)
     while (++i < size)
     {
         str[i] = tmp->env;
-        // printf("%s\n", str[i]);
         tmp = tmp->next;
     }
 }
@@ -52,38 +51,38 @@ void    get_envp(t_data *data)
     
 //     //tmp->pre->next = tmp->next;
 // }
-void    del_envp(t_data *data, char *key)
-{
-    t_list *tmp = find_envp(data, key);
+// void    del_envp(t_data *data, char *key)
+// {
+//     t_list *tmp = find_envp(data, key);
 
-    if (tmp == NULL)
-        return ; 
-    if (tmp == data->envs)
-    {
-        data->envs = tmp->next; 
-        if (data->envs)
-            data->envs->pre = NULL; 
-    }
-    else
-    {
-        tmp->pre->next = tmp->next;  
-        if (tmp->next)
-            tmp->next->pre = tmp->pre; 
-    }
-    // free(tmp->env);  
-    // free(tmp);
-} // unset part --> 아니왜안되는거임 개킹받네
+//     if (tmp == NULL)
+//         return ; 
+//     if (tmp == data->envs)
+//     {
+//         data->envs = tmp->next; 
+//         if (data->envs)
+//             data->envs->pre = NULL; 
+//     }
+//     else
+//     {
+//         tmp->pre->next = tmp->next;  
+//         if (tmp->next)
+//             tmp->next->pre = tmp->pre; 
+//     }
+//     // free(tmp->env);  
+//     // free(tmp);
+// } // unset part --> 아니왜안되는거임 개킹받네
 
 
-t_list    *find_envp(t_data *data, char *key)
+char    *find_envp(t_data *data, char *key)
 {
     t_list *tmp;
 
     tmp = data->envs;
     while (tmp)
     {
-        if (ft_strncmp(tmp->env, key, ft_strlen(key)))
-            return (tmp);
+        if (ft_strncmp(tmp->env, key, ft_strlen(key)) == 0)
+            return (tmp->env);
         tmp = tmp->next;
     }
     return (NULL);

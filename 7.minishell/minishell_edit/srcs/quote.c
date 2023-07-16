@@ -89,7 +89,6 @@ void double_quotes(t_data *data, t_token **token, int *i)
     }
     else
     {
-        // 닫는 따옴표가 없는 경우에는 그냥 문자열로 처리합니다.
         (*token)->str = strncat((*token)->str, &data->input[start - 1], strlen(&data->input[start - 1]));
         (*i) = strlen(data->input) - 1;
     }
@@ -112,7 +111,6 @@ void single_quotes(t_data *data, t_token **token, int *i)
     }
     else
     {
-        // 닫는 따옴표가 없는 경우에는 그냥 문자열로 처리합니다.
         (*token)->str = strncat((*token)->str, &data->input[start - 1], strlen(&data->input[start - 1]));
         (*i) = strlen(data->input) - 1;
     }

@@ -12,6 +12,8 @@ int main(int ac, char **av, char **env)
     data = new_data();
     data->input = readline("bash-3.2.1$ ");
     add_history(data->input);
+    env_init(data, env);
+    get_envp(data);
     lexer(data);
     t_list *cur = data->tokens;
     // list = lexer(data);
