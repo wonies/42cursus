@@ -98,7 +98,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n);
 void    addttlist(t_list **head, t_token *token);
 
 /* lexer.c */
-void    env_dollor(t_data *data, t_token *token, int *i);
+void    check_dollar(t_data *data, t_token **token, int *i);
 void    lexer(t_data *data);
 void    input_token(t_data *data, t_token **token, int *i);
 void    token_to_list(t_list **head, t_token **token, int check);

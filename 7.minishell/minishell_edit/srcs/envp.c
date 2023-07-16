@@ -78,6 +78,7 @@ char    *find_envp(t_data *data, char *key)
 {
     t_list *tmp;
 
+    key = ft_strncat(key, "=", 1);
     tmp = data->envs;
     while (tmp)
     {
