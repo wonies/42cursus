@@ -20,13 +20,13 @@ void	input_token(t_data *data, t_token **token, int *i)
 	printf("check idx : %c\n", data->input[*i]);
 	if (data->input[*i] == '<' || data->input[*i] == '>' || data->input[*i] == '|')
 	{
-		if ((*token)->str)
+		if (*(*token)->str)
 			token_to_list(&data->tokens, token, 1);
 		tokenization(data, token, i);
 	}
 	else if (data->input[*i] == ' ' || data->input[*i] == '\t')
 	{
-		if ((*token)->str)
+		if (*(*token)->str)
 			token_to_list(&data->tokens, token, 1);
 	}
 	else if (data->input[*i] == '\'' || data->input[*i] == '\"')

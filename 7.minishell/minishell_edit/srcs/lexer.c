@@ -39,28 +39,28 @@ t_data *new_data()
 // }
 
 
-void    redirect_check(t_data *data, t_token *token, int *i)
+void    redirect_check(t_data *data, t_token **token, int *i)
 {
-    (token)->type = T_REDIRECT;
+    (*token)->type = T_REDIRECT;
     if (data->input[*i] == '>')
     {
         if (data->input[*i + 1] == data->input[*i])
         {
-            token->re_type = T_APPEND;
+            (*token)->re_type = T_APPEND;
             (*i)++;
         }
         else
-            token->re_type = T_OUTPUT;
+            (*token)->re_type = T_OUTPUT;
     }
     else
     {
         if (data->input[*i + 1] == data->input[*i])
         {
-            token->re_type = T_HEREDOC;
+            (*token)->re_type = T_HEREDOC;
             (*i)++;
         }
         else
-            token->re_type = T_INPUT;
+            (*token)->re_type = T_INPUT;
     }
 }
 

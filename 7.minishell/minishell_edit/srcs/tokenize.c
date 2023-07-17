@@ -16,7 +16,7 @@ void    tokenization(t_data *data, t_token **token, int *i)
     if (data->input[*i] == '|')
         (*token)->type = T_PIPE;
     else if (data->input[*i] == '<' || data->input[*i] == '>')
-        redirect_check(data, *token, i);
+        redirect_check(data, token, i);
     else if (data->input[*i] == '\'')
         single_quotes(data, token, i);
     else if (data->input[*i] == '\"')

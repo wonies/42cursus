@@ -28,9 +28,12 @@ void check_dollar(t_data *data, t_token **token, int *i)
     int var_len = 0;
 
     ++(*i);
+    
     if (data->tokens->token->re_type == T_HEREDOC)
     {
-        printf("HEREDOC CHECK\n");
+        (*token)->str = ft_strncat((*token)->str, "$", 1);
+        --(*i);
+        return ;
     }
     if (data->input[*i] == ' ' || data->input[*i] == '\t')
     {
@@ -55,9 +58,16 @@ void check_dollar(t_data *data, t_token **token, int *i)
         (*i)++;
     }
 
-    if (possible_env(data, *token, i, var))
+    if (possible_env(data, token, i, var))
     {
-        (*token) = new_token();
+        if (!(*(*token)->str))
+            (*token) = new_token();
+        if (data->input[*i] != ' ' || data->input[*i] != '\t')
+        {
+            (*token)->str = ft_strncat((*token)->str, "$", 1);
+            (*i) -= (var_len + 1);
+            return ;
+        }
         (*token)->str = ft_strncat((*token)->str, "$ ", 2);
         (*token)->str = ft_strncat((*token)->str, var, var_len);
         printf("(*token)->str : %s\n", (*token)->str);
@@ -158,7 +168,7 @@ void check_dollar(t_data *data, t_token **token, int *i)
 //     // char *var = NULL;
 // }
 
-bool    possible_env(t_data *data, t_token *token, int *i, char *var)
+bool    possible_env(t_data *data, t_token **token, int *i, char *var)
 {
     char *temp;
 
@@ -166,13 +176,14 @@ bool    possible_env(t_data *data, t_token *token, int *i, char *var)
     temp = find_envp(data, var);
     if (temp != NULL)
     {
-        token = new_token();
+        if (!(*(*token)->str))
+            (*token) = new_token();
         char *value = ft_strtok(temp, "=");
         value = ft_strtok(NULL, "=");
         printf("value : %s\n", value);
-        token->str = ft_strncat(token->str, value, ft_strlen(value));
+        (*token)->str = ft_strncat((*token)->str, value, ft_strlen(value));
         (*i)+= ft_strlen(var);
-        token_to_list(&data->tokens, &token, 0);
+        // token_to_list(&data->tokens, token, 0);
         return 0;
     }
     return 1;

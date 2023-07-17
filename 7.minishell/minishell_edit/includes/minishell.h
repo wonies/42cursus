@@ -102,9 +102,9 @@ void    check_dollar(t_data *data, t_token **token, int *i);
 void    lexer(t_data *data);
 void    input_token(t_data *data, t_token **token, int *i);
 void    token_to_list(t_list **head, t_token **token, int check);
-void    redirect_check(t_data *data, t_token *token, int *i);
+void    redirect_check(t_data *data, t_token **token, int *i);
 void    tokenization(t_data *data, t_token **token, int *i);
-bool    possible_env(t_data *data, t_token *token, int *i, char *var);
+bool    possible_env(t_data *data, t_token **token, int *i, char *var);
 
 int find_closing_quote(int i, char *str, char quote);
 char *extract_quoted_string(char *str, int start, int end);
