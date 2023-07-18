@@ -77,6 +77,24 @@ void double_quotes(t_data *data, t_token **token, int *i)
     (*i)++;
     int start = *i;
     int end = find_closing_quote(start, data->input, '\"');
+    char    *dollar_var;
+    int check = 0;
+
+    dollar_var = strdup("");
+    if (data->input[*i] == '$')
+    {
+        ++(*i);
+        while (data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] != '\"')
+            dollar_var = strncat(dollar_var, &data->input[(*i)++], 1);
+        printf("dollar var ::: %s\n", dollar_var);
+        check = possible_env(data, token, i, dollar_var);
+        if (!check)
+        {
+            (*i) += ft_strlen(dollar_var) + 1;
+            return ;
+        }
+        --(*i);
+    }
     if (end >= 0)
     {
         int length = end - start;
