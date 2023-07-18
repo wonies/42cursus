@@ -21,18 +21,32 @@
 #define WRITE 1
 #define ERROR -1
 
+# define E_SYNTAX_PIPE "bash: syntax error near unexpected token `|'"
+# define E_SYNTAX_INPUT "bash: syntax error near unexpected token `<'"
+# define E_SYNTAX_OUTPUT "bash: syntax error near unexpected token `>'"
+# define E_SYNTAX_HEREDOC "bash: syntax error near unexpected token `<<'"
+# define E_SYNTAX_APPEND "bash: syntax error near unexpected token `>>'"
+# define E_SYNTAX_NEWLINE "bash: syntax error near unexpected token `newline'"
+
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+}t_bool;
+
+
 enum    e_type
 {
     T_WORD,
     T_PIPE,
+    T_CMD,
+    T_ARG,
     T_REDIRECT,
     T_INPUT,
 	T_OUTPUT,
 	T_HEREDOC,
 	T_APPEND,
-    T_DOUBLE_Q,
-    T_SINGLE_Q,
-    T_SPACE // 추후에 고려해보기
 };
 
 typedef struct  s_token
@@ -61,11 +75,24 @@ typedef struct s_mini
     
 }				t_mini;
 
+
+typedef struct s_leaf
+{
+	struct s_leaf	*parent;
+	struct s_leaf	*left_child;
+	struct s_leaf	*right_child;
+	int				leaf_type;
+	t_token			*token;
+	t_bool			exist;
+}t_leaf;
+
+
 typedef struct s_data
 {
 	char		*input;
 	t_list		*tokens;
 	t_list		*envs;
+    t_leaf      *root;
     // struct  s_data *next;
 }	t_data;
 
@@ -115,6 +142,21 @@ void    double_quotes(t_data *data, t_token **token, int *i);
 void    single_quotes(t_data *data, t_token **token, int *i);
 int     find_quote(int i, char *str, char quote);
 void	env_init(t_data *data, char **env);
+
+/* syntax */
+void	syntax(t_data *data);
+void	syntax_cmd(t_list	*cur);
+void	syntax_arg(t_list	*cur);
+void	syntax_redirect(t_list	*cur);
+void	syntax_pipe(t_list	*cur);
+
+/* tree.c */
+t_leaf	*create_leaf(int leaf_type, t_leaf *parent);
+void	init_leaf(t_data *data);
+void print_tree(t_leaf *root, int level);
+
+/* err.c */
+void	syntax_err(char *msg);
 /* bonus */
 /* gnl */
 int		ft_strchr(char *str, int c);

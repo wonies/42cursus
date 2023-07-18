@@ -11,7 +11,7 @@ void	lexer(t_data	*data)
 	token = new_token();
 	while (data->input[++i])
 		input_token(data, &token, &i);
-	if (token->str && *(token->str))
+	if (*(token)->str)
 		token_to_list(&data->tokens, &token, 0);
 }
 
@@ -23,6 +23,7 @@ void	input_token(t_data *data, t_token **token, int *i)
 		if (*(*token)->str)
 			token_to_list(&data->tokens, token, 1);
 		tokenization(data, token, i);
+		// printf("check seg : %d\n", data->tokens->pre->token->type);
 	}
 	else if (data->input[*i] == ' ' || data->input[*i] == '\t')
 	{

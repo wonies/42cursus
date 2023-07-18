@@ -16,9 +16,12 @@ int main(int ac, char **av, char **env)
     get_envp(data);
     lexer(data);
     t_list *cur = data->tokens;
+    syntax(data);
+    init_leaf(data);
     // list = lexer(data);
     // env_init(data, env);
     // get_envp(data);
+    // print_tree(data->root, 0);
     while (cur)
     {
         // printf("env : %s\n", cur->env);
