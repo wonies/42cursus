@@ -17,7 +17,10 @@ int main(int ac, char **av, char **env)
     lexer(data);
     t_list *cur = data->tokens;
     syntax(data);
-    init_leaf(data);
+    // init_leaf(data);
+    // TreeNode *root = NULL;
+    // build_tree(data, &root);
+    // printf_tree(root, 0, 0);
     // list = lexer(data);
     // env_init(data, env);
     // get_envp(data);

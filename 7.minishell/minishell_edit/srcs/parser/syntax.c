@@ -4,6 +4,8 @@ void	syntax(t_data *data)
 {
 	t_list	*cur;
 
+	if (!data->tokens)
+		return ;
 	cur = data->tokens;
 	syntax_cmd(cur);
 	cur = cur->next;

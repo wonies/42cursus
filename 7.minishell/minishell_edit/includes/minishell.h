@@ -97,6 +97,17 @@ typedef struct s_data
 }	t_data;
 
 
+
+// typedef struct s_treeNode
+// {
+//     struct s_treeNode *parent;
+//     struct s_treeNode *left_child;
+//     struct s_treeNode *right_child;
+//     int is_pipe;
+//     int				leaf_type;
+// } TreeNode;
+
+
 /*ft.c*/
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
@@ -170,6 +181,7 @@ char	*get_next_line(int fd);
 /* pipe_bonus */
 void	read_gnl(t_mini *pp);
 void	fileinit_bonus(int ac, char **av, t_mini *pp);
-
+// void build_tree(t_data *data, TreeNode **root);
+// void printf_tree(TreeNode *root, int level, int is_left);
 
 #endif 

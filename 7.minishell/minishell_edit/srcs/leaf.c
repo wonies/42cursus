@@ -1,6 +1,5 @@
 #include "../includes/minishell.h"
 
-
 void init_leaf(t_data *data)
 {
     t_leaf *cur_leaf;
@@ -53,7 +52,6 @@ void print_tree(t_leaf *root, int level)
     print_tree(root->left_child, level + 1);
     print_tree(root->right_child, level);
 }
-
 
 
 // void	init_leaf(t_data *data)
