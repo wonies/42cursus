@@ -164,8 +164,24 @@ void	syntax_pipe(t_list	*cur);
 /* tree.c */
 t_leaf	*create_leaf(int leaf_type, t_leaf *parent);
 void	init_leaf(t_data *data);
-void print_tree(t_leaf *root, int level);
+// void print_tree(t_leaf *root, int level, int is_left);
+void	tree_leaf(t_leaf **cur_leaf);
+void	tree_left_right(t_leaf *cur_leaf, t_list *cur_token);
+t_bool	tree_add_left(t_leaf *parent, t_token *new_token, int leaf_type);
+t_bool	tree_add_right(t_leaf *parent, t_token *new_token, int leaf_type);
+// t_leaf *tree_leaf(t_leaf **cur_leaf);
+void print_treess(t_leaf *root);
+void print_tree_recursive(t_leaf *node, int level);
 
+/* recursion */
+void	create_pipe(t_leaf **cur);
+t_leaf *leaf_create(int leaf_type, t_leaf *parent);
+// void	leaf_init(t_data *data);
+t_leaf *build_tree(t_list **cur_token);
+t_leaf 	*leaf_init(t_data *data);
+void print_tree_recursive(t_leaf *node, int level);
+void print_tree(t_leaf *root);
+void prints_tree(t_leaf *root, int level, int is_left);
 /* err.c */
 void	syntax_err(char *msg);
 /* bonus */

@@ -1,5 +1,35 @@
 #include "../includes/minishell.h"
 
+
+void print_tree_inorder(t_leaf *node)
+{
+    if (node == NULL)
+        return;
+
+    print_tree_inorder(node->left_child);
+
+    switch (node->leaf_type)
+    {
+        case T_PIPE:
+            printf("PIPE\n");
+            break;
+        case T_CMD:
+            printf("CMD: %s\n", node->token->str);
+            break;
+        case T_ARG:
+            printf("ARG: %s\n", node->token->str);
+            break;
+        case T_REDIRECT:
+            printf("REDIRECT\n");
+            break;
+        default:
+            printf("UNKNOWN\n");
+            break;
+    }
+
+    print_tree_inorder(node->right_child);
+}
+
 int main(int ac, char **av, char **env)
 {
     (void)ac;
@@ -17,14 +47,18 @@ int main(int ac, char **av, char **env)
     lexer(data);
     t_list *cur = data->tokens;
     syntax(data);
-    // init_leaf(data);
+    init_leaf(data);
+    // t_leaf *root;
+    // root = leaf_init(data);
+    print_tree_recursive(data->root, 0);
+    // print_tree_inorder(data->root);
     // TreeNode *root = NULL;
     // build_tree(data, &root);
-    // printf_tree(root, 0, 0);
+    // prints_tree(data->root, 0, 0);
     // list = lexer(data);
     // env_init(data, env);
     // get_envp(data);
-    // print_tree(data->root, 0);
+    // print_tree(root);
     while (cur)
     {
         // printf("env : %s\n", cur->env);
