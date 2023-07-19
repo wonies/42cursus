@@ -18,7 +18,7 @@ void	lexer(t_data	*data)
 void	input_token(t_data *data, t_token **token, int *i)
 {
 	printf("check idx : %c\n", data->input[*i]);
-	int flag = 0;
+	// printf("check token : %s\n", (*token)->str);
 
 	if (data->input[*i] == '<' || data->input[*i] == '>' || data->input[*i] == '|')
 	{
@@ -32,13 +32,13 @@ void	input_token(t_data *data, t_token **token, int *i)
 		if (*(*token)->str)
 		{
 			token_to_list(&data->tokens, token, 1);
-			flag = 1;
 		}
 	}
 	else if (data->input[*i] == '\'' || data->input[*i] == '\"')
 		tokenization(data, token, i);
 	else if	(data->input[*i] == '$')
 	{
+		printf("here?---\n");
 		check_dollar(data, token, i);
 	}
 	else
