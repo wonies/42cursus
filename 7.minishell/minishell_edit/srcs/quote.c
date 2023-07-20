@@ -97,39 +97,49 @@ void    double_quotes(t_data *data, t_token **token, int *i)
 		else if (end % 2 != 0)
 		{
 			printf("end check ----\n");
-            while (end == 0)
+            while (end != 0)
 			{
-			    (*token)->str = ft_strncat((*token)->str, &data->input[*i++], 1);
-				if (data->input[*i] == '\"')
+			    (*token)->str = ft_strncat((*token)->str, &data->input[(*i)++], 1);
+				printf("end :: {%s}\n", (*token)->str);
+                if (data->input[*i] == '\"')
 				{
-					(*i)++;
 					end--;
+                    if (end == 0)
+                        break ;
+					(*i)++;
 				}
-                if (end == 0)
-                    break ;
 			}
 		}
-	}
-    else
-    {
-        while (end != 0)
+        else if (end % 2 == 0)
         {
-            if (end > 2 && data->input[*i] == '\"')
+            printf("moduler -- \n");
+            while (end != 0)
             {
-                if (data->input[*i] == '\"')
+                if ((end % 2 == 0) && data->input[*i] == '\"')
                 {
-                    (*i)++;
-                    end--;
+                    if (data->input[*i] == '\"')
+                    {
+                        end--;
+                        if (end == 0)
+                            break ;
+                        (*i)++;
+                    }
                 }
+                else
+                {
+                    if (data->input[*i] == '\"')
+                    {
+                        end--;
+                        if (end == 0)
+                            break ;
+                    }
+                }
+                
+                (*token)->str = ft_strncat((*token)->str, &data->input[(*i)++], 1);
             }
-            else
-            {
-                if (data->input[*i] == '\"')
-                    end--;	
-            }
-            (*token)->str = ft_strncat((*token)->str, &data->input[*i++], 1);
-        }
-    }
+        }   
+    
+	}
     
   
     // (*i)++;
