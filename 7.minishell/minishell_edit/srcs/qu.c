@@ -1,28 +1,139 @@
 #include "../includes/minishell.h"
 
-void	double_quote(t_data *data, t_token **token, int *i)
-{
-	(*i++);
-	int		start;
-	int		end;
-	char	*d_var;
-	int		check;
+// void	double_quote(t_data *data, t_token **token, int *i)
+// {
+// 	(*i++);
+// 	int		start;
+// 	int		end;
+// 	char	*d_var;
+// 	int		check;
 
-	start = *i;
-	end = find_closing_quote(start, data->input, '\"');
-	d_var = ft_strdup("");
-	if (!d_var)
-		return ;
-	if (data->input[*i] == '$')
-	{
-		check = quote_dvar(data, token, i, d_var);
-		if (!check)
+// 	start = *i;
+// 	end = find_closing_quote(start, data->input, '\"');
+// 	d_var = ft_strdup("");
+// 	if (!d_var)
+// 		return ;
+// 	if (data->input[*i] == '$')
+// 	{
+// 		check = quote_dvar(data, token, i, d_var);
+// 		if (!check)
+// 			return ;
+// 	}
+// 	if (end >= 0)
+		
+		
+// }
+
+
+void    double_quotes(t_data *data, t_token **token, int *i)
+{
+    (*i)++;
+    int start = *i;
+    int end = find_closing_quote(start, data->input, '\"') - 1;
+    char    *temp;
+    printf("end size: %d\n", end);
+    temp = ft_strdup("");
+    char    *prove_env;
+    int len = 0;
+
+    prove_env = NULL;
+    if (end >= 0)
+    {
+		if (!(*(*token)->str))
+			(*token) = new_token();
+        if (end == 0)
+		{
+			(*token)->str = ft_strncat((*token)->str, &data->input[--(*i)], 1);
 			return ;
-	}
-	if (end >= 0)
+		}
+		else if (end % 2 != 0)
+		{
+			while (end != 0)
+			{
+				if (data->input[*i] == '\"')
+				{
+					(*i)++;
+					(*token)->str = ft_strncㅁ
+				}
+			}
+		}
 		
-		
+		printf("1----------\n");
+        if (!(*(*token)->str))
+            (*token) = new_token();
+        printf("2----------\n");
+        while (data->input[*i] != '\"')
+        {
+            printf("3----------\n");
+            if (data->input[*i] == '$')
+            {
+                printf("dollarcheck!!!!!!!!!!\n");
+                (*i)++;
+                while (data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] != '\"')
+                {
+                    printf("4-----------\n");
+                    temp = ft_strncat(temp, &data->input[(*i)++], 1);
+                }
+                printf("temp : ---- %s ---- \n", temp);
+                // (*i)++;
+                prove_env = possible_env_char(data, token, i, temp);
+                printf("prove env : %s\n", prove_env);
+                if (prove_env != NULL)
+                {
+                    (*token)->str = ft_strncat((*token)->str, prove_env, ft_strlen(prove_env));
+                    printf("token->str : %s\n", (*token)->str);
+                    // (*i) += ft_strlen(temp);
+                    printf("{%d}\n", *i);
+                    printf("[%c]\n", data->input[*i]);
+                }
+                // else
+                //     (*i) -= (len - 1);
+            }
+            if (data->input[*i] == '\\' && data->input[*i + 1] == '\\')
+                (*i)++;
+            (*token)->str = ft_strncat((*token)->str, &data->input[*i], 1);
+            (*i)++;
+        }
+    }
+    else
+    {
+        (*token)->str = strncat((*token)->str, &data->input[start - 1], strlen(&data->input[start - 1]));
+        (*i) = strlen(data->input) + 1;
+    }
+
 }
+
+
+
+
+int	find_closing_quote(int i, char *input, char quote)
+{
+    int len = 0;
+
+    if (quote == '\"')
+    {
+        while (input[i] != '\0')
+        {
+            if (input[i] == quote)
+            {
+                len++;
+            }
+            i++;
+        }
+        return (len);
+    }
+    else
+    {
+        while (input[i] != '\0')
+        {
+            if (input[i] == quote)
+                return (i);
+            i++;
+        }
+    }
+	return (-1);
+}
+
 
 
 int	find_closing_quote(char *input, int i, char quote)
