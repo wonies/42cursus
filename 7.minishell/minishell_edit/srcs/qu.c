@@ -1,30 +1,47 @@
 #include "../includes/minishell.h"
 
-// void	double_quote(t_data *data, t_token **token, int *i)
-// {
-// 	(*i++);
-// 	int		start;
-// 	int		end;
-// 	char	*d_var;
-// 	int		check;
+void	double_quote(t_data *data, t_token **token, int *i)
+{
+	(*i++);
+	int		start;
+	int		end;
+	char	*d_var;
+	int		check;
 
-// 	start = *i;
-// 	end = find_closing_quote(start, data->input, '\"');
-// 	d_var = ft_strdup("");
-// 	if (!d_var)
-// 		return ;
-// 	if (data->input[*i] == '$')
-// 	{
-// 		check = quote_dvar(data, token, i, d_var);
-// 		if (!check)
-// 			return ;
-// 	}
-// 	if (end >= 0)
+	start = *i;
+	end = find_closing_quote(start, data->input, '\"');
+	d_var = ft_strdup("");
+	if (!d_var)
+		return ;
+	if (data->input[*i] == '$')
+	{
+		check = quote_dvar(data, token, i, d_var);
+		if (!check)
+			return ;
+	}
+	if (end >= 0)
 		
 		
+}
 
 
-// }
+int	find_closing_quote(char *input, int i, char quote)
+{
+	while (input[i] != '\0' || input[i] != quote)
+	{
+		if (input[i] == '\\')
+			i++;
+		if (input[i] == quote)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+
+
+
+
 
 bool	check_heredoc(t_data *data, t_token **token, int *i)
 {
@@ -95,13 +112,13 @@ void	not_env(t_data *data, t_token **token, int *i, char *var)
 	(*i) -= (var_len + 1);
 }
 
-bool	possible_env(t_data *data, t_token **token, int *i, char *var)
-{
-	char	*temp;
+// bool	possible_env(t_data *data, t_token **token, int *i, char *var)
+// {
+// 	char	*temp;
 
-	temp - find_envp(data, var);
-	if (temp != NULL)
-	{
-		if ()
-	}
-}
+// 	temp - find_envp(data, var);
+// 	if (temp != NULL)
+// 	{
+// 		if ()
+// 	}
+// }

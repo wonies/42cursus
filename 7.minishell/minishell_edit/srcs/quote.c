@@ -76,39 +76,72 @@ void double_quotes(t_data *data, t_token **token, int *i)
 {
     (*i)++;
     int start = *i;
-    int end = find_closing_quote(start, data->input, '\"');
+    int end = find_closing_quote(start, data->input, '\"') - 1;
     char    *dollar_var;
     int check = 0;
-
+    printf("end ::::: %d\n", end);
     dollar_var = strdup("");
-    if (data->input[*i] == '$')
+    int env = 0;
+    int len = 0 ;
+
+    while (data->input[*i] != ' ' || data->input[*i] != '\t')
     {
-        ++(*i);
-        while (data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] != '\"')
-            dollar_var = strncat(dollar_var, &data->input[(*i)++], 1);
-        printf("dollar var ::: %s\n", dollar_var);
-        check = possible_env(data, token, i, dollar_var);
-        if (!check)
+        if (data->input[*i] == '$')
         {
-            (*i) += ft_strlen(dollar_var) + 1;
-            return ;
+            len = *i;
+            env = check_dollar(data, token, i);
         }
-        --(*i);
+        if (env == 1)
+        {
+            
+        }
+
+
     }
+
+    // if (data->input[*i] == '$')
+    // {
+    //     ++(*i);
+    //     while (data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] != '\"')
+    //         dollar_var = strncat(dollar_var, &data->input[(*i)++], 1);
+    //     printf("dollar var ::: %s\n", dollar_var);
+    //     check = possible_env(data, token, i, dollar_var);
+    //     if (!check)
+    //     {
+    //         (*i) += ft_strlen(dollar_var) + 1;
+    //         return ;
+    //     }
+    //     --(*i);
+    // }
     if (end >= 0)
     {
         int length = end - start;
+        printf("length : %d\n", length);
         char *str = malloc(length + 1);
+        // if ((possible_env(data, token, i, str))== 1)
+        //     return ;
         strncpy(str, &data->input[start], length);
+        printf("check str : %s\n", str);
         str[length] = '\0';
-        (*token)->str = strncat((*token)->str, str, length);
-        free(str);
-        (*i) = end;
+        check = possible_env(data, token, i, str);
+        if (!check)
+        {
+            (*i) += ft_strlen(str) + 1;
+        }
+        --(*i);
+        if (check)
+        {
+            if (str)
+            (*token)->str = strncat((*token)->str, str, length);
+            free(str);
+            (*i) = end + 1;
+        }
+
     }
     else
     {
         (*token)->str = strncat((*token)->str, &data->input[start - 1], strlen(&data->input[start - 1]));
-        (*i) = strlen(data->input) - 1;
+        (*i) = strlen(data->input) + 1;
     }
 }
 
@@ -134,19 +167,56 @@ void single_quotes(t_data *data, t_token **token, int *i)
     }
 }
 
-int find_closing_quote(int i, char *str, char quote)
+// int find_closing_quote(int i, char *str, char quote)
+// {
+//     if (quote == '\"')
+//     {
+//         while (str[i] != '\0' && str[i] != quote)
+//         {
+//             if (str[i] == '\\' && str[i + 1] == quote)
+//                 i++;
+//             i++;
+//         }
+//         if (str[i] == quote)
+//             return i;
+//     }
+//     else
+//     {
+//         while (str[i] != '\0' && str[i] != quote)
+//             i++;
+//         if (str[i] == quote)
+//             return i;
+//     }
+//     return -1;
+// }
+
+// int find_closing_quote(int i, char *str, char quote)
+// {
+//     int len = strlen(str);
+//     int escape = 0;
+//     while (i < len)
+//     {
+//         if (str[i] == quote && !escape)
+//             return i;
+//         escape = (str[i] == '\\' && !escape);
+//         i++;
+//     }
+//     return -1;
+// }
+
+int	find_closing_quote(int i, char *input, char quote)
 {
-    int len = strlen(str);
-    int escape = 0;
-    while (i < len)
-    {
-        if (str[i] == quote && !escape)
-            return i;
-        escape = (str[i] == '\\' && !escape);
-        i++;
-    }
-    return -1;
+	while (input[i] != '\0')
+	{
+		if (input[i] == '\\')
+			i++;
+		if (input[i] == quote)
+			return (i);
+		i++;
+	}
+	return (-1);
 }
+
 
 // void    double_quotes(t_data *data, t_token **token, int *i)
 // {
