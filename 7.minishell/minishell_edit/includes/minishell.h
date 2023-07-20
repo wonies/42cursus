@@ -172,7 +172,7 @@ t_bool	tree_add_right(t_leaf *parent, t_token *new_token, int leaf_type);
 // t_leaf *tree_leaf(t_leaf **cur_leaf);
 void print_treess(t_leaf *root);
 void print_tree_recursive(t_leaf *node, int level);
-
+char    *possible_env_char(t_data *data, t_token **token, int *i, char *var);
 /* recursion */
 void	create_pipe(t_leaf **cur);
 t_leaf *leaf_create(int leaf_type, t_leaf *parent);
@@ -182,6 +182,11 @@ t_leaf 	*leaf_init(t_data *data);
 void print_tree_recursive(t_leaf *node, int level);
 void print_tree(t_leaf *root);
 void prints_tree(t_leaf *root, int level, int is_left);
+
+bool	check_heredoc(t_data *data, t_token **token, int *i);
+bool	check_space(t_data *data, t_token **token, int *i);
+void check_dollar(t_data *data, t_token **token, int *i);
+
 /* err.c */
 void	syntax_err(char *msg);
 /* bonus */

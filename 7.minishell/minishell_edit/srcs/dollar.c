@@ -358,6 +358,23 @@ bool    possible_env(t_data *data, t_token **token, int *i, char *var)
 }
 
 
+char    *possible_env_char(t_data *data, t_token **token, int *i, char *var)
+{
+    char    *temp;
+
+    temp = find_envp(data, var);
+    printf("%s\n", temp);
+    if (temp != NULL)
+    {
+        char *value = ft_strtok(temp, "=");
+        value = ft_strtok(NULL, "=");
+        printf("prove value :: %s\n", value);
+        return (value);
+    }
+    return NULL;
+}
+
+
 // void    possible_env(t_data *data, t_token *token, int *i, char *var)
 // {
 //     t_list  *temp;
