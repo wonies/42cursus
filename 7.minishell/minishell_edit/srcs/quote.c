@@ -119,11 +119,13 @@ void    double_quotes(t_data *data, t_token **token, int *i)
                 if (data->input[*i] == '\"')
                 {
                     end--;
+                    printf("end length & str: %d\n {{%s}}\n", end, (*token)->str);
                     if (end == 0)
                         break;
                     (*i)++;
                 }
-                (*token)->str = ft_strncat((*token)->str, &data->input[(*i)++], 1);
+                if (!(data->input[*i] == '\"'))
+                    (*token)->str = ft_strncat((*token)->str, &data->input[(*i)++], 1);
             }
         }
         else if (end % 2 == 0)
