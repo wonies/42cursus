@@ -82,7 +82,7 @@ int main(int ac, char **av, char **env)
     while (cur)
     {
         // printf("env : %s\n", cur->env);
-        printf("cur : %d, %d, %s\n", cur->token->type, cur->token->re_type ,cur->token->str);
+        printf("cur : %d, %d, {%s}\n", cur->token->type, cur->token->re_type ,cur->token->str);
         cur = cur->next;
     }
     // list = NULL;

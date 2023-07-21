@@ -108,9 +108,34 @@ void    single_quote(t_data *data, t_token **token, int *i)
     (*i)++;
     int end = find_closing_quote(*i, data->input, '\'');
     
-    int flag = 1;
+    int flag = 0;
     if ((*(*token)->str))
         token_to_list(&data->tokens, token, 1);
+    if (end == 0)
+    {
+        (*token)->str = ft_strncat((*token)->str, &data->input[--(*i)], 1);
+        return ;
+    }
+    else if (end % 2 == 0)
+    {
+        while (data->input[*i] != '\'')
+        {
+            (*token)->str = ft_strncat((*token)->str, &data->input[(*i)++], 1);
+            if (data->input[*(i + 1)] == '\'')
+                flag = 1;
+        }
+        if (flag == 0 && (data->input[*i] == '\'' && data->input[*i + 1] == '\''))
+        {
+            (*i)++;
+            token_to_list(&data->tokens, token, 0);
+            return ;
+        }
+    }
+    else if (end % 2 != 0)
+    {
+        while (data->input[*i] != '\'')
+            (*token)->str = ft_strncat((*token)->str, &data->input[(*i)++], 1);
+    }
 }
 
 
@@ -140,12 +165,19 @@ int	find_closing_quote(int i, char *input, char quote)
     }
     else
     {
-        while (input[i] != '\0')
+        w while (input[i] != '\0')
         {
             if (input[i] == quote)
-                return (i);
+            {
+                len++;
+                printf("len : %d\n", len);
+            }
             i++;
         }
+        if (len == 0)
+            return 0;
+        else
+            return (len + 1);
     }
 	return (-1);
 }

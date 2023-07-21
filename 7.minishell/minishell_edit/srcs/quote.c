@@ -203,13 +203,23 @@ void    double_quotes(t_data *data, t_token **token, int *i)
             if (data->input[*i] == '$')
             {
                 (*i)++;
+                //   if (data->input[*i] == ' ' || data->input[*i] == '\t')
+                //     {
+                //         (*i) -= 2;
+                //         (*token)->str = ft_strncat((*token)->str, &data->input[(*i)], 1);
+                        
+                //     }
                     while (data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] != '\"')
                         temp = ft_strncat(temp, &data->input[(*i)++], 1);
                     prove_env = possible_env_char(data, token, i, temp);
                     if (prove_env)
                         (*token)->str = ft_strncat((*token)->str, prove_env, ft_strlen(prove_env));
                     else
+                    {
                         (*i) -= ft_strlen(temp);
+                        if (data->input[*i] == ' ' || data->input[*i] == '\t')
+                            (*token)->str = ft_strncat((*token)->str, "$", 1);
+                    }
             }
             if ((data->input[*i] == '\\' && data->input[*i + 1] == '\"') || data->input[*i] == '\\' && data->input[*i + 1] == '\\')
                     (*i)++;
@@ -228,6 +238,7 @@ void    double_quotes(t_data *data, t_token **token, int *i)
     else if (end % 2 != 0)
     {
         printf("actually,, IM ODD !!!!!!!!\n");
+        printf("end CHECK : [[[[[%d]]]]]\n", end);
         if (end > 1)
         {
             while (data->input[*i] != '\"')
@@ -241,7 +252,11 @@ void    double_quotes(t_data *data, t_token **token, int *i)
                     if (prove_env)
                         (*token)->str = ft_strncat((*token)->str, prove_env, ft_strlen(prove_env));
                     else
+                    {
                         (*i) -= ft_strlen(temp);
+                         if (data->input[*i] == ' ' || data->input[*i] == '\t')
+                            (*token)->str = ft_strncat((*token)->str, "$", 1);
+                    }
                 }
                 if (data->input[*i] == '\\' && data->input[*i + 1] == '\\')
                     (*i)++;
@@ -250,6 +265,7 @@ void    double_quotes(t_data *data, t_token **token, int *i)
         }
         else if (end == 0)
         {
+             printf("----------HERE? INSERT ??????????? -----\n");
              while (data->input[*i] != '\"')
             {
                 if (data->input[*i] == '$')
@@ -529,27 +545,63 @@ void    double_quotes(t_data *data, t_token **token, int *i)
 //     }
 // }
 
-void single_quotes(t_data *data, t_token **token, int *i)
+void    single_quotes(t_data *data, t_token **token, int *i)
 {
     (*i)++;
-    int start = *i;
-    int end = find_closing_quote(start, data->input, '\'');
-    if (end >= 0)
+    int end = find_closing_quote(*i, data->input, '\'');
+    
+    int flag = 0;
+    if ((*(*token)->str))
+        token_to_list(&data->tokens, token, 1);
+    if (end == 0)
     {
-        int length = end - start;
-        char *str = malloc(length + 1);
-        strncpy(str, &data->input[start], length);
-        str[length] = '\0';
-        (*token)->str = strncat((*token)->str, str, length);
-        free(str);
-        (*i) = end;
+        (*token)->str = ft_strncat((*token)->str, &data->input[--(*i)], 1);
+        return ;
     }
-    else
+    else if (end % 2 == 0)
     {
-        (*token)->str = strncat((*token)->str, &data->input[start - 1], strlen(&data->input[start - 1]));
-        (*i) = strlen(data->input) - 1;
+        while (data->input[*i] != '\'')
+        {
+            (*token)->str = ft_strncat((*token)->str, &data->input[(*i)++], 1);
+            if (data->input[*(i + 1)] == '\'')
+                flag = 1;
+        }
+        if (flag == 0 && (data->input[*i] == '\'' && data->input[*i + 1] == '\''))
+        {
+            (*i)++;
+            token_to_list(&data->tokens, token, 0);
+            return ;
+        }
+    }
+    else if (end % 2 != 0)
+    {
+        while (data->input[*i] != '\'')
+            (*token)->str = ft_strncat((*token)->str, &data->input[(*i)++], 1);
     }
 }
+
+
+// void single_quotes(t_data *data, t_token **token, int *i)
+// {
+//     (*i)++;
+//     int start = *i;
+//     int end = find_closing_quote(start, data->input, '\'');
+//     if (end >= 0)
+//     {
+//         int length = end - start;
+//         char *str = malloc(length + 1);
+//         strncpy(str, &data->input[start], length);
+//         str[length] = '\0';
+//         (*token)->str = strncat((*token)->str, str, length);
+//         free(str);
+//         (*i) = end;
+//     }
+//     else
+//     {
+//         (*token)->str = strncat((*token)->str, &data->input[start - 1], strlen(&data->input[start - 1]));
+//         (*i) = strlen(data->input) - 1;
+//     }
+// }
 
 // // int find_closing_quote(int i, char *str, char quote)
 // // {
