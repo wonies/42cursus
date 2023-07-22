@@ -170,7 +170,10 @@ bool	check_heredoc(t_data *data, t_token **token, int *i)
 
 bool	check_space(t_data *data, t_token **token, int *i)
 {
-	if (data->input[*i] == ' ' || data->input[*i] == '\t')
+	t_token *prev = NULL;
+
+
+    if (data->input[*i] == ' ' || data->input[*i] == '\t')
     {
         // if (data->tokens->pre)
         //     printf("check PIPE : %d\n", data->tokens->pre->token->type);
@@ -183,12 +186,22 @@ bool	check_space(t_data *data, t_token **token, int *i)
             token_to_list(&data->tokens, token, 1);
             return 1;
         }
-        if (data->tokens->pre && data->tokens->pre->token->type == T_PIPE)
-            printf("check PIPE : %d\n", data->tokens->pre->token->type);
+        if (data->tokens)
+        {
+            prev = ft_lstlast(data->tokens)->token;
+            if (prev && prev->type == T_PIPE)
+            {
+                (*token) = new_token();
+                (*token)->str = ft_strncat((*token)->str, "$", 1);
+                token_to_list(&data->tokens, token, 1);
+                return 1;
+            }
+        }
         while (data->input[*i] == ' ' || data->input[*i] == '\t')
             (*i)++;
         if (data->input[*i] != '\0' || data->input[*i] != '|')
         {
+            printf("WHT YOU PASS HERE ??? \n");
             (*token) = new_token();
             (*token)->str = ft_strncat((*token)->str, "$ ", 2);
             --(*i);
@@ -214,16 +227,28 @@ data->tokens가 NULL이 아니고, 리스트에 최소한 하나 이상의 노�
 
 void check_dollar(t_data *data, t_token **token, int *i)
 {
+    t_token *prev = NULL;
     char *var = ft_strdup("");
     if (!var)
         printf("no!!\n");
     int var_len = 0;
     printf("here????\n");
     ++(*i);
+    //printf(" || check PIPE || : %p\n", (*token)->prev);
+    // if ((data->tokens)->token)
+    //     prev = ft_lstlast(data->tokens)->token;
+    // if (prev->type == T_PIPE)
+    //     printf("=========HERE=======\n");
+   // if (data->tokens && data->tokens->pre && data->tokens->pre->token && data->tokens->pre->token->type == T_PIPE)
     if (check_heredoc(data, token, i))
 		return ;
     if (check_space(data, token, i))
-		return ;  
+		return ;
+    if (data->input[*i] == '\"' || data->input[*i] == '\'' )
+    {
+        --(*i);
+        return ;
+    }
     // if (data->tokens && data->tokens->token->re_type == T_HEREDOC)
     // {
     //     (*token)->str = ft_strncat((*token)->str, "$", 1);

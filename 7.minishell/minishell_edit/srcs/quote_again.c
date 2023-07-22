@@ -165,7 +165,7 @@ int	find_closing_quote(int i, char *input, char quote)
     }
     else
     {
-        w while (input[i] != '\0')
+        while (input[i] != '\0')
         {
             if (input[i] == quote)
             {
