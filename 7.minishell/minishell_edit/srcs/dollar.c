@@ -172,6 +172,19 @@ bool	check_space(t_data *data, t_token **token, int *i)
 {
 	if (data->input[*i] == ' ' || data->input[*i] == '\t')
     {
+        // if (data->tokens->pre)
+        //     printf("check PIPE : %d\n", data->tokens->pre->token->type);
+        if ((!(data->tokens)))
+        {
+            // if (!(*(*token)->str))
+            // if (data->tokens->pre && data->tokens->pre->token->type == T_PIPE)
+            (*token) = new_token();
+            (*token)->str = ft_strncat((*token)->str, "$", 1);
+            token_to_list(&data->tokens, token, 1);
+            return 1;
+        }
+        if (data->tokens->pre && data->tokens->pre->token->type == T_PIPE)
+            printf("check PIPE : %d\n", data->tokens->pre->token->type);
         while (data->input[*i] == ' ' || data->input[*i] == '\t')
             (*i)++;
         if (data->input[*i] != '\0' || data->input[*i] != '|')
@@ -184,6 +197,20 @@ bool	check_space(t_data *data, t_token **token, int *i)
     }
 	return 0;
 }
+
+/* data->tokens가 NULL인 경우:
+
+data->tokens가 NULL이라는 것은 리스트가 아예 비어있다는 것을 의미합니다.
+즉, data->tokens가 아무런 노드도 가지고 있지 않은 상태입니다.
+이 상태에서 data->tokens->pre를 접근하려고 하면 세그멘테이션 오류가 발생합니다. 왜냐하면 data->tokens가 NULL이므로 노드의 이전 노드를 가리키는 pre 포인터가 존재하지 않기 때문입니다.
+!data->tokens->pre (즉, data->tokens->pre가 NULL인 경우):
+
+data->tokens가 NULL이 아니고, 리스트에 최소한 하나 이상의 노드가 있는 상태입니다.
+이때 data->tokens->pre가 NULL이라는 것은 현재 노드의 이전 노드가 존재하지 않는다는 것을 의미합니다.
+이는 리스트의 첫 번째 노드인 경우나 이전 노드가 없는 경우에 해당합니다.
+따라서 data->tokens->pre를 접근하는 것이 가능합니다.
+따라서 !data->tokens->pre은 data->tokens가 비어있지 않고 최소한 하나의 노드를 가지고 있으며, 현재 노드가 첫 번째 노드가 아닌 경우를 확인하는 조건문입니다. 한편, data->tokens가 NULL인 경우는 리스트가 아예 비어있는 상태이며, 이때는 data->tokens->pre를 접근할 수 없습니다. 따라서 이 두 상황은 서로 다른 상황입니다.*/
+
 
 void check_dollar(t_data *data, t_token **token, int *i)
 {

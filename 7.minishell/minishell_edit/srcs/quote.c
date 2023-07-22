@@ -265,8 +265,8 @@ void    double_quotes(t_data *data, t_token **token, int *i)
         }
         else if (end == 0)
         {
-             printf("----------HERE? INSERT ??????????? -----\n");
-             while (data->input[*i] != '\"')
+            printf("----------HERE? INSERT ??????????? -----\n");
+            while (data->input[*i] != '\"')
             {
                 if (data->input[*i] == '$')
                 {
@@ -281,7 +281,7 @@ void    double_quotes(t_data *data, t_token **token, int *i)
                 }
                 if (data->input[*i] == '\\' && data->input[*i + 1] == '\\')
                     (*i)++;
-                 while (data->input[*i] != '\"')
+            while (data->input[*i] != '\"')
             {
                 if (data->input[*i] == '$')
                 {
@@ -300,7 +300,7 @@ void    double_quotes(t_data *data, t_token **token, int *i)
             }
             }
             if (data->input[*i] == '\"')
-                 (*token)->str = ft_strncat((*token)->str, &data->input[(*i)++], 1);
+                (*token)->str = ft_strncat((*token)->str, &data->input[(*i)++], 1);
         }
     }
 
