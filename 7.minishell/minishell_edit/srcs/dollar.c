@@ -141,13 +141,14 @@ void	not_env(t_data *data, t_token **token, int *i, char *var)
 {
 	int	var_len;
 
+    printf("not env-------------\n");
 	var_len = ft_strlen(var);
 	if (!(*(*token)->str))
 		(*token) = new_token();
 	if (data->input[*i] != ' ' || data->input[*i] != '\t')
 	{
 		(*token)->str = ft_strncat((*token)->str, "$", 1);
-		(*i) -= (var_len + 1);
+		(*i) -= var_len;
 		return ;
 	}
 	(*token)->str = ft_strncat((*token)->str, "$ ", 2);
@@ -171,7 +172,6 @@ bool	check_heredoc(t_data *data, t_token **token, int *i)
 bool	check_space(t_data *data, t_token **token, int *i)
 {
 	t_token *prev = NULL;
-
 
     if (data->input[*i] == ' ' || data->input[*i] == '\t')
     {
@@ -197,13 +197,49 @@ bool	check_space(t_data *data, t_token **token, int *i)
                 return 1;
             }
         }
+        int len = 0;
         while (data->input[*i] == ' ' || data->input[*i] == '\t')
+        {
             (*i)++;
+            len++;
+        }
+
+        /* echo $                 cat -> {echo} {$ cat} 으로 바꿔준 코드 */
+
+
         if (data->input[*i] != '\0' || data->input[*i] != '|')
         {
             printf("WHT YOU PASS HERE ??? \n");
             (*token) = new_token();
-            (*token)->str = ft_strncat((*token)->str, "$ ", 2);
+            (*token)->str = ft_strncat((*token)->str, "$", 1);
+            // token_to_list(&data->tokens, token, 1);
+            printf("break point : %d\n", len);
+            printf("break point : %d\n", len);
+            if (len > 0)
+                (*token)->str = ft_strncat((*token)->str, " ", 1);
+            // while(data->input[*i])
+            // {
+                // printf("data input : %c\n", data->input[*i]);
+                // printf("data input : %c\n", data->input[*i]);
+            //     ++(*i);
+            // }
+            while (data->input[*i] || data->input[*i] == '|')//|| data->input[*i] != '|')
+            {
+                printf("data input : %c\n", data->input[*i]);
+                if (data->input[*i] == '\"' || data->input[*i]== '\'')
+                {
+                    if (data->input[*i] == '\"')
+                        double_quotes(data, token, i, 1);
+                    else
+                        single_quotes(data, token, i, 1);
+                    return 1;
+                }
+                else
+                {
+                    len = 0;
+                    (*token)->str = ft_strncat((*token)->str, &data->input[(*i)++], 1);
+                } 
+            }
             --(*i);
         }
         return 1;
@@ -225,6 +261,13 @@ data->tokens가 NULL이 아니고, 리스트에 최소한 하나 이상의 노�
 따라서 !data->tokens->pre은 data->tokens가 비어있지 않고 최소한 하나의 노드를 가지고 있으며, 현재 노드가 첫 번째 노드가 아닌 경우를 확인하는 조건문입니다. 한편, data->tokens가 NULL인 경우는 리스트가 아예 비어있는 상태이며, 이때는 data->tokens->pre를 접근할 수 없습니다. 따라서 이 두 상황은 서로 다른 상황입니다.*/
 
 
+
+
+
+
+
+
+
 void check_dollar(t_data *data, t_token **token, int *i)
 {
     t_token *prev = NULL;
@@ -234,21 +277,21 @@ void check_dollar(t_data *data, t_token **token, int *i)
     int var_len = 0;
     printf("here????\n");
     ++(*i);
+    if (check_heredoc(data, token, i))
+		return ;
+    if (check_space(data, token, i))
+		return ;
     //printf(" || check PIPE || : %p\n", (*token)->prev);
     // if ((data->tokens)->token)
     //     prev = ft_lstlast(data->tokens)->token;
     // if (prev->type == T_PIPE)
     //     printf("=========HERE=======\n");
    // if (data->tokens && data->tokens->pre && data->tokens->pre->token && data->tokens->pre->token->type == T_PIPE)
-    if (check_heredoc(data, token, i))
-		return ;
-    if (check_space(data, token, i))
-		return ;
-    if (data->input[*i] == '\"' || data->input[*i] == '\'' )
-    {
-        --(*i);
-        return ;
-    }
+    // if (data->input[*i] == '\"' || data->input[*i] == '\'' )
+    // {
+    //     --(*i);
+    //     return ;
+    // }
     // if (data->tokens && data->tokens->token->re_type == T_HEREDOC)
     // {
     //     (*token)->str = ft_strncat((*token)->str, "$", 1);
@@ -269,16 +312,28 @@ void check_dollar(t_data *data, t_token **token, int *i)
     //     }
     //     return ; 
     // }
+    int possible_check = -1;
+    
+    printf("----------------[?]------------------\n");
     while (data->input[*i] != '\0' && data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] != '\'' \
 		&& data->input[*i] != '\"')
     {
         var_len++;
         var = ft_strncat(var, &data->input[*i], 1);
+        possible_check = possible_env(data, token, i, var);
+        printf("possible_check :: %d\n", possible_check);
+        if (possible_check == 0)
+            break ;
         printf("var value: %s\n", var);
         (*i)++;
     }
-    if (possible_env(data, token, i, var))
+    if (possible_check == 1)
+    {
         not_env(data, token, i, var);
+    }
+    // if (possible_env(data, token, i, var))
+    //     not_env(data, token, i, var);
+    (*i)--;
     // int len = ft_strlen(var);
     //     if (!(*(*token)->str))
     //         (*token) = new_token();
@@ -402,6 +457,7 @@ bool    possible_env(t_data *data, t_token **token, int *i, char *var)
         value = ft_strtok(NULL, "=");
         printf("value : %s\n", value);
         (*token)->str = ft_strncat((*token)->str, value, ft_strlen(value));
+        (*i)+= 1;
         // (*i)+= ft_strlen(var);
         // token_to_list(&data->tokens, token, 0);
         return 0;

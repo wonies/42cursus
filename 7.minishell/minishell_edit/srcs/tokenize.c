@@ -18,8 +18,11 @@ void    tokenization(t_data *data, t_token **token, int *i)
     else if (data->input[*i] == '<' || data->input[*i] == '>')
         redirect_check(data, token, i);
     else if (data->input[*i] == '\'')
-        single_quotes(data, token, i);
+        single_quotes(data, token, i, 0);
     else if (data->input[*i] == '\"')
-        double_quotes(data, token, i);
+        double_quotes(data, token, i, 0);
+    printf("you pass here?\n");
+    printf("[[[%c]]]\n", data->input[*i]);
+    printf("[[[%s]]]\n", (*token)->str);
     token_to_list(&data->tokens, token, 1);
 }

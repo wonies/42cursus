@@ -175,7 +175,7 @@
 //     }
 // }
 
-void    double_quotes(t_data *data, t_token **token, int *i)
+int    double_quotes(t_data *data, t_token **token, int *i, int ch)
 {
     (*i)++;
     int end = find_closing_quote(*i, data->input, '\"');
@@ -186,17 +186,19 @@ void    double_quotes(t_data *data, t_token **token, int *i)
     prove_env = NULL;
 
     int flag = 1;
-    if ((*(*token)->str))
+    if ((*(*token)->str) && ch == 0)
         token_to_list(&data->tokens, token, 1);
     // if (!(*(*token)->str))
     //     (*token) = new_token();
     if (end == 0)
     {
+        printf("double QUOTES  : %d\n", data->input[*i]);
         (*token)->str = ft_strncat((*token)->str, &data->input[--(*i)], 1);
-        return ;
+        return 1;
     }
     else if (end % 2 == 0)
     {
+        int quote_ch = 0;
         printf("actually,, IM  EVEN !!!!!!!!\n");
         while (data->input[*i] != '\"')
         {
@@ -210,19 +212,57 @@ void    double_quotes(t_data *data, t_token **token, int *i)
                         
                 //     }
                     while (data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] != '\"')
-                        temp = ft_strncat(temp, &data->input[(*i)++], 1);
-                    prove_env = possible_env_char(data, token, i, temp);
-                    if (prove_env)
-                        (*token)->str = ft_strncat((*token)->str, prove_env, ft_strlen(prove_env));
-                    else
                     {
+                        temp = ft_strncat(temp, &data->input[(*i)++], 1);
+                        prove_env = possible_env_char(data, token, i, temp);
+                        printf("PROVE_ENV : %s\n", prove_env);
+                        if (prove_env)
+                        {
+                            (*token)->str = ft_strncat((*token)->str, prove_env, ft_strlen(prove_env));
+                        // (*i) += ft_strlen(temp);
+                            printf("{%c}\n", data->input[*i]);
+                            break ;
+                        }
+                    }
+                    // --(*i);
+                    printf("check idx : %d\n", *i);
+                    // return 114;
+                    printf("temp ::::::::::::  %s\n", temp);
+                    // if (prove_env)
+                    // {
+                    //     (*token)->str = ft_strncat((*token)->str, prove_env, ft_strlen(prove_env));
+                    //     // (*i) += ft_strlen(temp);
+                    //     printf("{%c}\n", data->input[*i]);
+                    //     return 114;
+                    // }
+                    printf("check prove :: %s\n", prove_env);
+                    if (prove_env == NULL)
+                    {
+                        printf("-----------------------------------\n");\
                         (*i) -= ft_strlen(temp);
-                        if (data->input[*i] == ' ' || data->input[*i] == '\t')
+                        // data->input[*i] == ft_strncata((*token)->Str )
+                        if (data->input[*i] != ' ' || data->input[*i] != '\t')
                             (*token)->str = ft_strncat((*token)->str, "$", 1);
                     }
             }
+            printf("check :  ((%c))\n", data->input[*i]);
+            printf("what is ?  - %d\n", '-');
+            // printf("is_alnum: %d\n", ft_isalnum());
+            printf("ft_isalnum : %d\n", ft_isalnum(data->input[*i]));
+            // if (prove_env != NULL && (ft_isalnum(data->input[*i]) == 0))
+            // {
+            //     //token에 있는 모든 Str을 지우고 싶음
+            //     printf("alnum : %d\n", ft_isalnum(data->input[*i]));
+            //     // free((*token)->str);
+            //     (*token)->str = NULL;
+            //     (*token)->str = ft_strdup("");
+            // }
+            // if (prove_env == NULL)
+            prove_env = NULL;
             if ((data->input[*i] == '\\' && data->input[*i + 1] == '\"') || data->input[*i] == '\\' && data->input[*i + 1] == '\\')
                     (*i)++;
+            // (*i)++;
+            // --(*i);
             printf("**%c**\n", data->input[*i]);
             (*token)->str = ft_strncat((*token)->str, &data->input[(*i)++], 1);
             if (data->input[*(i+1)] == '\"')
@@ -232,7 +272,7 @@ void    double_quotes(t_data *data, t_token **token, int *i)
         {
             (*i)++;
             token_to_list(&data->tokens, token, 0);
-            return ;
+            return 1;
         }
     }
     else if (end % 2 != 0)
@@ -262,6 +302,7 @@ void    double_quotes(t_data *data, t_token **token, int *i)
                     (*i)++;
                 (*token)->str = ft_strncat((*token)->str, &data->input[(*i)++], 1);
             }
+            end--;
         }
         else if (end == 0)
         {
@@ -303,7 +344,7 @@ void    double_quotes(t_data *data, t_token **token, int *i)
                 (*token)->str = ft_strncat((*token)->str, &data->input[(*i)++], 1);
         }
     }
-
+    return 0;
 }
 
 
@@ -545,13 +586,13 @@ void    double_quotes(t_data *data, t_token **token, int *i)
 //     }
 // }
 
-void    single_quotes(t_data *data, t_token **token, int *i)
+void    single_quotes(t_data *data, t_token **token, int *i, int ch)
 {
     (*i)++;
     int end = find_closing_quote(*i, data->input, '\'');
     
     int flag = 0;
-    if ((*(*token)->str))
+    if ((*(*token)->str) && ch == 0)
         token_to_list(&data->tokens, token, 1);
     if (end == 0)
     {
