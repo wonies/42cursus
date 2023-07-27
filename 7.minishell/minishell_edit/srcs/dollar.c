@@ -148,7 +148,7 @@ void	not_env(t_data *data, t_token **token, int *i, char *var)
 	if (data->input[*i] != ' ' || data->input[*i] != '\t')
 	{
 		(*token)->str = ft_strncat((*token)->str, "$", 1);
-		(*i) -= (var_len + 1);
+		(*i) -= (var_len );
 		return ;
 	}
 	(*token)->str = ft_strncat((*token)->str, "$ ", 2);
@@ -262,94 +262,151 @@ data->tokens가 NULL이 아니고, 리스트에 최소한 하나 이상의 노�
 
 
 
-
-
-
-
-
-
-void check_dollar(t_data *data, t_token **token, int *i)
+void	check_dsign(t_data *data, t_token **token, int *i)
 {
-    t_token *prev = NULL;
-    char *var = ft_strdup("");
-    if (!var)
-        printf("no!!\n");
-    int var_len = 0;
-    printf("here????\n");
-    ++(*i);
-    if (check_heredoc(data, token, i))
-		return ;
-    if (check_space(data, token, i))
-		return ;
-    //printf(" || check PIPE || : %p\n", (*token)->prev);
-    // if ((data->tokens)->token)
-    //     prev = ft_lstlast(data->tokens)->token;
-    // if (prev->type == T_PIPE)
-    //     printf("=========HERE=======\n");
-   // if (data->tokens && data->tokens->pre && data->tokens->pre->token && data->tokens->pre->token->type == T_PIPE)
-    // if (data->input[*i] == '\"' || data->input[*i] == '\'' )
-    // {
-    //     --(*i);
-    //     return ;
-    // }
-    // if (data->tokens && data->tokens->token->re_type == T_HEREDOC)
-    // {
-    //     (*token)->str = ft_strncat((*token)->str, "$", 1);
-    //     --(*i);
-    //     return ;
-    // }
-    // if (data->input[*i] == ' ' || data->input[*i] == '\t')
-    // {
-    //     printf("space check\n");
-    //     while (data->input[*i] == ' ' || data->input[*i] == '\t')
-    //         (*i)++;
-        
-    //     if (data->input[*i] != '\0' || data->input[*i] != '|')
-    //     {
-    //         (*token) = new_token();
-    //         (*token)->str = ft_strncat((*token)->str, "$ ", 2);
-    //         --(*i);
-    //     }
-    //     return ; 
-    // }
-    int possible_check = 2;
+	t_token *prev;
+	char	*var;
+	int	var_len;
 
-    while (data->input[*i] != '\0' && data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] == '\'' \
+	prev = NULL;
+	var = ft_strdup("");
+	if (!var)
+		return ;
+	var_len = 0;
+	++(*i);
+	if (check_heredoc(data, token, i))
+		return ;
+	if (check_space(data, token, i))
+		return ;
+	while (data->input[*i] != '\0' && data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] != '\'' \
 		&& data->input[*i] != '\"')
-    {
-        var_len++;
-        var = ft_strncat(var, &data->input[*i], 1);
-        possible_check = possible_env(data, token, i, var);
-        printf("possible_check :: %d\n", possible_check);
-        if (possible_check == 0)
+	{
+		var_len++;
+        printf("{{{{{%c}}}}}\n", data->input[*i]);
+        if ((special_character(data->input[*i], 0)) == 1)
+        {
+            --(*i);
             break ;
-        printf("var value: %s\n", var);
-        (*i)++;
-    }
-    if (possible_check == 1)
-    {
-        not_env(data, token, i, var);
-    }
-    // if (possible_env(data, token, i, var))
-    //     not_env(data, token, i, var);
-    (*i)--;
-    // int len = ft_strlen(var);
-    //     if (!(*(*token)->str))
-    //         (*token) = new_token();
-    //     if (data->input[*i] != ' ' || data->input[*i] != '\t')
-    //     {
-    //         (*token)->str = ft_strncat((*token)->str, "$", 1);
-    //         (*i) -= (len + 1);
-    //         return ;
-    //     }
-    //     (*token)->str = ft_strncat((*token)->str, "$ ", 2);
-    //     (*token)->str = ft_strncat((*token)->str, var, len);
-    //     printf("(*token)->str : %s\n", (*token)->str);
-    //     printf("var len ::: %d\n", len);
-    //     (*i) -= (len + 1);
-    //     return;
-    // }
+        }
+		var = ft_strncat(var, &data->input[(*i)++], 1);
+	}
+	if (possible_env(data, token, i, var))
+		not_env(data, token, i, var);
+	--(*i);
 }
+
+int	special_character(char c, int digit)
+{
+    if (digit == 0)
+    {
+        if (c == '~' || c == '@' || c == '#' || c == '%' || c == '$' || c == '^' \
+        || c == '&' || c == '*' || c == '(' || c == ')' || c == '=' || c == '+' \
+        || c == '{' || c == '}' || c == '/'|| c == '-' || c ==':')
+            return 1;
+        else
+            return 0;
+    }
+    else
+    {
+        if (c == '~' || c == '@' || c == '#' || c == '%' || c == '$' || c == '^' \
+        || c == '&' || c == '*' || c == '(' || c == ')' || c == '=' || c == '+' \
+        || c == '{' || c == '}' || c == '/'|| c == '-' || c == ':' || c == ';' \
+        || c == '|' || c == '<' || c == '>')
+            return 1;
+        else
+            return 0;
+    }
+}
+
+
+
+
+
+
+
+
+// void check_dollar(t_data *data, t_token **token, int *i)
+// {
+//     t_token *prev = NULL;
+//     char *var = ft_strdup("");
+//     if (!var)
+//         printf("no!!\n");
+//     int var_len = 0;
+//     printf("here????\n");
+//     ++(*i);
+//     if (check_heredoc(data, token, i))
+// 		return ;
+//     if (check_space(data, token, i))
+// 		return ;
+//     //printf(" || check PIPE || : %p\n", (*token)->prev);
+//     // if ((data->tokens)->token)
+//     //     prev = ft_lstlast(data->tokens)->token;
+//     // if (prev->type == T_PIPE)
+//     //     printf("=========HERE=======\n");
+//    // if (data->tokens && data->tokens->pre && data->tokens->pre->token && data->tokens->pre->token->type == T_PIPE)
+//     // if (data->input[*i] == '\"' || data->input[*i] == '\'' )
+//     // {
+//     //     --(*i);
+//     //     return ;
+//     // }
+//     // if (data->tokens && data->tokens->token->re_type == T_HEREDOC)
+//     // {
+//     //     (*token)->str = ft_strncat((*token)->str, "$", 1);
+//     //     --(*i);
+//     //     return ;
+//     // }
+//     // if (data->input[*i] == ' ' || data->input[*i] == '\t')
+//     // {
+//     //     printf("space check\n");
+//     //     while (data->input[*i] == ' ' || data->input[*i] == '\t')
+//     //         (*i)++;
+        
+//     //     if (data->input[*i] != '\0' || data->input[*i] != '|')
+//     //     {
+//     //         (*token) = new_token();
+//     //         (*token)->str = ft_strncat((*token)->str, "$ ", 2);
+//     //         --(*i);
+//     //     }
+//     //     return ; 
+//     // }
+//     int possible_check = 2;
+
+//     while (data->input[*i] != '\0' && data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] == '\'' \
+// 		&& data->input[*i] != '\"')
+//     {
+//         var_len++;
+//         var = ft_strncat(var, &data->input[*i], 1);
+//         possible_check = possible_env(data, token, i, var);
+//         printf("possible_check :: %d\n", possible_check);
+//         if (possible_check == 0)
+//             break ;
+//         printf("var value: %s\n", var);
+//         (*i)++;
+//     }
+//     if (possible_check == 1)
+//     {
+//         not_env(data, token, i, var);
+//     }
+//     // if (possible_env(data, token, i, var))
+//     //     not_env(data, token, i, var);
+//     (*i)--;
+//     // int len = ft_strlen(var);
+//     //     if (!(*(*token)->str))
+//     //         (*token) = new_token();
+//     //     if (data->input[*i] != ' ' || data->input[*i] != '\t')
+//     //     {
+//     //         (*token)->str = ft_strncat((*token)->str, "$", 1);
+//     //         (*i) -= (len + 1);
+//     //         return ;
+//     //     }
+//     //     (*token)->str = ft_strncat((*token)->str, "$ ", 2);
+//     //     (*token)->str = ft_strncat((*token)->str, var, len);
+//     //     printf("(*token)->str : %s\n", (*token)->str);
+//     //     printf("var len ::: %d\n", len);
+//     //     (*i) -= (len + 1);
+//     //     return;
+//     // }
+// }
 
 // void check_dollar(t_data *data, t_token **token, int *i)
 // {

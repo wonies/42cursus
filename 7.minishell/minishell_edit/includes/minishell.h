@@ -208,5 +208,6 @@ void	fileinit_bonus(int ac, char **av, t_mini *pp);
 int	ft_isalpha(int c);
 int	ft_isdigit(int c);
 int	ft_isalnum(int c);
-
+int	special_character(char c, int digit);
+void	check_dsign(t_data *data, t_token **token, int *i);
 #endif 

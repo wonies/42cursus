@@ -213,20 +213,31 @@ int    double_quotes(t_data *data, t_token **token, int *i, int ch)
                 //     }
                     while (data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] != '\"')
                     {
-                        temp = ft_strncat(temp, &data->input[(*i)], 1);
-                        prove_env = possible_env_char(data, token, i, temp);
-                        printf("PROVE_ENV : %s\n", prove_env);
-                        if (prove_env)
+                        if ((special_character(data->input[*i], 1)) == 1)
                         {
-                            (*token)->str = ft_strncat((*token)->str, prove_env, ft_strlen(prove_env));
-                        // (*i) += ft_strlen(temp);
-                            printf("{%c}\n", data->input[*i]);
+                            --(*i);
                             break ;
                         }
+                        temp = ft_strncat(temp, &data->input[(*i)], 1);
                         (*i)++;
                     }
+                    prove_env = possible_env_char(data, token, i, temp);
+                    printf("PROVE_ENV : %s\n", prove_env);
+                    if (prove_env)
+                    {
+                        (*token)->str = ft_strncat((*token)->str, prove_env, ft_strlen(prove_env));
+                        // if (special_character(data->input[++(*i)], 1) == 1)
+                        // {
+                            // while (data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] != '\"')
+                            //     ++(*i);
+                    //    }  
+
+                    // (*i) += ft_strlen(temp);
+                        printf("{%c}\n", data->input[*i]);
+                    }
+                    printf("token -> str : %s\n", (*token)->str);
                     (*i)++;
-                    printf("check idx : %d\n", *i);
+                    printf("check idx : %d\n", *i); 
                     // return 114;
                     printf("temp ::::::::::::  %s\n", temp);
                     // if (prove_env)
@@ -240,7 +251,7 @@ int    double_quotes(t_data *data, t_token **token, int *i, int ch)
                     if (prove_env == NULL)
                     {
                         printf("-----------------------------------\n");\
-                        (*i) -= ft_strlen(temp);
+                        (*i) -= ft_strlen(temp) + 1;
                         // data->input[*i] == ft_strncata((*token)->Str )
                         if (data->input[*i] != ' ' || data->input[*i] != '\t')
                             (*token)->str = ft_strncat((*token)->str, "$", 1);
@@ -288,10 +299,20 @@ int    double_quotes(t_data *data, t_token **token, int *i, int ch)
                 {
                     (*i)++;
                     while (data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] != '\"')
+                    {
+                        if ((special_character(data->input[*i], 1)) == 1)
+                        {
+                            --(*i);
+                            break ;
+                        }
                         temp = ft_strncat(temp, &data->input[(*i)++], 1);
+                    }
                     prove_env = possible_env_char(data, token, i, temp);
                     if (prove_env)
+                    {
                         (*token)->str = ft_strncat((*token)->str, prove_env, ft_strlen(prove_env));
+                        (*i)++;
+                    }
                     else
                     {
                         (*i) -= ft_strlen(temp);

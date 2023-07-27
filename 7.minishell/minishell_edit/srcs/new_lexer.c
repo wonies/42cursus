@@ -38,7 +38,7 @@ void	input_token(t_data *data, t_token **token, int *i)
 		tokenization(data, token, i);
 	else if	(data->input[*i] == '$')
 	{
-		check_dollar(data, token, i);
+		check_dsign(data, token, i);
 	}
 	else
 	{
