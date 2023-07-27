@@ -148,7 +148,7 @@ void	not_env(t_data *data, t_token **token, int *i, char *var)
 	if (data->input[*i] != ' ' || data->input[*i] != '\t')
 	{
 		(*token)->str = ft_strncat((*token)->str, "$", 1);
-		(*i) -= var_len;
+		(*i) -= (var_len + 1);
 		return ;
 	}
 	(*token)->str = ft_strncat((*token)->str, "$ ", 2);
@@ -312,10 +312,9 @@ void check_dollar(t_data *data, t_token **token, int *i)
     //     }
     //     return ; 
     // }
-    int possible_check = -1;
-    
-    printf("----------------[?]------------------\n");
-    while (data->input[*i] != '\0' && data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] != '\'' \
+    int possible_check = 2;
+
+    while (data->input[*i] != '\0' && data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] == '\'' \
 		&& data->input[*i] != '\"')
     {
         var_len++;

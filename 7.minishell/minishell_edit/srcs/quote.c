@@ -213,7 +213,7 @@ int    double_quotes(t_data *data, t_token **token, int *i, int ch)
                 //     }
                     while (data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] != '\"')
                     {
-                        temp = ft_strncat(temp, &data->input[(*i)++], 1);
+                        temp = ft_strncat(temp, &data->input[(*i)], 1);
                         prove_env = possible_env_char(data, token, i, temp);
                         printf("PROVE_ENV : %s\n", prove_env);
                         if (prove_env)
@@ -223,8 +223,9 @@ int    double_quotes(t_data *data, t_token **token, int *i, int ch)
                             printf("{%c}\n", data->input[*i]);
                             break ;
                         }
+                        (*i)++;
                     }
-                    // --(*i);
+                    (*i)++;
                     printf("check idx : %d\n", *i);
                     // return 114;
                     printf("temp ::::::::::::  %s\n", temp);
@@ -245,10 +246,10 @@ int    double_quotes(t_data *data, t_token **token, int *i, int ch)
                             (*token)->str = ft_strncat((*token)->str, "$", 1);
                     }
             }
-            printf("check :  ((%c))\n", data->input[*i]);
-            printf("what is ?  - %d\n", '-');
-            // printf("is_alnum: %d\n", ft_isalnum());
-            printf("ft_isalnum : %d\n", ft_isalnum(data->input[*i]));
+            // printf("check :  ((%c))\n", data->input[*i]);
+            // printf("what is ?  - %d\n", '-');
+            // // printf("is_alnum: %d\n", ft_isalnum());
+            // printf("ft_isalnum : %d\n", ft_isalnum(data->input[*i]));
             // if (prove_env != NULL && (ft_isalnum(data->input[*i]) == 0))
             // {
             //     //token에 있는 모든 Str을 지우고 싶음
