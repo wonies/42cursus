@@ -173,6 +173,11 @@ bool	check_space(t_data *data, t_token **token, int *i)
 {
 	t_token *prev = NULL;
 
+    if (data->input[*i] == '\"' || data->input[*i] == '\'')
+    {
+        --(*i);
+        return 1;
+    }
     if (data->input[*i] == ' ' || data->input[*i] == '\t')
     {
         // if (data->tokens->pre)
@@ -198,8 +203,9 @@ bool	check_space(t_data *data, t_token **token, int *i)
             }
         }
         int len = 0;
-        while (data->input[*i] == ' ' || data->input[*i] == '\t')
+        while (data->input[*i] == ' ' ||  data->input[*i] == '\t')
         {
+            printf("--------  space  ---------\n");
             (*i)++;
             len++;
         }
@@ -207,7 +213,7 @@ bool	check_space(t_data *data, t_token **token, int *i)
         /* echo $                 cat -> {echo} {$ cat} 으로 바꿔준 코드 */
 
 
-        if (data->input[*i] != '\0' || data->input[*i] != '|')
+        if (data->input[*i] != '\0' || data->input[*i] != '|' )
         {
             printf("WHT YOU PASS HERE ??? \n");
             (*token) = new_token();
@@ -215,7 +221,8 @@ bool	check_space(t_data *data, t_token **token, int *i)
             // token_to_list(&data->tokens, token, 1);
             printf("break point : %d\n", len);
             printf("break point : %d\n", len);
-            if (len > 0)
+            printf("^^^^^^^{%c}^^^^^^\n", data->input[*i]);
+            if (len > 0 && (data->input[*i] !=  '\0'))
                 (*token)->str = ft_strncat((*token)->str, " ", 1);
             // while(data->input[*i])
             // {
@@ -278,18 +285,32 @@ void	check_dsign(t_data *data, t_token **token, int *i)
 		return ;
 	if (check_space(data, token, i))
 		return ;
-	while (data->input[*i] != '\0' && data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] != '\'' \
+	// while (data->input[*i] != '\0' && data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] != '\'' \
+	// 	&& data->input[*i] != '\"')
+	// {
+	// 	var_len++;
+    //     printf("{{{{{%c}}}}}\n", data->input[*i]);
+    //     if ((special_character(data->input[*i], 0)) == 1)
+    //     {
+    //         --(*i);
+    //         break ;
+    //     }
+	// 	var = ft_strncat(var, &data->input[(*i)++], 1);
+	// }
+    while (data->input[*i] != '\0' && data->input[*i] != ' ' && data->input[*i] != '\t' && data->input[*i] != '\'' \
 		&& data->input[*i] != '\"')
 	{
 		var_len++;
         printf("{{{{{%c}}}}}\n", data->input[*i]);
-        if ((special_character(data->input[*i], 0)) == 1)
+        if (ft_isalnum(data->input[*i]) == 0)
         {
             --(*i);
             break ;
         }
+        // else if (data->input[*i] == '<' || data->input[*i] == '>' || data->input[*i] == '|')
 		var = ft_strncat(var, &data->input[(*i)++], 1);
 	}
+    
 	if (possible_env(data, token, i, var))
 		not_env(data, token, i, var);
 	--(*i);

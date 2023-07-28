@@ -149,7 +149,7 @@ char *extract_quoted_string(char *str, int start, int end);
 void remove_escape_characters(char *str);
 int is_quote_character(char c);
 /* quote.c */
-int    double_quotes(t_data *data, t_token **token, int *i, int ch);
+void    double_quotes(t_data *data, t_token **token, int *i, int ch);
 void    single_quotes(t_data *data, t_token **token, int *i, int ch);
 int     find_quote(int i, char *str, char quote);
 void	env_init(t_data *data, char **env);
