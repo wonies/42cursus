@@ -313,7 +313,7 @@ void	check_dsign(t_data *data, t_token **token, int *i)
     
 	if (possible_env(data, token, i, var))
 		not_env(data, token, i, var);
-	--(*i);
+	// --(*i);
 }
 
 int	special_character(char c, int digit)
