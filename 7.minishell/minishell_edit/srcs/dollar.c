@@ -534,7 +534,7 @@ bool    possible_env(t_data *data, t_token **token, int *i, char *var)
         value = ft_strtok(NULL, "=");
         printf("value : %s\n", value);
         (*token)->str = ft_strncat((*token)->str, value, ft_strlen(value));
-        (*i)+= 1;
+        // (*i)+= 1;
         // (*i)+= ft_strlen(var);
         // token_to_list(&data->tokens, token, 0);
         return 0;

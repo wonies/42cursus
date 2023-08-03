@@ -144,7 +144,6 @@ void    redirect_check(t_data *data, t_token **token, int *i);
 void    tokenization(t_data *data, t_token **token, int *i);
 bool    possible_env(t_data *data, t_token **token, int *i, char *var);
 
-int find_closing_quote(int i, char *str, char quote);
 char *extract_quoted_string(char *str, int start, int end);
 void remove_escape_characters(char *str);
 int is_quote_character(char c);
@@ -153,6 +152,14 @@ void    double_quotes(t_data *data, t_token **token, int *i, int ch);
 void    single_quotes(t_data *data, t_token **token, int *i, int ch);
 int     find_quote(int i, char *str, char quote);
 void	env_init(t_data *data, char **env);
+
+void	even_quote(t_data *data, t_token **token, int *i, char quote);
+void	odd_quote(t_data *data, t_token **token, int *i);
+void	quote_dsign(t_data *data, t_token **token, int *i);
+void    single_quotes(t_data *data, t_token **token, int *i, int ch);
+int	    find_closing_quote(int i, char *line, char quote);
+
+
 
 /* syntax */
 void	syntax(t_data *data);
