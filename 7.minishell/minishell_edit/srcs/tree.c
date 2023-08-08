@@ -12,4 +12,3 @@ t_leaf	*create_leaf(int leaf_type, t_leaf *parent)
 
 	return (new_leaf);
 }
-
