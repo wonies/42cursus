@@ -1,0 +1,16 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug",
+            "program": "${workspaceFolder}/Pmerge",
+            "args": ["8", "3", "1", "9", "11", "5", "44", "330", "32", "99", "100", "88", "2335", "2334", "4231", "5992", "921", "922"],
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

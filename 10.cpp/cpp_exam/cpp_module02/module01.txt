@@ -1,0 +1,50 @@
++-----------------------+
+|       Warlock         |
++-----------------------+
+| - name: string        |
+| - title: string       |
+| - spells: 컨테이너 타입|
++-----------------------+
+| + getName(): const string&          |
+| + getTitle(): const string&         |
+| + setTitle(const string&): void     |
+| + introduce() const: void           |
+| + learnSpell(ASpell*): void         |
+| + forgetSpell(const string&): void  |
+| + launchSpell(const string&, const ATarget&): void |
++-----------------------+
+           |
+           |
++-----------------------+
+|       ASpell          |
++-----------------------+
+| - name: string        |
+| - effects: string     |
++-----------------------+
+| + getName() const: string           |
+| + getEffects() const: string        |
+| + clone() const: ASpell* = 0        |
+| + launch(const ATarget&) const: void|
++-----------------------+
+           |
+           +--------------------+
+           |                    |
++-----------------------+   +-----------------------+
+|       Fwoosh          |   |       ATarget         |
++-----------------------+   +-----------------------+
+| (ASpell에서 상속)     |   | - type: string        |
++-----------------------+   +-----------------------+
+| + Fwoosh()            |   | + getType() const: const string& |
+| + clone() const: ASpell*   | + clone() const: ATarget* = 0    |
++-----------------------+   | + getHitBySpell(const ASpell&): void|
+                            +-----------------------+
+                                   |
+                                   |
+                            +-----------------------+
+                            |        Dummy          |
+                            +-----------------------+
+                            | (ATarget에서 상속)     |
+                            +-----------------------+
+                            | + Dummy()            |
+                            | + clone() const: ATarget*  |
+                            +-----------------------+

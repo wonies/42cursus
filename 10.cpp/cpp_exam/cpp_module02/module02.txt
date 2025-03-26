@@ -1,0 +1,76 @@
++-----------------------+
+|       Warlock         |
++-----------------------+
+| - name: string        |
+| - title: string       |
+| - spellBook: SpellBook|
++-----------------------+
+| + getName() const: const string&          |
+| + getTitle() const: const string&         |
+| + setTitle(const string&): void           |
+| + introduce() const: void                 |
+| + learnSpell(ASpell*): void               |
+| + forgetSpell(const string&): void        |
+| + launchSpell(const string&, const ATarget&): void |
++-----------------------+
+           |
+           |
++-----------------------+
+|     SpellBook         |
++-----------------------+
+| - spells: map<string, ASpell*> |
++-----------------------+
+| + learnSpell(ASpell*): void                   |
+| + forgetSpell(const string&): void            |
+| + createSpell(const string&): ASpell*         |
++-----------------------+
+
++-----------------------+
+|       ASpell          |
++-----------------------+
+| - name: string        |
+| - effects: string     |
++-----------------------+
+| + getName() const: string                   |
+| + getEffects() const: string                |
+| + clone() const = 0: ASpell*                |
+| + launch(const ATarget&) const: void        |
++-----------------------+
+           |
+           +--------------------+
+           |                    |
++-----------------------+   +-----------------------+
+|      Fireball         |   |      Polymorph        |
++-----------------------+   +-----------------------+
+| + Fireball()          |   | + Polymorph()         |
+| + clone() const: ASpell*  | + clone() const: ASpell*  |
++-----------------------+   +-----------------------+
+
++-----------------------+
+|       ATarget         |
++-----------------------+
+| - type: string        |
++-----------------------+
+| + getType() const: const string&              |
+| + clone() const = 0: ATarget*                 |
+| + getHitBySpell(const ASpell&) const: void    |
++-----------------------+
+           |
+           +--------------------+
+           |                    |
++-----------------------+   +-----------------------+
+|      Dummy            |   |      BrickWall        |
++-----------------------+   +-----------------------+
+| + Dummy()             |   | + BrickWall()         |
+| + clone() const: ATarget*  | + clone() const: ATarget*  |
++-----------------------+   +-----------------------+
+
++-----------------------+
+|   TargetGenerator     |
++-----------------------+
+| - targets: map<string, ATarget*> |
++-----------------------+
+| + learnTargetType(ATarget*): void              |
+| + forgetTargetType(const string&): void        |
+| + createTarget(const string&): ATarget*        |
++-----------------------+

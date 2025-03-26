@@ -1,0 +1,87 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class FruitSeller
+{
+private:
+	int APPLE_PRICE;
+	int numOfApples;
+	int myMoney;
+
+public:
+	void InitMembers(int price, int num, int money)
+	{
+		if (price < 0 || num < 0 || money < 0)
+		{
+			cout << "Wrong!" <<endl;
+			return ;
+		}
+		
+		APPLE_PRICE = price;
+		numOfApples = num;
+		myMoney = money;
+	}
+	int SaleApples(int money)
+	{
+		int num=money/APPLE_PRICE;
+		numOfApples-=num;
+		myMoney+=money;
+		return num;
+	}
+	void ShowSalesRes()
+	{
+		cout<<"남은 사과: "<<numOfApples<<endl;
+		cout<<"판매 수익: "<<myMoney<<endl;
+	}
+};
+
+
+class FruitBuyer
+{
+	int myMoney;
+	int numOfApples;
+public:
+	void	InitMembers(int money)
+	{
+		if (money < 0)
+		{
+			cout<<"wrong!"<<endl;
+			return ;
+		}
+		
+		myMoney=money;
+		numOfApples=0;
+	}
+	void	BuyApples(FruitSeller &seller, int money)
+	{
+		numOfApples+=seller.SaleApples(money);
+		myMoney-=money;
+	}
+	void ShowBuyRes()
+	{
+		cout<<"cur balance : "<<myMoney<<endl;
+		cout<<"the count of Apples: "<<numOfApples<<endl;
+	}
+};
+
+
+
+int main(void)
+{
+	FruitSeller seller;
+	seller.InitMembers(1000, 20, 0);
+	FruitBuyer buyer;
+	buyer.InitMembers(5000);
+	buyer.BuyApples(seller, 2000);
+	FruitBuyer buyer2;
+	buyer2.InitMembers(-2000);
+	buyer2.BuyApples(seller, 1);
+
+	cout<<"Update of Fruit Seller"<<endl;
+	seller.ShowSalesRes();
+	cout<<"Update of Fruit Buyer"<<endl;
+	buyer.ShowBuyRes();
+
+	return 0;
+}
